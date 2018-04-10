@@ -1,0 +1,295 @@
+<template>
+  <el-row class="container">
+    <el-col :span="24" class="header">
+      <el-col :span="10" class="logo logo-width">
+         811管理平台
+      </el-col>
+      <el-col :span="10">
+        <div class="tools" @click.prevent="collapse">
+         
+        </div>
+      </el-col>
+      <el-col :span="6" class="userinfo">
+        <el-dropdown trigger="hover">
+          <span class="el-dropdown-link userinfo-inner">
+            {{sysOrgName}}:{{sysUserName}}
+            <font size="6px" style="margin-left:20px"><i class="fa fa-user"></i></font> 
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>我的消息</el-dropdown-item>
+            <el-dropdown-item>设置</el-dropdown-item>
+            <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-col>
+    </el-col>
+    <el-col :span="24" class="main">
+      <aside class="menu-expanded">
+        <!--导航菜单-->
+          <el-menu
+      default-active="1"
+      class="el-menu-vertical-demo"
+      background-color="#545c64"
+      text-color="#fff"
+      :unique-opened="true"
+      active-text-color="#ffd04b"
+      :router="true">
+      <el-submenu index="1">
+        <template slot="title">
+          <i class="fa fa-user fa-lg" style="padding-right:10px"></i>
+          <span>系统管理</span>
+        </template>
+        <el-menu-item index="/main/system/account">用户管理</el-menu-item>
+        <el-menu-item index="/main/system/org">部门管理</el-menu-item>
+        <el-menu-item index="/main/system/role">角色管理</el-menu-item>
+        <el-menu-item index="/main/system/menu">菜单管理</el-menu-item>
+      </el-submenu>
+      <el-submenu index="2">
+        <template slot="title">
+          <i class="fa fa-book fa-lg" style="padding-right:10px"></i>
+          <span>内容管理</span>
+        </template>
+        <el-menu-item index="/main/system/column">栏目管理</el-menu-item>
+        <el-menu-item index="/main/system/content">内容管理</el-menu-item>
+      </el-submenu>
+      <el-submenu index="3">
+        <template slot="title">
+          <i class="fa fa-users fa-lg" style="padding-right:10px"></i>
+          <span>会员管理</span>
+        </template>
+      </el-submenu>
+      <el-submenu index="4">
+        <template slot="title">
+          <i class="fa fa-id-card-o fa-lg" style="padding-right:10px"></i>
+          <span>培训管理</span>
+        </template>
+      </el-submenu>
+      <el-submenu index="5">
+        <template slot="title">
+          <i class="fa fa-bullhorn fa-lg" style="padding-right:10px"></i>
+          <span>招聘管理</span>
+        </template>
+      </el-submenu>
+      <el-submenu index="6">
+        <template slot="title">
+          <i class="fa fa-cart-plus fa-lg" style="padding-right:10px"></i>
+          <span>商品管理</span>
+        </template>
+      </el-submenu>
+    </el-menu>
+       
+    </aside>
+      <section class="content-container">
+        <div class="grid-content bg-purple-light">
+          <el-col :span="24" class="content-wrapper">
+            <transition name="fade" mode="out-in">
+              <router-view></router-view>
+            </transition>
+          </el-col>
+        </div>
+      </section>
+    </el-col>
+  </el-row>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        collapsed:false,
+        sysUserName: '',
+        sysOrgName: '',
+        sysUserAvatar: '',
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
+      }
+    },
+    methods: {
+      onSubmit() {
+        console.log('submit!');
+      },
+      //退出登录
+      logout: function () {
+        var _this = this;
+        this.$confirm('确认退出吗?', '提示', {
+          //type: 'warning'
+        }).then(() => {
+          sessionStorage.removeItem('user');
+          _this.$router.push('/');
+        }).catch(() => {
+
+        });
+
+
+      },
+      //折叠导航栏
+      collapse:function(){
+        this.collapsed=!this.collapsed;
+      },
+      showMenu(i,status){
+        this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-'+i)[0].style.display=status?'block':'none';
+      }
+    },
+    mounted() {
+      var orgName = sessionStorage.getItem('orgName');
+      var userName = sessionStorage.getItem('userName');
+      this.sysUserName = userName;
+      this.sysOrgName=orgName;
+      this.sysUserAvatar =  '';
+    }
+  }
+
+</script>
+
+<style scoped lang="scss">
+  .container {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    .header {
+      height: 60px;
+      line-height: 60px;
+      background:#20a0ff;
+      color:#fff;
+      .userinfo {
+        text-align: right;
+        padding-right: 35px;
+        float: right;
+        .userinfo-inner {
+          cursor: pointer;
+          color:#fff;
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin: 10px 0px 10px 10px;
+            float: right;
+          }
+        }
+      }
+      .logo {
+        //width:230px;
+        height:60px;
+        font-size: 22px;
+        padding-left:20px;
+        padding-right:20px;
+        border-color: rgba(238,241,146,0.3);
+        border-right-width: 1px;
+        border-right-style: solid;
+        img {
+          width: 40px;
+          float: left;
+          margin: 10px 10px 10px 18px;
+        }
+        .txt {
+          color:#fff;
+        }
+      }
+      .logo-width{
+        width:180px;
+      }
+      .logo-collapse-width{
+        width:60px
+      }
+      .tools{
+        padding: 0px 23px;
+        width:14px;
+        height: 60px;
+        line-height: 60px;
+        cursor: pointer;
+      }
+    }
+    .main {
+      display: flex;
+      // background: #324057;
+      position: absolute;
+      top: 60px;
+      bottom: 0px;
+      overflow: hidden;
+      aside {
+        flex:0 0 230px;
+        width: 200px;
+        // position: absolute;
+        // top: 0px;
+        // bottom: 0px;
+        .el-menu{
+          height: 100%;
+        }
+        .collapsed{
+          width:60px;
+          .item{
+            position: relative;
+          }
+          .submenu{
+            position:absolute;
+            top:0px;
+            left:60px;
+            z-index:99999;
+            height:auto;
+            display:none;
+          }
+
+        }
+      }
+      .menu-collapsed{
+        flex:0 0 60px;
+        width: 60px;
+      }
+      .menu-expanded{
+        flex:0 0 180px;
+        width: 220px;
+        overflow-y:auto; 
+      }
+      .content-container {
+        // background: #f1f2f7;
+        flex:1;
+        // position: absolute;
+        // right: 0px;
+        // top: 0px;
+        // bottom: 0px;
+        // left: 230px;
+        overflow-y: scroll;
+        padding: 20px;
+        .breadcrumb-container {
+          //margin-bottom: 15px;
+          .title {
+            width: 200px;
+            float: left;
+            color: #475669;
+          }
+          .breadcrumb-inner {
+            float: right;
+          }
+        }
+        .content-wrapper {
+          background-color: #fff;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+</style>
+
+
+<style  lang="scss">
+  .content{
+    .page{
+     float:right;
+     margin-top:10px;
+    }
+    .div-center{
+      margin-top:10px;
+      text-align:center;
+    }
+    
+  }
+</style>
