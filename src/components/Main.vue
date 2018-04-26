@@ -51,7 +51,19 @@
         </template>
         <el-menu-item index="/main/system/column">栏目管理</el-menu-item>
         <el-menu-item index="/main/system/content">内容管理</el-menu-item>
+         <el-menu-item index="/main/system/outnews">信息采集</el-menu-item>
+         <el-menu-item index="/main/system/outkey">关键词管理</el-menu-item>
       </el-submenu>
+      <el-submenu index="2">
+        <template slot="title">
+          <i class="fa fa-book fa-lg" style="padding-right:10px"></i>
+          <span>118管理</span>
+        </template>
+        <el-menu-item index="/main/system/applyorg">监管部门</el-menu-item>
+        <el-menu-item index="/main/system/beforeapply">申请管理</el-menu-item>
+         
+      </el-submenu>
+
       <el-submenu index="3">
         <template slot="title">
           <i class="fa fa-users fa-lg" style="padding-right:10px"></i>

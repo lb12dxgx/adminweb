@@ -15,8 +15,12 @@ import SystemRoleMenu from '@/components/system/RoleMenu'
 
 import ContentColumnInfo from '@/components/content/ColumnInfo'
 import ContentInfo from '@/components/content/ContentInfo'
+import OutNews from '@/components/content/OutNews'
+import OutKey from '@/components/content/OutKey'
 
 
+import ApplyOrg from '@/components/before/ApplyOrg'
+import BeforeApply from '@/components/before/BeforeApply'
 
 Vue.use(Router)
 
@@ -69,7 +73,23 @@ export default new Router({
             component: ContentInfo,
             name:'contentInfo'
             
-          }
+          },{
+            path: 'system/outnews',
+            component: OutNews,
+            name:'outNews'
+           },{
+            path: 'system/outkey',
+            component: OutKey,
+            name:'outKey'
+           },{
+            path: 'system/applyorg',
+            component: ApplyOrg,
+            name:'applyOrg'
+           },{
+            path: 'system/beforeapply',
+            component: BeforeApply,
+            name:'beforeApply'
+           }
       ]
     }
   ]

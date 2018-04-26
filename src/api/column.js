@@ -19,3 +19,13 @@ export const saveContent = params => { return mockAxios.post(`${base}/system/con
 export const updateContent = params => { return mockAxios.post(`${base}/system/content/update.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getContentList = params => { return mockAxios.post(`${base}/system/content/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteContent = params => { return mockAxios.post(`${base}/system/content/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+
+
+export const getOutNewsList = params => { return mockAxios.post(`${base}/system/outnews/list.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteOutNew = params => { return mockAxios.post(`${base}/system/outnews/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const deleteAllOutNew = params => { return mockAxios.post(`${base}/system/outnews/alldelete.do`,qs.stringify(params)).then(res => res.data); }; 
+
+
+export const outKeyList = params => { return mockAxios.post(`${base}/system/outkey/list.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteOutKey = params => { return mockAxios.post(`${base}/system/outkey/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const saveOutKey = params => { return mockAxios.post(`${base}/system/outkey/save.do`,qs.stringify(params)).then(res => res.data); }; 
