@@ -54,7 +54,7 @@
          <el-menu-item index="/main/system/outnews">信息采集</el-menu-item>
          <el-menu-item index="/main/system/outkey">关键词管理</el-menu-item>
       </el-submenu>
-      <el-submenu index="2">
+      <el-submenu index="3">
         <template slot="title">
           <i class="fa fa-book fa-lg" style="padding-right:10px"></i>
           <span>118管理</span>
@@ -64,25 +64,25 @@
          
       </el-submenu>
 
-      <el-submenu index="3">
+      <el-submenu index="4">
         <template slot="title">
           <i class="fa fa-users fa-lg" style="padding-right:10px"></i>
           <span>会员管理</span>
         </template>
       </el-submenu>
-      <el-submenu index="4">
+      <el-submenu index="5">
         <template slot="title">
           <i class="fa fa-id-card-o fa-lg" style="padding-right:10px"></i>
           <span>培训管理</span>
         </template>
       </el-submenu>
-      <el-submenu index="5">
+      <el-submenu index="6">
         <template slot="title">
           <i class="fa fa-bullhorn fa-lg" style="padding-right:10px"></i>
           <span>招聘管理</span>
         </template>
       </el-submenu>
-      <el-submenu index="6">
+      <el-submenu index="7">
         <template slot="title">
           <i class="fa fa-cart-plus fa-lg" style="padding-right:10px"></i>
           <span>商品管理</span>

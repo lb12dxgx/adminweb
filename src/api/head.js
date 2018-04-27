@@ -4,7 +4,7 @@ import axiosMock from 'axios-mock-adapter'
 const mockAxios = Axios.create();
 const mock = new axiosMock(mockAxios);
 const uuidv4 = require('uuid/v4');
-const ip="http://127.0.0.1:8012"
+const ip="http://127.0.0.1:8080"
 //const ip="http://120.79.20.2:8080"
 mock.restore();//去掉模拟行为
  

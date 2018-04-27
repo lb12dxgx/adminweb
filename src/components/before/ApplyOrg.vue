@@ -37,6 +37,9 @@
     <!--新增界面-->
     <el-dialog title="新增管理机构" :visible.sync="addFormVisible">
        <el-form :model="addForm" label-width="120px"  :rules="addFormRules" ref="addForm">
+         <el-form-item label="业务表单编码" required prop="formCode">
+          <el-input v-model="addForm.formCode" auto-complete="off"></el-input>
+        </el-form-item>
         <el-form-item label="机构编码" required prop="orgCode">
           <el-input v-model="addForm.orgCode" auto-complete="off"></el-input>
         </el-form-item>
@@ -44,7 +47,7 @@
           <el-input v-model="addForm.orgName" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="管理城市" required prop="city">
-          <el-input  type="password" v-model="addForm.city" auto-complete="off"></el-input>
+          <el-input  v-model="addForm.city" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="机构电话"  prop="telphone" >
           <el-input  v-model="addForm.telphone" auto-complete="off"></el-input>
@@ -52,18 +55,10 @@
         <el-form-item label="机构地址"  prop="address" >
           <el-input  v-model="addForm.address" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="联系人"  prop="contacts" >
-          <el-input  v-model="addForm.contacts" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="联系人手机"  prop="contactsTel" >
-          <el-input  v-model="addForm.contactsTel" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="工作时间"  prop="workDate" >
+       <el-form-item label="工作时间"  prop="workDate" >
           <el-input  v-model="addForm.workDate" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码"  prop="password" >
-          <el-input  v-model="addForm.password" auto-complete="off"></el-input>
-        </el-form-item>
+      
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addFormVisible = false">取消</el-button>
@@ -74,6 +69,9 @@
     <!--编辑界面-->
     <el-dialog title="编辑" :visible.sync="editFormVisible">
       <el-form :model="editForm" label-width="120px" :rules="editFormRules" ref="editForm">
+        <el-form-item label="业务表单编码" required prop="formCode">
+          <el-input v-model="editForm.formCode" auto-complete="off"></el-input>
+        </el-form-item>
        <el-form-item label="机构编码" required prop="orgCode">
           <el-input v-model="editForm.orgCode" auto-complete="off"></el-input>
         </el-form-item>
@@ -81,7 +79,7 @@
           <el-input v-model="editForm.orgName" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="管理城市" required prop="city">
-          <el-input  type="password" v-model="editForm.city" auto-complete="off"></el-input>
+          <el-input   v-model="editForm.city" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="机构电话"  prop="telphone" >
           <el-input  v-model="editForm.telphone" auto-complete="off"></el-input>
@@ -89,18 +87,11 @@
         <el-form-item label="机构地址"  prop="address" >
           <el-input  v-model="editForm.address" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="联系人"  prop="contacts" >
-          <el-input  v-model="editForm.contacts" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="联系人手机"  prop="contactsTel" >
-          <el-input  v-model="editForm.contactsTel" auto-complete="off"></el-input>
-        </el-form-item>
+       
         <el-form-item label="工作时间"  prop="workDate" >
           <el-input  v-model="editForm.workDate" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="密码"  prop="password" >
-          <el-input  v-model="editForm.password" auto-complete="off"></el-input>
-        </el-form-item>
+       
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="editFormVisible = false">取消</el-button>
@@ -113,13 +104,13 @@
 </template>
 
 <script>
-  import {accountList,deleteAccount,saveAccount,updateAccount,getOrgTree,resetAccount} from '../../api/api';
+  import {applyorgList,deleteApplyorg,saveApplyorg,updateApplyorg} from '../../api/before';
   import NProgress from 'nprogress';
   export default {
     data() {
       return {
         filters: {
-          userName: ''
+          orgName: ''
         },
         listLoading:false,
         list: [],
@@ -129,42 +120,42 @@
         addFormVisible: false,//新增界面是否显示
         addLoading: false,
         addFormRules: {
-          accountName: [
+          orgName: [
             { required: true, message: '请输入单位名称', trigger: 'blur' }
-          ],
-          accountPassword: [
-            
-            { required: true, message: '请输入单位编码', trigger: 'blur' }
           ]
         },
         addForm: {
-          accountName: '',
-          accountPassword: '',
-          userName: '',
-          orgName:'',
-          orgId:''
+          formCode: '',
+          orgCode: '',
+          orgName: '',
+          city:'',
+          telphone:'',
+          address:'',
+          contacts:'',
+          contactsTel:'',
+          workDate:'',
+          feedback:''
         },
 
         editFormVisible: false,//界面是否显示
         editLoading: false,
         editFormRules: {
-          accountName: [
+          orgName: [
             { required: true, message: '请输入单位名称', trigger: 'blur' }
-          ],
-          passworld: [
-            { required: true, message: '请输入单位编码', trigger: 'blur' }
           ]
         },
         editForm: {
-          accountName: '',
-          accountPassword: '',
-          userName: '',
-          orgName:''
-        },
-        stateList:[
-          {state:0,stateName:'启用'},
-          {state:1,stateName:'停用'}
-        ]
+          formCode: '',
+          orgCode: '',
+          orgName: '',
+          city:'',
+          telphone:'',
+          address:'',
+          contacts:'',
+          contactsTel:'',
+          workDate:'',
+          feedback:''
+        }
 
       }
     },
@@ -205,7 +196,7 @@
               NProgress.start();
               let para = Object.assign({}, this.addForm);
               console.log(para);
-              saveAccount(para).then((res) => {
+              saveApplyorg(para).then((res) => {
                 this.addLoading = false;
                 NProgress.done();
                 this.$notify({
@@ -216,7 +207,7 @@
                 });
                 this.$refs['addForm'].resetFields();
                 this.addFormVisible = false;
-                this.getUserList();
+                this.getList();
               });
             });
           }
@@ -229,11 +220,7 @@
 
       
 
-      nodeClick(node,nodeCheck){
-        this.addForm.orgId=node.orgId;
-        this.addForm.orgName=node.orgName;
-      },
-
+     
       //编辑
       editSubmit: function () {
             this.$refs.editForm.validate((valid) => {
@@ -242,7 +229,7 @@
               this.editLoading = true;
               NProgress.start();
               let para = Object.assign({}, this.editForm);
-              updateAccount(para).then((res) => {
+              updateApplyorg(para).then((res) => {
                 this.editLoading = false;
                 NProgress.done();
                 this.$notify({
@@ -253,7 +240,7 @@
                 });
                 this.$refs['editForm'].resetFields();
                 this.editFormVisible = false;
-                this.getUserList();
+                this.getList();
               }).catch((err)=>{
                   this.editLoading = false;
                 NProgress.done();
@@ -273,8 +260,8 @@
         }).then(() => {
           this.listLoading = true;
           NProgress.start();
-          let para = {accountId: row.accountId };
-          deleteAccount(para).then((res) => {
+          let para = {applyOrgId: row.applyOrgId };
+          deleteApplyorg(para).then((res) => {
             this.listLoading = false;
             NProgress.done();
             if(res.state==1){
@@ -284,7 +271,7 @@
                 duration:2500,
                 type: 'success'
               });
-             this.getUserList();
+             this.getList();
             }
             
           });
@@ -292,37 +279,11 @@
       },
 
 
-
-      //删除
-      handleRest: function (index, row) {
-        this.$confirm('确认删除该记录吗?', '提示', {
-          type: 'warning'
-        }).then(() => {
+      getList() {
+          var params = Object.assign({pageNum:this.pageNum}, this.filters);
           this.listLoading = true;
           NProgress.start();
-          let para = {accountId: row.accountId };
-          resetAccount(para).then((res) => {
-            this.listLoading = false;
-            NProgress.done();
-            if(res.state==1){
-              this.$notify({
-                title: '成功',
-                message: '删除成功',
-                duration:2500,
-                type: 'success'
-              });
-             this.getUserList();
-            }
-            
-          });
-        });
-      },
-
-      getUserList() {
-          var params = Object.assign({pageNum:this.pageNum,accountType:10}, this.filters);
-          this.listLoading = true;
-          NProgress.start();
-          accountList(params).then(data => {
+          applyorgList(params).then(data => {
             this.listLoading = false;
             NProgress.done();
     
@@ -333,11 +294,8 @@
     },
 
     mounted() {
-      this.getUserList();
-      getOrgTree().then((res) => {
-        console.log(res.retData);
-        this.orgJson =JSON.parse(res.retData);
-      });
+      this.getList();
+     
     }
 
   }
