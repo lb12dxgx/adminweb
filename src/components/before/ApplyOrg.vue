@@ -58,6 +58,9 @@
        <el-form-item label="工作时间"  prop="workDate" >
           <el-input  v-model="addForm.workDate" auto-complete="off"></el-input>
         </el-form-item>
+         <el-form-item label="顺序号"  prop="orderNum" >
+          <el-input  v-model="addForm.orderNum" auto-complete="off"></el-input>
+        </el-form-item>
       
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -91,6 +94,10 @@
         <el-form-item label="工作时间"  prop="workDate" >
           <el-input  v-model="editForm.workDate" auto-complete="off"></el-input>
         </el-form-item>
+
+        <el-form-item label="顺序号"  prop="orderNum" >
+          <el-input  v-model="editForm.orderNum" auto-complete="off"></el-input>
+        </el-form-item>
        
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -105,6 +112,7 @@
 
 <script>
   import {applyorgList,deleteApplyorg,saveApplyorg,updateApplyorg} from '../../api/before';
+  import {resetAccount} from '../../api/api';
   import NProgress from 'nprogress';
   export default {
     data() {
@@ -134,7 +142,8 @@
           contacts:'',
           contactsTel:'',
           workDate:'',
-          feedback:''
+          feedback:'',
+          orderNum:'',
         },
 
         editFormVisible: false,//界面是否显示
@@ -154,7 +163,8 @@
           contacts:'',
           contactsTel:'',
           workDate:'',
-          feedback:''
+          feedback:'',
+          orderNum:'',
         }
 
       }
@@ -183,7 +193,7 @@
       },
 
       handleSubmit(){
-          this.getUserList();
+          this.getList();
       },
 
 
@@ -214,9 +224,6 @@
         });
       },
 
-      addTreeSubmit(){
-            console.log(this.$refs.addOrgTree.getCheckedNodes());
-      },
 
       
 
@@ -268,6 +275,31 @@
               this.$notify({
                 title: '成功',
                 message: '删除成功',
+                duration:2500,
+                type: 'success'
+              });
+             this.getList();
+            }
+            
+          });
+        });
+      },
+
+      //密码重置
+      handleRest: function (index, row) {
+        this.$confirm('确认重置密码吗?', '提示', {
+          type: 'warning'
+        }).then(() => {
+          this.listLoading = true;
+          NProgress.start();
+          let para = {accountId: row.accountId };
+          resetAccount(para).then((res) => {
+            this.listLoading = false;
+            NProgress.done();
+            if(res.state==1){
+              this.$notify({
+                title: '成功',
+                message: '重置成功',
                 duration:2500,
                 type: 'success'
               });
