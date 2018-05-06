@@ -26,12 +26,13 @@
        <div class="list">
           <el-table :data="contentList" highlight-current-row  border style="width: 100%">
             <el-table-column type="index" label="序号" width="50"></el-table-column>
-            <el-table-column prop="contentTitle" label="标题"  width="350"> </el-table-column>
-            <el-table-column prop="contentJson.level" label="级别" width="70" :formatter='formatLevel'></el-table-column>
+            <el-table-column prop="contentTitle" label="标题" > </el-table-column> 
+            <el-table-column prop="level" label="级别" width="70" :formatter='formatLevel'></el-table-column>
             <el-table-column prop="contentJson.creator" label="发布者" width="80"></el-table-column>
-             <el-table-column prop="contentJson.pdate" label="发布时间" 
+             <el-table-column prop="contentJson.pdate" label="发布时间" width="100"
              :formatter='formatDate'>
              </el-table-column>
+              
              <el-table-column prop="viewNum" label="点击" width="50"></el-table-column>
             <el-table-column label="操作" width="150">
               <template slot-scope="scope">
@@ -89,11 +90,13 @@ export default {
         total: 0,
         pageNum: 1,
         editContent:{},
-        levelMap:{'90':'级别一','80':'级别二','70':'级别三'}
+        levelMap:{90:'级别一',80:'级别二',70:'级别三'}
       }
   },
  
    methods: {
+
+     
 
       //性别显示转换
       formatDate(row, column) {
@@ -135,6 +138,7 @@ export default {
 
       handleEdit(index, row){
         this.editContent=row;
+      
         this.editflag = true;
         this.listflag=false;
       },

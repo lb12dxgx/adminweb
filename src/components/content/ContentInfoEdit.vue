@@ -43,7 +43,7 @@
               <el-row>
                 <el-col :span="12" >
                   <el-form-item label="固定级别">
-                    <el-select v-model="form.contentJson.level" placeholder="请选择">
+                    <el-select v-model="form.level" placeholder="请选择">
                       <el-option
                         v-for="item in options"
                         :key="item.value"
@@ -64,6 +64,13 @@
                   </el-form-item>
                 </el-col> 
               </el-row>
+              <el-row>
+                <el-col :span="12" >
+                  <el-form-item label="新闻来源">
+                    <el-input v-model="form.contentJson.source"></el-input>
+                  </el-form-item>
+                </el-col> 
+              </el-row>
           </el-tab-pane>
           <el-tab-pane label="正文内容" name="zero">
             <UE :defaultMsg="form.content" 
@@ -77,6 +84,7 @@
             <el-upload
               class="upload-demo"
               :action="uploadAction"
+              :data="titleDate"
               :on-preview="handlePreview"
               :before-remove="handleRemove"
               multiple
@@ -210,13 +218,13 @@ export default {
         options:
         [
           {
-            value: '90',
+            value: 90,
             label: '级别一'
           },{
-            value: '80',
+            value: 80,
             label: '级别二'
           },{
-            value: '70',
+            value: 70,
             label: '级别三'
           }
         ],
@@ -295,6 +303,7 @@ export default {
     },
 
      mounted() {
+      console.log(this.form.titleFileId);
       this.editorcontent=this.form.content;
       titleFileId=this.form.titleFileId;
       contentFileId=this.form.contentFileId;

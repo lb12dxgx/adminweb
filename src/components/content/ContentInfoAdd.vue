@@ -42,7 +42,7 @@
               <el-row>
                 <el-col :span="12" >
                   <el-form-item label="固定级别">
-                    <el-select v-model="form.contentJson.level" placeholder="请选择">
+                    <el-select v-model="form.level" placeholder="请选择">
                       <el-option
                         v-for="item in options"
                         :key="item.value"
@@ -53,7 +53,7 @@
                     
                   </el-form-item>
                 </el-col> 
-                <el-col :span="12" >
+                <el-col :span="6" >
                   <el-form-item label="固定时间">
                     <el-date-picker
                       v-model="form.contentJson.gddate"
@@ -62,7 +62,15 @@
                     </el-date-picker>
                   </el-form-item>
                 </el-col> 
+                </el-row>
+              <el-row>
+                <el-col :span="12" >
+                  <el-form-item label="新闻来源">
+                    <el-input v-model="form.contentJson.source"></el-input>
+                  </el-form-item>
+                </el-col> 
               </el-row>
+              
           </el-tab-pane>
           <el-tab-pane label="正文内容" name="zero">
             <UE defaultMsg="" 
@@ -166,11 +174,11 @@ import {deleteFileinfo,base} from '../../api/fileinfo';
 import {saveContent} from '../../api/column';
 
 
-const uuidv4 = require('uuid/v4');
-var titleFileId=uuidv4();
-var contentFileId=uuidv4();
-var picFileId=uuidv4();
-var otherFileId=uuidv4();
+const uuidv1 = require('uuid/v1');
+var titleFileId="";
+var contentFileId="";
+var picFileId="";
+var otherFileId="";
 
 
 export default {
@@ -217,6 +225,7 @@ export default {
         form: {
           contentTitle: '',
           content: '',
+          level:'',
           contentJson:{},
           titleFileId:titleFileId,
           contentFileId:contentFileId,
@@ -233,13 +242,13 @@ export default {
         options:
         [
           {
-            value: '90',
+            value: 90,
             label: '级别一'
           },{
-            value: '80',
+            value: 80,
             label: '级别二'
           },{
-            value: '70',
+            value: 70,
             label: '级别三'
           }
         ],
@@ -316,7 +325,15 @@ export default {
     },
 
      mounted() {
-     
+      let r=uuidv1();
+      titleFileId=r+"titleFileId";
+      contentFileId=r+"contentFileId";
+      picFileId=r+"picFileId";
+      otherFileId=r+"otherFileId";
+      console.log(titleFileId);
+      console.log(contentFileId);
+      console.log(picFileId);
+      console.log(otherFileId);
     }
   }
    </script>
