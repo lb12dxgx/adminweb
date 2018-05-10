@@ -22,6 +22,10 @@ import OutKey from '@/components/content/OutKey'
 import ApplyOrg from '@/components/before/ApplyOrg'
 import BeforeApply from '@/components/before/BeforeApply'
 
+import TrainPlan from '@/components/Train/TrainPlan'
+import TrainPlanAdd from '@/components/Train/TrainPlanAdd'
+import TrainPlanEdit from '@/components/Train/TrainPlanEdit'
+
 Vue.use(Router)
 
 export default new Router({
@@ -89,7 +93,21 @@ export default new Router({
             path: 'system/beforeapply',
             component: BeforeApply,
             name:'beforeApply'
+           },{
+            path: 'system/trainplan',
+            component: TrainPlan,
+            name:'trainPlan'
+           },{
+            path: 'system/trainplan/add',
+            component: TrainPlanAdd,
+            name:'trainPlanAdd'
+           },{
+            path: 'system/trainplan/edit',
+            component: TrainPlanEdit,
+            name:'trainPlanEdit'
            }
+
+
       ]
     }
   ]

@@ -2,18 +2,18 @@
   <div class="content">
     <el-row>
       <el-col :span="20" :offset="2">
-       <el-form :model="addForm" label-width="120px"  :rules="addFormRules" ref="addForm" size="small">
+       <el-form :model="editForm" label-width="120px"  :rules="editFormRules" ref="editForm" size="small">
             <el-form-item label="培训名称" required prop="trainName">
-              <el-input v-model="addForm.trainName" auto-complete="off"></el-input>
+              <el-input v-model="editForm.trainName" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="培训地点" required prop="trainAddr">
-              <el-input v-model="addForm.trainAddr" auto-complete="off"></el-input>
+              <el-input v-model="editForm.trainAddr" auto-complete="off"></el-input>
             </el-form-item>
             <el-row>
               <el-col :span="12">
                 <el-form-item label="开始时间" required prop="trainStartDate">
                   <el-date-picker
-                    v-model="addForm.trainStartDate"
+                    v-model="editForm.trainStartDate"
                     type="date"
                     placeholder="选择日期"
                     format="yyyy-MM-dd"
@@ -26,7 +26,7 @@
               <el-col :span="12">
                 <el-form-item label="结束时间" required prop="trainEndDate">
                    <el-date-picker
-                    v-model="addForm.trainEndDate"
+                    v-model="editForm.trainEndDate"
                     type="date"
                     placeholder="选择日期"
                     format="yyyy-MM-dd"
@@ -39,18 +39,18 @@
             <el-row>
               <el-col :span="12">
                 <el-form-item label="培训人数" required prop="personNum">
-                  <el-input v-model="addForm.personNum" auto-complete="off"></el-input>
+                  <el-input v-model="editForm.personNum" auto-complete="off"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
                 <el-form-item label="培训费" required prop="trainMoney">
-                  <el-input v-model="addForm.trainMoney" auto-complete="off"></el-input>
+                  <el-input v-model="editForm.trainMoney" auto-complete="off"></el-input>
                 </el-form-item>
                 </el-col>
             </el-row>
 
             <el-form-item label="培训说明" required prop="trainSumary">
-               <quill-editor v-model="addForm.trainSumary"
+               <quill-editor v-model="editForm.trainSumary"
                     ref="myQuillEditor"
                     :options="editorOption"
                     
@@ -76,7 +76,7 @@
   import 'quill/dist/quill.bubble.css'
   import { quillEditor } from 'vue-quill-editor'
 
-  import {saveTrainPlan} from '../../api/train';
+  import {updateTrainPlan,getTrainPlan} from '../../api/train';
 
   export default {
     components: {
@@ -92,7 +92,8 @@
             { required: true, message: '请输入关键词', trigger: 'blur' }
           ]
         },
-        addForm: {
+        editForm: {
+          trainPlanId:'',
           trainName: '',
           trainAddr:'',
           trainStartDate:'',
@@ -123,13 +124,13 @@
 
       //新增
       addSubmit() {
-        this.$refs.addForm.validate((valid) => {
+        this.$refs.editForm.validate((valid) => {
           if (valid) {
             this.$confirm('确认提交吗？', '提示', {}).then(() => {
             
-              let para = Object.assign({}, this.addForm);
+              let para = Object.assign({}, this.editForm);
               console.log(para);
-              saveTrainPlan(para).then((res) => {
+              updateTrainPlan(para).then((res) => {
                 this.$notify({
                   title: '成功',
                   message: '提交成功',
@@ -145,7 +146,12 @@
     },
 
     mounted() {
-      
+      let trainPlanId=this.$route.query.trainPlanId;
+      let para = {trainPlanId: trainPlanId};
+      console.log(para);
+      getTrainPlan(para).then((data) => {
+        this.editForm=data.retData;
+      })
     }
 
   }

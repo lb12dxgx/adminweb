@@ -7,115 +7,75 @@
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column prop="trainName" label="培训名称" > </el-table-column>
-        <el-table-column label="操作" width="250">
+        <el-table-column prop="trainAddr" label="培训地点" > </el-table-column>
+        <el-table-column prop="trainStartDate" label="开始时间" width="100" :formatter='formatTrainStartDate'> </el-table-column>
+        <el-table-column prop="trainEndDate" label="结束时间" width="100" :formatter='formatTrainEndDate'> </el-table-column>
+        <el-table-column prop="personNum" label="培训人数" width="80"> </el-table-column>
+        <el-table-column label="操作" width="150">
           <template slot-scope="scope">
+             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
             <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
       </el-table-column>
       </el-table>
     </div>
+
+     <div class="page">
+      <el-pagination  @current-change="handleCurrentChange" :current-page="pageNum" :page-size="5" layout="total,  prev, pager, next, jumper" :total="total">
+      </el-pagination>
+    </div>
     
-
-    <!--新增界面-->
-    <el-dialog title="新增" :visible.sync="addFormVisible">
-       
-      <el-form :model="addForm" label-width="120px"  :rules="addFormRules" ref="addForm">
-        <el-form-item label="培训名称" required prop="trainName">
-          <el-input v-model="addForm.trainName" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="培训地点" required prop="trainAddr">
-          <el-input v-model="addForm.trainAddr" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="培训开始时间" required prop="trainStartDate">
-          <el-input v-model="addForm.trainStartDate" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="培训结束时间" required prop="trainEndDate">
-          <el-input v-model="addForm.trainEndDate" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="培训人数" required prop="personNum">
-          <el-input v-model="addForm.personNum" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="培训名称" required prop="trainName">
-          <el-input v-model="addForm.trainName" auto-complete="off"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="addFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="addSubmit" :loading="addLoading">提交</el-button>
-      </div>
-    </el-dialog>
-
-   </div>
+  </div>
 </template>
 
 <script>
-  import {outKeyList,deleteOutKey,saveOutKey} from '../../api/column';
+  import {getTrainPlanList,deleteTrainPlan} from '../../api/train';
   import NProgress from 'nprogress';
   export default {
     data() {
       return {
         filters: {
-          userName: ''
+          trainName: ''
         },
         listLoading:false,
         list: [],
-        
+        total: 0,
+        pageNum: 1,
 
-        
-
-        addFormVisible: false,//新增界面是否显示
-        
-        addLoading: false,
-        addFormRules: {
-          keyStr: [
-            { required: true, message: '请输入关键词', trigger: 'blur' }
-          ]
-        },
-        addForm: {
-          keyStr: ''
-        }
-        }
+      }
     },
 
     methods: {
-     
-     
-      handleAdd(){
-        this.addFormVisible = true;
+
+     formatTrainStartDate(row, column) {
+          var val=row.trainStartDate
+         if (val != null) {
+            var date = new Date(val);
+            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        }
       },
 
-
-
-      //新增
-      addSubmit() {
-        this.$refs.addForm.validate((valid) => {
-          if (valid) {
-            this.$confirm('确认提交吗？', '提示', {}).then(() => {
-              this.addLoading = true;
-              NProgress.start();
-              let para = Object.assign({}, this.addForm);
-              console.log(para);
-              saveOutKey(para).then((res) => {
-                this.addLoading = false;
-                NProgress.done();
-                this.$notify({
-                  title: '成功',
-                  message: '提交成功',
-                  duration:2500,
-                  type: 'success'
-                });
-                this.$refs['addForm'].resetFields();
-                this.addFormVisible = false;
-                this.getList();
-              });
-            });
-          }
-        });
+       formatTrainEndDate(row, column) {
+          var val=row.trainStartDate
+         if (val != null) {
+            var date = new Date(val);
+            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        }
       },
 
-      
+     handleAdd(){
+        this.$router.push({ path:'trainplan/add'});
+      },
+      handleEdit(row){
+        this.$router.push({ path:'trainplan/edit', query:{trainPlanId:row.trainPlanId}});
+      },
 
-      //删除
+      handleCurrentChange(val) {
+        this.pageNum = val;
+        this.getList();
+      },
+
+     //删除
       handleDel: function (index, row) {
         this.$confirm('确认删除该记录吗?', '提示', {
           type: 'warning'
@@ -123,7 +83,7 @@
           this.listLoading = true;
           NProgress.start();
           let para = {outkeyinfoId: row.outkeyinfoId };
-          deleteOutKey(para).then((res) => {
+          deleteTrainPlan(para).then((res) => {
             this.listLoading = false;
             NProgress.done();
             if(res.state==1){
@@ -139,14 +99,16 @@
           });
         });
       },
-       getList() {
-          var params = Object.assign({pageNum:this.pageNum,accountType:10}, this.filters);
+
+      getList() {
+          var params = Object.assign({pageNum:this.pageNum}, this.filters);
           this.listLoading = true;
           NProgress.start();
-          outKeyList(params).then(data => {
+          getTrainPlanList(params).then(data => {
             this.listLoading = false;
             NProgress.done();
-            this.list =data.retData;
+            this.list =data.retData.content;
+            this.total=data.retData.totalElements;
           });
       }
     },
