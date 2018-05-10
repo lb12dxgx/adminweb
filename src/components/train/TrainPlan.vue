@@ -32,8 +32,8 @@
         <el-form-item label="培训结束时间" required prop="trainEndDate">
           <el-input v-model="addForm.trainEndDate" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="培训名称" required prop="trainName">
-          <el-input v-model="addForm.trainName" auto-complete="off"></el-input>
+        <el-form-item label="培训人数" required prop="personNum">
+          <el-input v-model="addForm.personNum" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="培训名称" required prop="trainName">
           <el-input v-model="addForm.trainName" auto-complete="off"></el-input>
