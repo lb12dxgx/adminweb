@@ -38,13 +38,17 @@
             </el-row>
             <el-row>
               <el-col :span="12">
-                <el-form-item label="培训人数" required prop="personNum">
-                  <el-input v-model="editForm.personNum" auto-complete="off"></el-input>
+                <el-form-item label="培训人数"  prop="personNum">
+                  <el-input v-model.number="editForm.personNum" type="number" style="width:200px">
+                    <template slot="append">人数</template>
+                  </el-input> 
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="培训费" required prop="trainMoney">
-                  <el-input v-model="editForm.trainMoney" auto-complete="off"></el-input>
+                <el-form-item label="培训费"  prop="trainMoney">
+                  <el-input  v-model.number="editForm.trainMoney" type="number" style="width:200px" >
+                     <template slot="append">元</template>
+                  </el-input>
                 </el-form-item>
                 </el-col>
             </el-row>
@@ -87,9 +91,18 @@
       return {
         editorOption: {
         },
-        addFormRules: {
-          keyStr: [
-            { required: true, message: '请输入关键词', trigger: 'blur' }
+       editFormRules: {
+          trainName: [
+            { required: true, message: '请输入计划名称', trigger: 'blur' }
+          ],
+          trainAddr: [
+            { required: true, message: '请输入培训地址', trigger: 'blur' }
+          ],
+          trainStartDate:[
+            { required: true, message: '请输入开始时间', trigger: 'blur' }
+          ],
+            trainEndDate:[
+            { required: true, message: '请输入结束时间', trigger: 'blur' }
           ]
         },
         editForm: {

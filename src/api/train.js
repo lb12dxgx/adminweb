@@ -20,8 +20,10 @@ export const saveTrainClass = params => { return mockAxios.post(`${base}/system/
 export const updateTrainClass = params => { return mockAxios.post(`${base}/system/trainclass/update.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getTrainClassList = params => { return mockAxios.post(`${base}/system/trainclass/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteTrainClass = params => { return mockAxios.post(`${base}/system/trainclass/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getTrainClass = params => { return mockAxios.post(`${base}/system/trainclass/get.do`,qs.stringify(params)).then(res => res.data); }; 
 
 export const saveTrainTeacher = params => { return mockAxios.post(`${base}/system/trainteacher/save.do`,qs.stringify(params)).then(res => res.data); }; 
 export const updateTrainTeacher = params => { return mockAxios.post(`${base}/system/trainteacher/update.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getTrainTeacherList = params => { return mockAxios.post(`${base}/system/trainteacher/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteTrainTeacher = params => { return mockAxios.post(`${base}/system/trainteacher/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getTrainTeacher = params => { return mockAxios.post(`${base}/system/trainteacher/get.do`,qs.stringify(params)).then(res => res.data); }; 

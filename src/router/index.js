@@ -25,6 +25,12 @@ import BeforeApply from '@/components/before/BeforeApply'
 import TrainPlan from '@/components/Train/TrainPlan'
 import TrainPlanAdd from '@/components/Train/TrainPlanAdd'
 import TrainPlanEdit from '@/components/Train/TrainPlanEdit'
+import TrainClass from '@/components/Train/TrainClass'
+import TrainClassAdd from '@/components/Train/TrainClassAdd'
+import TrainClassEdit from '@/components/Train/TrainClassEdit'
+import TrainTeacher from '@/components/Train/TrainTeacher'
+import TrainTeacherAdd from '@/components/Train/TrainTeacherAdd'
+import TrainTeacherEdit from '@/components/Train/TrainTeacherEdit'
 
 Vue.use(Router)
 
@@ -105,6 +111,30 @@ export default new Router({
             path: 'system/trainplan/edit',
             component: TrainPlanEdit,
             name:'trainPlanEdit'
+           },{
+            path: 'system/trainclass',
+            component: TrainClass,
+            name:'trainClass'
+           },{
+            path: 'system/trainclass/add',
+            component: TrainClassAdd,
+            name:'trainClassAdd'
+           },{
+            path: 'system/trainclass/edit',
+            component: TrainClassEdit,
+            name:'trainClassEdit'
+           },{
+            path: 'system/trainteacher',
+            component: TrainTeacher,
+            name:'trainTeacher'
+           },{
+            path: 'system/trainteacher/add',
+            component: TrainTeacherAdd,
+            name:'trainTeacher'
+           },{
+            path: 'system/trainteacher/edit',
+            component: TrainTeacherEdit,
+            name:'trainTeacher'
            }
 
 

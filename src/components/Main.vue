@@ -76,7 +76,6 @@
           <span>培训管理</span>
         </template>
          <el-menu-item index="/main/system/trainplan">培训计划</el-menu-item>
-         <el-menu-item index="/main/system/trainclass">培训课程</el-menu-item>
          <el-menu-item index="/main/system/trainteacher">专家信息</el-menu-item>
       </el-submenu>
       <el-submenu index="6">
