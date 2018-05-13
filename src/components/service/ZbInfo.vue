@@ -2,8 +2,8 @@
   <div class="content">
     <div class="seach">
       <el-form :inline="true" :model="filters" class="demo-form-inline">
-        <el-form-item label="专家名称">
-          <el-input v-model="filters.teacherName" placeholder="专家名称"></el-input>
+        <el-form-item label="招标项目">
+          <el-input v-model="filters.zbXmName" placeholder="招标项目"></el-input>
         </el-form-item>
         
         <el-form-item>
@@ -16,10 +16,10 @@
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="teacherName" label="专家名称" > </el-table-column>
-        <el-table-column prop="teacherCode" label="证书编码" width="250"  > </el-table-column>
-        <el-table-column prop="teacherTitle" label="专家职称" width="100"  > </el-table-column>
-        <el-table-column prop="startDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
+        <el-table-column prop="zbXmName" label="招标项目" > </el-table-column>
+        <el-table-column prop="area" label="项目地址" width="250"  > </el-table-column>
+       
+        <el-table-column prop="publishDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
         <el-table-column prop="endDate" label="结束时间" width="100"
         :formatter='formatEndDate' > </el-table-column>
        
@@ -38,13 +38,13 @@
 </template>
 
 <script>
-  import {getTrainTeacherList,deleteTrainTeacher} from '../../api/train';
+  import {getZbInfoList,deleteZbInfo} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
     data() {
       return {
         filters: {
-          teacherName: ''
+          zbXmName: ''
         },
         listLoading:false,
         list: [],
@@ -57,7 +57,7 @@
     methods: {
 
      formatStartDate(row, column) {
-          var val=row.startDate
+          var val=row.publishDate
          if (val != null) {
             var date = new Date(val);
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -77,13 +77,13 @@
       },
 
       handleAdd(){
-        this.$router.push({ path:'trainteacher/add', });
+        this.$router.push({ path:'zbinfo/add', });
       },
 
       
 
       handleEdit(row){
-        this.$router.push({ path:'trainteacher/edit', query:{trainTeacherId:row.trainTeacherId}});
+        this.$router.push({ path:'zbinfo/edit', query:{zbInfoId:row.zbInfoId}});
       },
 
       handleCurrentChange(val) {
@@ -98,8 +98,8 @@
         }).then(() => {
           this.listLoading = true;
           NProgress.start();
-          let para = {trainTeacherId: row.trainTeacherId };
-          deleteTrainTeacher(para).then((res) => {
+          let para = {zbInfoId: row.zbInfoId };
+          deleteZbInfo(para).then((res) => {
             this.listLoading = false;
             NProgress.done();
             if(res.state==1){
@@ -120,7 +120,7 @@
           var params = Object.assign({pageNum:this.pageNum}, this.filters);
           this.listLoading = true;
           NProgress.start();
-          getTrainTeacherList(params).then(data => {
+          getZbInfoList(params).then(data => {
             this.listLoading = false;
             NProgress.done();
             this.list =data.retData.content;

@@ -32,6 +32,11 @@ import TrainTeacher from '@/components/Train/TrainTeacher'
 import TrainTeacherAdd from '@/components/Train/TrainTeacherAdd'
 import TrainTeacherEdit from '@/components/Train/TrainTeacherEdit'
 
+
+import ZbInfo from '@/components/service/ZbInfo'
+import ZbInfoAdd from '@/components/service/ZbInfoAdd'
+import ZbInfoEdit from '@/components/service/ZbInfoEdit'
+
 Vue.use(Router)
 
 export default new Router({
@@ -135,6 +140,18 @@ export default new Router({
             path: 'system/trainteacher/edit',
             component: TrainTeacherEdit,
             name:'trainTeacher'
+           },{
+            path: 'system/zbinfo',
+            component: ZbInfo,
+            name:'zbInfo'
+           },{
+            path: 'system/zbinfo/add',
+            component: ZbInfoAdd,
+            name:'zbInfoadd'
+           },{
+            path: 'system/zbinfo/edit',
+            component: ZbInfoEdit,
+            name:'zbInfoedit'
            }
 
 

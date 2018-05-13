@@ -5,40 +5,22 @@
        <el-form :model="addForm" label-width="120px"  :rules="addFormRules" ref="addForm" size="small">
             <el-row>
               <el-col :span="12">
-                <el-form-item label="专家名称" required prop="teacherName">
-                 <el-input v-model="addForm.teacherName"  style="width:700px">
+                <el-form-item label="招标项目" required prop="zbXmName">
+                 <el-input v-model="addForm.zbXmName"  style="width:700px">
                   </el-input> 
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-               
-              </el-col>
-            </el-row>
-
-            <el-row>
-              <el-col :span="12">
-                <el-form-item label="职位" required prop="teacherPosition">
-                 <el-input v-model="addForm.teacherPosition"  style="width:200px">
-                  </el-input> 
-                </el-form-item>
-              </el-col>
-              <el-col :span="12">
-                 <el-form-item label="职称" required prop="teacherTitle">
-                 <el-input v-model="addForm.teacherTitle"  style="width:200px">
+                <el-form-item label="项目地址" required prop="area">
+                 <el-input v-model="addForm.area"  style="width:200px">
                   </el-input> 
                 </el-form-item>
               </el-col>
             </el-row>
 
             <el-row>
-              <el-col :span="12">
-                <el-form-item label="证书编码" required prop="teacherCode">
-                 <el-input v-model="addForm.teacherCode"  style="width:200px">
-                  </el-input> 
-                </el-form-item>
-              </el-col>
-              <el-col :span="12">
-                <el-form-item label="证书有效期" required prop="startDate" style="display:inline-block">
+               <el-col :span="12">
+                <el-form-item label="招标日期" required prop="startDate" style="display:inline-block">
                     <el-col :span="11">
                        <el-date-picker
                       v-model="addForm.startDate"
@@ -66,21 +48,10 @@
               </el-col>
             </el-row>
            
-            <el-form-item label="照片"  prop="teacherPicPath">
-               <el-upload
-                class="avatar-uploader"
-                :action="uploadAction" 
-                :data="otherDate"
-                :show-file-list="false"
-                :on-success="handleOtherSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="addForm.teacherPicPath" :src="viewAction" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
-            </el-form-item>
+           
 
-            <el-form-item label="从业经历"  prop="teacherSumary">
-               <quill-editor v-model="addForm.teacherSumary"
+            <el-form-item label="招标内容"  prop="zbContent">
+               <quill-editor v-model="addForm.zbContent"
                     ref="myQuillEditor"
                     :options="editorOption"
                  >
@@ -106,8 +77,7 @@
   import 'quill/dist/quill.snow.css'
   import 'quill/dist/quill.bubble.css'
   import { quillEditor } from 'vue-quill-editor'
-  import {deleteFileinfo,base} from '../../api/fileinfo';
-  import {saveTrainTeacher} from '../../api/train';
+  import {saveZbInfo} from '../../api/service';
   const uuidv1 = require('uuid/v1');
 
   export default {
@@ -117,25 +87,15 @@
     
     data() {
       return {
-        uploadAction:base+"/file/upload.do",
-        viewAction:base+"/file/download.do?fileInfoId=",
-         otherDate:
-        {
-          dirName:'content/teacher',
-          token:sessionStorage.getItem('accessToken'),
-          bussinessId:uuidv1()
-        },
-
-        editorOption: {
-        },
+       
         addFormRules: {
-          teacherName: [
-            { required: true, message: '请输入名称', trigger: 'blur' }
+          zbXmName: [
+            { required: true, message: '请输入项目名称', trigger: 'blur' }
           ],
-          teacherCode: [
-            { required: true, message: '请输入编码', trigger: 'blur' }
+          area: [
+            { required: true, message: '请输入地区', trigger: 'blur' }
           ],
-          startDate:[
+          publishDate:[
             { required: true, message: '请输入开始时间', trigger: 'blur' }
           ],
             endDate:[
@@ -143,14 +103,11 @@
           ]
         },
         addForm: {
-          teacherPicPath:'',
-          teacherName:'', 
-          teacherCode:'',
-          teacherTitle:'',
-          teacherPosition:'',
-          teacherSumary:'',
-          startDate:'',
-          endDate:''
+          zbXmName:'',
+          area:'', 
+          publishDate:'',
+          endDate:'',
+          zbContent:''
         }
       }
         
@@ -158,27 +115,7 @@
 
     methods: {
 
-      handleOtherSuccess(res, file) {
-          console.log(res.retData.filePath);
-          this.addForm.teacherPicPath=res.retData.fileInfoId;
-          this.viewAction=this.viewAction+res.retData.fileInfoId;
-          console.log(this.viewAction);
-        },
-
-      beforeAvatarUpload(file) {
-            console.log(file.type);
-            const isJPG = (file.type === 'image/jpeg'||file.type === 'image/png');
-            const isLt2M = file.size / 1024 / 1024 < 2;
-
-            if (!isJPG) {
-              this.$message.error('上传头像图片只能是 JPG 格式!');
-            }
-            if (!isLt2M) {
-              this.$message.error('上传头像图片大小不能超过 2MB!');
-            }
-            return isJPG && isLt2M;
-       },
-
+      
       getStartDate(date){
           this.startDate = date;
           console.log(this.trainStartDate);
@@ -192,7 +129,7 @@
      
        //新增
       retBack() {
-         this.$router.push({ path:'/main/system/trainteacher'});
+         this.$router.push({ path:'/main/system/zbinfo'});
       },
 
       //新增
@@ -203,14 +140,14 @@
             
               let para = Object.assign({}, this.addForm);
               console.log(para);
-              saveTrainTeacher(para).then((res) => {
+              saveZbInfo(para).then((res) => {
                 this.$notify({
                   title: '成功',
                   message: '提交成功',
                   duration:2500,
                   type: 'success'
                 });
-                this.$router.push({ path:'/main/system/trainteacher'});
+                this.$router.push({ path:'/main/system/zbinfo'});
               
               });
             });
