@@ -85,8 +85,7 @@
           <span>产业服务</span>
         </template>
          <el-menu-item index="/main/system/zbinfo">招标信息</el-menu-item>
-         <el-menu-item index="/main/system/trainteacher">产品信息</el-menu-item>
-         <el-menu-item index="/main/system/trainteacher">商家信息</el-menu-item>
+         <el-menu-item index="/main/system/enterprise">企业信息</el-menu-item>
       </el-submenu>
 
       <el-submenu index="7">

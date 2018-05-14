@@ -37,6 +37,10 @@ import ZbInfo from '@/components/service/ZbInfo'
 import ZbInfoAdd from '@/components/service/ZbInfoAdd'
 import ZbInfoEdit from '@/components/service/ZbInfoEdit'
 
+import Enterprise from '@/components/service/Enterprise'
+import EnterpriseAdd from '@/components/service/EnterpriseAdd'
+import EnterpriseEdit from '@/components/service/EnterpriseEdit'
+
 Vue.use(Router)
 
 export default new Router({
@@ -152,7 +156,20 @@ export default new Router({
             path: 'system/zbinfo/edit',
             component: ZbInfoEdit,
             name:'zbInfoedit'
+           },{
+            path: 'system/enterprise',
+            component: Enterprise,
+            name:'enterprise'
+           },{
+            path: 'system/enterprise/add',
+            component: EnterpriseAdd,
+            name:'enterpriseadd'
+           },{
+            path: 'system/enterprise/edit',
+            component: EnterpriseEdit,
+            name:'enterpriseedit'
            }
+
 
 
       ]

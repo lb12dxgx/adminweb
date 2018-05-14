@@ -5,8 +5,8 @@
        <el-form :model="addForm" label-width="120px"  :rules="addFormRules" ref="addForm" size="small">
             <el-row>
               <el-col :span="20">
-                <el-form-item label="招标项目" required prop="zbXmName">
-                 <el-input v-model="addForm.zbXmName"  >
+                <el-form-item label="企业名称" required prop="enterpriseName">
+                 <el-input v-model="addForm.enterpriseName"  >
                   </el-input> 
                 </el-form-item>
               </el-col>
@@ -15,38 +15,65 @@
 
             <el-row>
                <el-col :span="12">
-                <el-form-item label="发布日期" required prop="publishDate">
-                  <el-date-picker
-                      v-model="addForm.publishDate"
-                      style="width: 100%;"
-                      type="date"
-                      placeholder="发布日期"
-                      format="yyyy-MM-dd"
-                      value-format="yyyy-MM-dd"
-                      @change="getStartDate">
-                  </el-date-picker>
-
-                </el-form-item>
-                
+                <el-form-item label="地址" required prop="addree">
+                  <el-input v-model="addForm.addree"  >
+                  </el-input> 
+                 </el-form-item>
               </el-col>
 
               <el-col :span="12">
-                <el-form-item label="项目所在地" required prop="area">
-                 <el-input v-model="addForm.area"  style="width:200px">
+                <el-form-item label="电话" required prop="telphone">
+                 <el-input v-model="addForm.telphone" >
+                  </el-input> 
+                </el-form-item>
+              </el-col>
+            </el-row>
+
+            <el-row>
+               <el-col :span="12">
+                <el-form-item label="级别" required prop="level">
+                  <el-input v-model="addForm.level"  >
                   </el-input> 
                 </el-form-item>
               </el-col>
 
+              <el-col :span="12">
+                <el-form-item label="顺序"  prop="orderNum">
+                 <el-input v-model="addForm.orderNum" >
+                  </el-input> 
+                </el-form-item>
+              </el-col>
             </el-row>
            
-           <el-form-item label="招标内容"  prop="zbContent">
-                <quill-editor v-model="addForm.zbContent"
+            <el-form-item label="主营业务"  prop="business">
+                <el-input
+                type="textarea"
+                :autosize="{ minRows: 4, maxRows: 6}"
+                placeholder="请输入内容"
+                v-model="addForm.business">
+                </el-input> 
+            </el-form-item>
+
+             <el-form-item label="企业logo"  prop="enterprisePicId"> 
+               <el-upload
+                class="avatar-uploader"
+                :action="uploadAction" 
+                :data="otherDate"
+                :show-file-list="false"
+                :on-success="handleOtherSuccess"
+                :before-upload="beforeAvatarUpload">
+                <img v-if="addForm.enterprisePicId" :src="viewAction" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </el-form-item>
+
+            <el-form-item label="企业介绍"  prop="enterpriseSummary">
+                <quill-editor v-model="addForm.enterpriseSummary"
                     ref="myQuillEditor"
                     :options="editorOption"
                 >
                 </quill-editor>
             </el-form-item>
-
           
 
           </el-form>
@@ -66,7 +93,8 @@
   import 'quill/dist/quill.snow.css'
   import 'quill/dist/quill.bubble.css'
   import {quillEditor } from 'vue-quill-editor'
-  import {saveZbInfo} from '../../api/service';
+  import {deleteFileinfo,base} from '../../api/fileinfo';
+  import {saveEnterprise} from '../../api/service';
   const uuidv1 = require('uuid/v1');
 
   export default {
@@ -76,37 +104,73 @@
     
     data() {
       return {
+        uploadAction:base+"/file/upload.do",
+        viewAction:base+"/file/download.do?fileInfoId=",
+        otherDate:
+        {
+          dirName:'content/enterprise/logo',
+          token:sessionStorage.getItem('accessToken'),
+          bussinessId:uuidv1()
+        },
         editorOption: {
         
         },
 
         addFormRules: {
-          zbXmName: [
-            { required: true, message: '请输入项目名称', trigger: 'blur' }
+          enterpriseName: [
+            { required: true, message: '请输入企业名称', trigger: 'blur' }
           ],
-          area: [
-            { required: true, message: '请输入地区', trigger: 'blur' }
+          addree:[
+            { required: true, message: '请输入地址', trigger: 'blur' }
           ],
-          publishDate:[
-            { required: true, message: '请输入发布日期', trigger: 'blur' }
+          telphone:[
+            { required: true, message: '请输入电话', trigger: 'blur' }
           ],
-            endDate:[
-            { required: true, message: '请输入结束时间', trigger: 'blur' }
-          ]
+          level:[
+            { required: true, message: '请输入等级', trigger: 'blur' }
+          ],
+          orderNum:[
+            { required: true, message: '请输入顺序', trigger: 'blur' }
+          ],
+          
         },
 
         addForm: {
-          zbXmName:'',
-          area:'', 
-          publishDate:'',
-          endDate:'',
-          zbContent:''
+          enterpriseName:'',
+          enterpriseSummary:'', 
+          business:'',
+          addree:'',
+          telphone:'',
+          level:'',
+          orderNum:'',
+          enterprisePicId:''
         }
       }
         
     },
 
     methods: {
+
+      handleOtherSuccess(res, file) {
+          console.log(res.retData.filePath);
+          this.addForm.enterprisePicId=res.retData.fileInfoId;
+          this.viewAction=this.viewAction+res.retData.fileInfoId;
+          console.log(this.viewAction);
+        },
+
+      beforeAvatarUpload(file) {
+            console.log(file.type);
+            const isJPG = (file.type === 'image/jpeg'||file.type === 'image/png');
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG) {
+              this.$message.error('上传头像图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+              this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
+       },
 
       
       getStartDate(date){
@@ -122,7 +186,7 @@
      
        //新增
       retBack() {
-         this.$router.push({ path:'/main/system/zbinfo'});
+         this.$router.push({ path:'/main/system/enterprise'});
       },
 
       //新增
@@ -133,14 +197,14 @@
             
               let para = Object.assign({}, this.addForm);
               console.log(para);
-              saveZbInfo(para).then((res) => {
+              saveEnterprise(para).then((res) => {
                 this.$notify({
                   title: '成功',
                   message: '提交成功',
                   duration:2500,
                   type: 'success'
                 });
-                this.$router.push({ path:'/main/system/zbinfo'});
+                this.$router.push({ path:'/main/system/enterprise'});
               
               });
             });

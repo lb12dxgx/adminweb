@@ -18,8 +18,8 @@
         <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column prop="enterpriseName" label="企业名称" > </el-table-column>
         <el-table-column prop="addree" label="地址" width="250"  > </el-table-column>
-        <el-table-column prop="telphone" label="电话" width="250"  > </el-table-column>
-        <el-table-column prop="level" label="级别" width="250"  > </el-table-column>
+        <el-table-column prop="telphone" label="电话" width="100"  > </el-table-column>
+        <el-table-column prop="level" label="级别" width="50"  > </el-table-column>
        <el-table-column prop="createDate" label="创建时间" width="100" :formatter='formatCreateDate'> </el-table-column>
        
         <el-table-column label="操作" width="250">
