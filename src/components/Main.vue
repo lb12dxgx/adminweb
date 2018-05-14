@@ -79,23 +79,23 @@
          <el-menu-item index="/main/system/trainteacher">专家信息</el-menu-item>
       </el-submenu>
 
-      <el-submenu index="5">
+      <el-submenu index="6">
         <template slot="title">
           <i class="fa fa-id-card-o fa-lg" style="padding-right:10px"></i>
           <span>产业服务</span>
         </template>
-         <el-menu-item index="/main/service/zbinfo">招标信息</el-menu-item>
-         <el-menu-item index="/main/service/trainteacher">产品信息</el-menu-item>
-         <el-menu-item index="/main/service/trainteacher">商家信息</el-menu-item>
+         <el-menu-item index="/main/system/zbinfo">招标信息</el-menu-item>
+         <el-menu-item index="/main/system/trainteacher">产品信息</el-menu-item>
+         <el-menu-item index="/main/system/trainteacher">商家信息</el-menu-item>
       </el-submenu>
 
-      <el-submenu index="6">
+      <el-submenu index="7">
         <template slot="title">
           <i class="fa fa-bullhorn fa-lg" style="padding-right:10px"></i>
           <span>招聘管理</span>
         </template>
       </el-submenu>
-      <el-submenu index="7">
+      <el-submenu index="8">
         <template slot="title">
           <i class="fa fa-cart-plus fa-lg" style="padding-right:10px"></i>
           <span>商品管理</span>

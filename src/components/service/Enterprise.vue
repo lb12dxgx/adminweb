@@ -2,8 +2,8 @@
   <div class="content">
     <div class="seach">
       <el-form :inline="true" :model="filters" class="demo-form-inline">
-        <el-form-item label="招标项目">
-          <el-input v-model="filters.zbXmName" placeholder="招标项目"></el-input>
+        <el-form-item label="企业名称">
+          <el-input v-model="filters.enterpriseName" placeholder="企业名称"></el-input>
         </el-form-item>
         
         <el-form-item>
@@ -16,10 +16,11 @@
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="zbXmName" label="招标项目" > </el-table-column>
-        <el-table-column prop="area" label="项目地址" width="250"  > </el-table-column>
-       
-        <el-table-column prop="publishDate" label="发布时间" width="100" :formatter='formatStartDate'> </el-table-column>
+        <el-table-column prop="enterpriseName" label="企业名称" > </el-table-column>
+        <el-table-column prop="addree" label="地址" width="250"  > </el-table-column>
+        <el-table-column prop="telphone" label="电话" width="250"  > </el-table-column>
+        <el-table-column prop="level" label="级别" width="250"  > </el-table-column>
+       <el-table-column prop="createDate" label="创建时间" width="100" :formatter='formatCreateDate'> </el-table-column>
        
         <el-table-column label="操作" width="250">
           <template slot-scope="scope">
@@ -36,7 +37,7 @@
 </template>
 
 <script>
-  import {getZbInfoList,deleteZbInfo} from '../../api/service';
+  import {getEnterpriseList,deleteEnterprise} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
     data() {
@@ -54,34 +55,28 @@
 
     methods: {
 
-     formatStartDate(row, column) {
-          var val=row.publishDate
+     formatCreateDate(row, column) {
+          var val=row.createDate
          if (val != null) {
             var date = new Date(val);
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         }
       },
 
-       formatEndDate(row, column) {
-          var val=row.endDate
-         if (val != null) {
-            var date = new Date(val);
-            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-        }
-      },
+       
 
       handleSubmit(){
            this.getList();
       },
 
       handleAdd(){
-        this.$router.push({ path:'zbinfo/add', });
+        this.$router.push({ path:'enterprise/add', });
       },
 
       
 
       handleEdit(row){
-        this.$router.push({ path:'zbinfo/edit', query:{zbInfoId:row.zbInfoId}});
+        this.$router.push({ path:'enterprise/edit', query:{enterpriseId:row.enterpriseId}});
       },
 
       handleCurrentChange(val) {
@@ -96,8 +91,8 @@
         }).then(() => {
           this.listLoading = true;
           NProgress.start();
-          let para = {zbInfoId: row.zbInfoId };
-          deleteZbInfo(para).then((res) => {
+          let para = {enterpriseId: row.enterpriseId };
+          deleteEnterprise(para).then((res) => {
             this.listLoading = false;
             NProgress.done();
             if(res.state==1){
@@ -113,12 +108,12 @@
           });
         });
       },
-
+  
       getList() {
           var params = Object.assign({pageNum:this.pageNum}, this.filters);
           this.listLoading = true;
           NProgress.start();
-          getZbInfoList(params).then(data => {
+          getEnterpriseList(params).then(data => {
             this.listLoading = false;
             NProgress.done();
             this.list =data.retData.content;
