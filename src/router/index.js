@@ -36,10 +36,12 @@ import TrainTeacherEdit from '@/components/Train/TrainTeacherEdit'
 import ZbInfo from '@/components/service/ZbInfo'
 import ZbInfoAdd from '@/components/service/ZbInfoAdd'
 import ZbInfoEdit from '@/components/service/ZbInfoEdit'
-
 import Enterprise from '@/components/service/Enterprise'
 import EnterpriseAdd from '@/components/service/EnterpriseAdd'
 import EnterpriseEdit from '@/components/service/EnterpriseEdit'
+import Product from '@/components/service/Product'
+import ProductAdd from '@/components/service/ProductAdd'
+import ProductEdit from '@/components/service/ProductEdit'
 
 Vue.use(Router)
 
@@ -168,6 +170,18 @@ export default new Router({
             path: 'system/enterprise/edit',
             component: EnterpriseEdit,
             name:'enterpriseedit'
+           },{
+            path: 'system/product',
+            component: Product,
+            name:'product'
+           },{
+            path: 'system/product/add',
+            component: ProductAdd,
+            name:'productadd'
+           },{
+            path: 'system/product/edit',
+            component: ProductEdit,
+            name:'productedit'
            }
 
 

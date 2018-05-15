@@ -25,13 +25,17 @@
         <el-table-column label="操作" width="250">
           <template slot-scope="scope">
              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-             <el-button size="small" type="primary"  @click="handleClass(scope.row)">产品信息</el-button>
+             <el-button size="small" type="primary"  @click="handleProduct(scope.row)">产品信息</el-button>
             <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
       </el-table-column>
       </el-table>
     </div>
 
+     <div class="page">
+      <el-pagination  @current-change="handleCurrentChange" :current-page="pageNum" :page-size="5" layout="total,  prev, pager, next, jumper" :total="total">
+      </el-pagination>
+    </div>
      
     
   </div>
@@ -78,7 +82,9 @@
         this.$router.push({ path:'enterprise/add', });
       },
 
-      
+      handleProduct(row){
+        this.$router.push({ path:'product', query:{enterpriseId:row.enterpriseId}});
+      },
 
       handleEdit(row){
         this.$router.push({ path:'enterprise/edit', query:{enterpriseId:row.enterpriseId}});

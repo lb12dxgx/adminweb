@@ -1,24 +1,19 @@
 <template>
   <div class="content">
-    <div class="seach">
-      <el-form :inline="true" :model="filters" class="demo-form-inline">
-        <el-form-item label="企业名称">
-          <el-input v-model="filters.enterpriseName" placeholder="企业名称"></el-input>
-        </el-form-item>
-        
-        <el-form-item>
-          <el-button  @click="handleSubmit">查询</el-button>
-          <el-button type="primary" @click="handleAdd">新增</el-button>
-        </el-form-item>
-      </el-form>
+   <div style="text-align:right;margin-bottom:5px">
+       <el-button type="primary" @click="handleAdd">新增</el-button>
+
+        <el-button  @click="retBack">返回</el-button>
     </div>
     
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="enterpriseName" label="企业名称" > </el-table-column>
-        <el-table-column prop="addree" label="地址" width="250"  > </el-table-column>
-        <el-table-column prop="telphone" label="电话" width="100"  > </el-table-column>
+        <el-table-column prop="productName" label="产品名称" > </el-table-column>
+        <el-table-column prop="productPrice" label="产品价格" width="100"  > </el-table-column>
+        <el-table-column prop="productBrand" label="产品品牌" width="100"  > </el-table-column>
+        <el-table-column prop="person" label="联系人" width="100"  > </el-table-column>
+        <el-table-column prop="telphone" label="联系电话" width="100"  > </el-table-column>
         <el-table-column prop="level" label="级别" width="100" :formatter='formatLevel' > </el-table-column>
        <el-table-column prop="createDate" label="创建时间" width="100" :formatter='formatCreateDate'> </el-table-column>
        
@@ -38,14 +33,12 @@
 </template>
 
 <script>
-  import {getEnterpriseList,deleteEnterprise} from '../../api/service';
+  import {getProductList,deleteProduct} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
     data() {
       return {
-        filters: {
-          zbXmName: ''
-        },
+       
         listLoading:false,
         list: [],
         total: 0,
@@ -75,13 +68,16 @@
       },
 
       handleAdd(){
-        this.$router.push({ path:'enterprise/add', });
+        this.$router.push({ path:'product/add', query:{productId:this.productId}});
       },
 
-      
+      retBack() {
+        this.$router.push({ path:'/main/system/product'});
+      },
+
 
       handleEdit(row){
-        this.$router.push({ path:'enterprise/edit', query:{enterpriseId:row.enterpriseId}});
+        this.$router.push({ path:'product/edit', query:{productId:row.productId}});
       },
 
       handleCurrentChange(val) {
@@ -96,8 +92,8 @@
         }).then(() => {
           this.listLoading = true;
           NProgress.start();
-          let para = {enterpriseId: row.enterpriseId };
-          deleteEnterprise(para).then((res) => {
+          let para = {productId: row.productId };
+          deleteProduct(para).then((res) => {
             this.listLoading = false;
             NProgress.done();
             if(res.state==1){
@@ -115,21 +111,20 @@
       },
   
       getList() {
-          var params = Object.assign({pageNum:this.pageNum}, this.filters);
+          var params = Object.assign({productId:this.productId});
           this.listLoading = true;
           NProgress.start();
-          getEnterpriseList(params).then(data => {
+          getProductList(params).then(data => {
             this.listLoading = false;
             NProgress.done();
-            this.list =data.retData.content;
-            this.total=data.retData.totalElements;
+            this.list =data.retData;
             
           });
       }
     },
 
     mounted() {
-      
+      this.productId=this.$route.query.productId;
       this.getList();
     }
 
