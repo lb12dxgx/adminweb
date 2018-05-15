@@ -33,6 +33,9 @@
     methods: {
       getUEContent() { // 获取内容方法
         return this.editor.getContent()
+      },
+      setUEContent(msg) { // 获取内容方法
+        return this.editor.setContent(msg)
       }
     },
     destroyed() {

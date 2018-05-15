@@ -23,7 +23,7 @@
         <el-table-column label="操作" width="250">
           <template slot-scope="scope">
              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-             <el-button size="small" @click="handleClass(scope.row)">课程信息</el-button>
+             <el-button size="small" type="primary"  @click="handleClass(scope.row)">课程信息</el-button>
             <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
       </el-table-column>
