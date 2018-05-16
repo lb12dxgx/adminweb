@@ -58,7 +58,7 @@
             <el-row>
               <el-col :span="12">
                 <el-form-item label="顺序"  prop="orderNum">
-                 <el-input v-model="addForm.orderNum" >
+                 <el-input v-model.number="addForm.orderNum"   type="number">
                   </el-input> 
                 </el-form-item>
               </el-col>

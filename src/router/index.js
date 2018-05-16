@@ -31,6 +31,9 @@ import TrainClassEdit from '@/components/Train/TrainClassEdit'
 import TrainTeacher from '@/components/Train/TrainTeacher'
 import TrainTeacherAdd from '@/components/Train/TrainTeacherAdd'
 import TrainTeacherEdit from '@/components/Train/TrainTeacherEdit'
+import TrainCert from '@/components/Train/TrainCert'
+import TrainCertAdd from '@/components/Train/TrainCertAdd'
+import TrainCertEdit from '@/components/Train/TrainCertEdit'
 
 
 import ZbInfo from '@/components/service/ZbInfo'
@@ -146,6 +149,18 @@ export default new Router({
             path: 'system/trainteacher/edit',
             component: TrainTeacherEdit,
             name:'trainTeacher'
+           },{
+            path: 'system/traincert',
+            component: TrainCert,
+            name:'trainCert'
+           },{
+            path: 'system/traincert/add',
+            component: TrainCertAdd,
+            name:'trainCertAdd'
+           },{
+            path: 'system/traincert/edit',
+            component: TrainCertEdit,
+            name:'trainCertEdit'
            },{
             path: 'system/zbinfo',
             component: ZbInfo,

@@ -1,9 +1,13 @@
 <template>
   <div class="content">
-   <div style="text-align:right;margin-bottom:5px">
+   <div style="text-algin:center">
+      <span > 
+        {{enterpriseName}}产品列表
+      </span>
+      <span style="float:right;margin-bottom:10px"> 
        <el-button type="primary" @click="handleAdd">新增</el-button>
-
-        <el-button  @click="retBack">返回</el-button>
+       <el-button  @click="retBack">返回</el-button>
+      </span>
     </div>
     
     <div class="list">
@@ -17,10 +21,9 @@
         <el-table-column prop="level" label="级别" width="100" :formatter='formatLevel' > </el-table-column>
        <el-table-column prop="createDate" label="创建时间" width="100" :formatter='formatCreateDate'> </el-table-column>
        
-        <el-table-column label="操作" width="250">
+        <el-table-column label="操作" width="150">
           <template slot-scope="scope">
              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-             <el-button size="small" type="primary"  @click="handleClass(scope.row)">产品信息</el-button>
             <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
       </el-table-column>
@@ -33,12 +36,13 @@
 </template>
 
 <script>
-  import {getProductList,deleteProduct} from '../../api/service';
+  import {getProductList,deleteProduct,getEnterprise} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
     data() {
       return {
-       
+        enterpriseId:'',
+        enterpriseName:'', 
         listLoading:false,
         list: [],
         total: 0,
@@ -68,7 +72,7 @@
       },
 
       handleAdd(){
-        this.$router.push({ path:'product/add', query:{productId:this.productId}});
+        this.$router.push({ path:'product/add', query:{enterpriseId: this.enterpriseId}});
       },
 
       retBack() {
@@ -111,7 +115,7 @@
       },
   
       getList() {
-          var params = Object.assign({productId:this.productId});
+          var params = Object.assign({enterpriseId: this.enterpriseId});
           this.listLoading = true;
           NProgress.start();
           getProductList(params).then(data => {
@@ -124,7 +128,13 @@
     },
 
     mounted() {
-      this.productId=this.$route.query.productId;
+      this.enterpriseId=this.$route.query.enterpriseId;
+
+      let para = {enterpriseId: this.enterpriseId};
+      getEnterprise(para).then((data) => {
+        this.enterpriseName=data.retData.enterpriseName;
+      })
+
       this.getList();
     }
 

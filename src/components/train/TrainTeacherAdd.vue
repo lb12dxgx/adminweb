@@ -60,7 +60,7 @@
                     @change="getEndDate">
                     </el-date-picker>
                   </el-col>
-                  </el-input> 
+                  
                 </el-form-item>
                 
               </el-col>
@@ -180,12 +180,12 @@
        },
 
       getStartDate(date){
-          this.startDate = date;
+          this.addForm.startDate = date;
           console.log(this.trainStartDate);
       },
 
       getEndDate(date){
-          this.endDate = date;
+          this.addForm.endDate = date;
           console.log(this.trainStartDate);
       },
 

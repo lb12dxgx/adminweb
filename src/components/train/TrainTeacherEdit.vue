@@ -163,7 +163,7 @@
 
       handleOtherSuccess(res, file) {
           console.log(res.retData.filePath);
-          this.addForm.teacherPicPath=res.retData.fileInfoId;
+          
           this.viewAction=base+"/file/download.do?fileInfoId="+res.retData.fileInfoId;
           console.log(this.viewAction);
         },
