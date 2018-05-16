@@ -31,6 +31,8 @@ import TrainClassEdit from '@/components/Train/TrainClassEdit'
 import TrainTeacher from '@/components/Train/TrainTeacher'
 import TrainTeacherAdd from '@/components/Train/TrainTeacherAdd'
 import TrainTeacherEdit from '@/components/Train/TrainTeacherEdit'
+
+import TrainPlanCert from '@/components/Train/TrainPlanCert'
 import TrainCert from '@/components/Train/TrainCert'
 import TrainCertAdd from '@/components/Train/TrainCertAdd'
 import TrainCertEdit from '@/components/Train/TrainCertEdit'
@@ -149,6 +151,10 @@ export default new Router({
             path: 'system/trainteacher/edit',
             component: TrainTeacherEdit,
             name:'trainTeacher'
+           },{
+            path: 'system/trainpalncert',
+            component: TrainPlanCert,
+            name:'trainPlanCert'
            },{
             path: 'system/traincert',
             component: TrainCert,

@@ -8,7 +8,7 @@
         
         <el-form-item>
           <el-button  @click="handleSubmit">查询</el-button>
-          <el-button type="primary" @click="handleAdd">新增</el-button>
+         
         </el-form-item>
       </el-form>
     </div>
@@ -20,11 +20,9 @@
         <el-table-column prop="trainStartDate" label="开始时间" width="100" :formatter='formatTrainStartDate'> </el-table-column>
         <el-table-column prop="trainEndDate" label="结束时间" width="100" :formatter='formatTrainEndDate'> </el-table-column>
         <el-table-column prop="personNum" label="培训人数" width="80"> </el-table-column>
-        <el-table-column label="操作" width="250">
+        <el-table-column label="操作" width="150">
           <template slot-scope="scope">
-             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-             <el-button size="small" type="primary"  @click="handleClass(scope.row)">课程信息</el-button>
-            <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+           <el-button size="small" type="primary"  @click="handleCert(scope.row)">证书信息</el-button>
           </template>
       </el-table-column>
       </el-table>
@@ -73,19 +71,9 @@
         }
       },
 
-       handleSubmit(){
-           this.getList();
-      },
-
-     handleAdd(){
-        this.$router.push({ path:'trainplan/add'});
-      },
-      handleEdit(row){
-        this.$router.push({ path:'trainplan/edit', query:{trainPlanId:row.trainPlanId}});
-      },
-
-      handleClass(row){
-        this.$router.push({ path:'trainclass', query:{trainPlanId:row.trainPlanId}});
+      
+      handleCert(row){
+        this.$router.push({ path:'traincert', query:{trainPlanId:row.trainPlanId}});
       },
 
       handleCurrentChange(val) {
@@ -93,30 +81,7 @@
         this.getList();
       },
 
-     //删除
-      handleDel: function (index, row) {
-        this.$confirm('确认删除该记录吗?', '提示', {
-          type: 'warning'
-        }).then(() => {
-          this.listLoading = true;
-          NProgress.start();
-          let para = {trainPlanId: row.trainPlanId };
-          deleteTrainPlan(para).then((res) => {
-            this.listLoading = false;
-            NProgress.done();
-            if(res.state==1){
-              this.$notify({
-                title: '成功',
-                message: '删除成功',
-                duration:2500,
-                type: 'success'
-              });
-              this.getList();
-            }
-            
-          });
-        });
-      },
+     
 
       getList() {
           var params = Object.assign({pageNum:this.pageNum}, this.filters);

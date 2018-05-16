@@ -77,7 +77,7 @@
         </template>
          <el-menu-item index="/main/system/trainplan">培训计划</el-menu-item>
          <el-menu-item index="/main/system/trainteacher">专家信息</el-menu-item>
-         <el-menu-item index="/main/system/traincert">培训证书</el-menu-item>
+         <el-menu-item index="/main/system/trainpalncert">培训证书</el-menu-item>
       </el-submenu>
 
       <el-submenu index="6">

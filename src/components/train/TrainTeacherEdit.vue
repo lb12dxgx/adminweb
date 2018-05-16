@@ -228,7 +228,7 @@
       console.log(para);
       getTrainTeacher(para).then((data) => {
         this.addForm=data.retData;
-        this.viewAction=base+"/file/download.do?fileInfoId="+data.retData.teacherPicPath;
+        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+data.retData.teacherPicPath;
       })
     }
 

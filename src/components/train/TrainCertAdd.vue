@@ -1,12 +1,21 @@
 <template>
   <div class="content">
-    <el-row>
-      <el-col :span="20" :offset="2">
-       <el-form :model="addForm" label-width="120px"  :rules="addFormRules" ref="addForm" size="small">
+
+    <el-row style="margin-top:30px">
+      <el-col :span="18" :offset="2">
+       <el-form :model="addForm" label-width="120px"  :rules="addFormRules" ref="addForm" >
             <el-row>
               <el-col :span="12">
-                <el-form-item label="证书类型" required prop="trainClassName">
-                  <el-input v-model="addForm.trainClassName" auto-complete="off"></el-input>
+                <el-form-item label="证书类型" required prop="certTypeName">
+                  <el-select v-model="addForm.certTypeName" placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+                 
                 </el-form-item>
               </el-col>
               
@@ -32,7 +41,7 @@
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="有效期" required prop="certCode">
+                <el-form-item label="有效期" required prop="startDate">
                     <el-col :span="11">
                        <el-date-picker
                       v-model="addForm.startDate"
@@ -40,7 +49,8 @@
                       placeholder="开始日期"
                       format="yyyy-MM-dd"
                       value-format="yyyy-MM-dd"
-                      @change="getStartDate">
+                      @change="getStartDate"
+                      style="width:150px">
                       </el-date-picker>
                   </el-col>
                    <el-col class="line" :span="2">-</el-col>
@@ -51,12 +61,28 @@
                     placeholder="结束日期"
                     format="yyyy-MM-dd"
                     value-format="yyyy-MM-dd"
-                    @change="getEndDate">
+                    @change="getEndDate"
+                    style="width:150px">
                     </el-date-picker>
                   </el-col>
                 </el-form-item>
               </el-col>
             </el-row>
+
+            <el-form-item label="照片"  prop="certPicPath">
+               <el-upload
+                class="avatar-uploader"
+                :action="uploadAction" 
+                :data="otherDate"
+                :show-file-list="false"
+                :on-success="handleOtherSuccess"
+                :before-upload="beforeAvatarUpload"
+                :on-remove="handleRemove">
+                <img v-if="addForm.certPicPath" :src="viewAction" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </el-form-item>
+
           </el-form>
         </el-col>
       </el-row>
@@ -71,14 +97,23 @@
 
 <script>
   
-
   import {saveTrainCert} from '../../api/train';
+  import {deleteFileinfo,base} from '../../api/fileinfo';
+  const uuidv1 = require('uuid/v1');
 
   export default {
    
     
     data() {
       return {
+        uploadAction:base+"/file/upload.do",
+        viewAction:"",
+        otherDate:
+        {
+          dirName:'content/cert',
+          token:sessionStorage.getItem('accessToken'),
+          bussinessId:uuidv1()
+        },
       
         addFormRules: {
           certTypeName: [
@@ -96,6 +131,9 @@
           endDate:[
             { required: true, message: '请输入结束时间', trigger: 'blur' }
           ],
+          certPicPath:[
+            { required: true, message: '请输入照片', trigger: 'blur' }
+          ]
           
         },
         addForm: {
@@ -105,7 +143,8 @@
           userCode:'',
           certCode:'',
           startDate:'',
-          endDate:''
+          endDate:'',
+          certPicPath:''
         
         },
          options:
@@ -123,6 +162,41 @@
     },
 
     methods: {
+
+      handleOtherSuccess(res, file) {
+           this.addForm.certPicPath=res.retData.fileInfoId;
+           console.log("dddd"+file.id);
+          this.viewAction=base+"/file/download.do?fileInfoId="+res.retData.fileInfoId;
+       },
+
+      beforeAvatarUpload(file) {
+            console.log(file.type);
+            const isJPG = (file.type === 'image/jpeg'||file.type === 'image/png');
+            const isLt2M = file.size / 1024 / 1024 < 2;
+
+            if (!isJPG) {
+              this.$message.error('上传头像图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+              this.$message.error('上传头像图片大小不能超过 2MB!');
+            }
+            return isJPG && isLt2M;
+       },
+
+       handleRemove(file, fileList) {
+            console.log(file);
+            this.$confirm('确认删除该记录吗?', '提示', {
+          type: 'warning'
+        }).then(() => {
+          let para = {fileInfoId:file.id };
+          deleteFileinfo(para).then(data => {
+
+          })
+        }).catch(() => {
+          fileList.push(file);
+          return false;
+        }); 
+      },
 
 
      getStartDate(date){
