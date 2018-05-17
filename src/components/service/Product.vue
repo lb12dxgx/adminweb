@@ -75,8 +75,8 @@
         this.$router.push({ path:'product/add', query:{enterpriseId: this.enterpriseId}});
       },
 
-      retBack() {
-        this.$router.push({ path:'/main/system/product'});
+        retBack() {
+         this.$router.push({ path:'/main/system/enterprise'});
       },
 
 

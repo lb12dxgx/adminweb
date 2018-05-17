@@ -70,7 +70,7 @@
             </el-row>
 
             <el-form-item label="照片"  prop="certPicPath">
-               <el-upload
+              <el-upload
                 class="avatar-uploader"
                 :action="uploadAction" 
                 :data="otherDate"
@@ -78,7 +78,8 @@
                 :on-success="handleOtherSuccess"
                 :before-upload="beforeAvatarUpload"
                 :on-remove="handleRemove">
-                <img v-if="addForm.certPicPath" :src="viewAction" class="avatar">
+                <img v-if="addForm.certPicPath" :src="viewAction" 
+                class="avatar" style="width:178;height:178px">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-form-item>
@@ -106,7 +107,7 @@
     
     data() {
       return {
-        uploadAction:base+"/file/upload.do",
+        uploadAction:base+"/file/uploadone.do",
         viewAction:"",
         otherDate:
         {
@@ -164,8 +165,8 @@
     methods: {
 
       handleOtherSuccess(res, file) {
-           
-          this.viewAction=base+"/file/download.do?fileInfoId="+res.retData.fileInfoId;
+       
+         this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+res.retData.bussinessId+"&timestamp="+new Date().getTime();
        },
 
       beforeAvatarUpload(file) {
@@ -244,7 +245,7 @@
       getTrainCert(para).then((data) => {
         this.addForm=data.retData;
         this.otherDate.bussinessId=data.retData.certPicPath;
-        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+data.retData.certPicPath;
+        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+data.retData.certPicPath+"&timestamp="+new Date().getTime();
       })
     }
 

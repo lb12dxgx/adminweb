@@ -110,8 +110,8 @@
     
     data() {
       return {
-        uploadAction:base+"/file/upload.do",
-        viewAction:base+"/file/download.do?fileInfoId=",
+        uploadAction:base+"/file/uploadone.do",
+        viewAction:'',
         otherDate:
         {
           dirName:'content/enterprise/logo',
@@ -172,10 +172,8 @@
     methods: {
 
       handleOtherSuccess(res, file) {
-          console.log(res.retData.filePath);
-          this.addForm.enterprisePicId=res.retData.fileInfoId;
-          this.viewAction=this.viewAction+res.retData.fileInfoId;
-          console.log(this.viewAction);
+          this.addForm.enterprisePicId=res.retData.bussinessId;
+          this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+res.retData.bussinessId+"&timestamp="+new Date().getTime();
         },
 
       beforeAvatarUpload(file) {

@@ -78,7 +78,8 @@
                 :on-success="handleOtherSuccess"
                 :before-upload="beforeAvatarUpload"
                 :on-remove="handleRemove">
-                <img v-if="addForm.certPicPath" :src="viewAction" class="avatar">
+                <img v-if="addForm.certPicPath" :src="viewAction" 
+                class="avatar">
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-form-item>
@@ -106,7 +107,7 @@
     
     data() {
       return {
-        uploadAction:base+"/file/upload.do",
+        uploadAction:base+"/file/uploadone.do",
         viewAction:"",
         otherDate:
         {
@@ -164,9 +165,8 @@
     methods: {
 
       handleOtherSuccess(res, file) {
-           this.addForm.certPicPath=res.retData.fileInfoId;
-           console.log("dddd"+file.id);
-          this.viewAction=base+"/file/download.do?fileInfoId="+res.retData.fileInfoId;
+        this.addForm.certPicPath=res.retData.bussinessId;
+        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+res.retData.bussinessId+"&timestamp="+new Date().getTime();
        },
 
       beforeAvatarUpload(file) {

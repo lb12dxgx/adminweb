@@ -61,9 +61,7 @@
             </el-form-item>
 
              <el-form-item label="企业logo"  prop="enterprisePicId"> 
-              <div v-if="addForm.enterprisePicId" style="width:178px;float:left"> 
-                    <img  :src="viewAction" class="avatar">
-               </div>
+              
                <el-upload
                 class="avatar-uploader"
                 :action="uploadAction" 
@@ -71,7 +69,8 @@
                 :show-file-list="false"
                 :on-success="handleOtherSuccess"
                 :before-upload="beforeAvatarUpload">
-                 <i  class="el-icon-plus avatar-uploader-icon"></i>
+                <img v-if="addForm.enterprisePicId" :src="viewAction" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                
               </el-upload>
             </el-form-item>
@@ -113,8 +112,8 @@
     
     data() {
       return {
-        uploadAction:base+"/file/upload.do",
-        viewAction:base+"/file/download.do?fileInfoId=",
+        uploadAction:base+"/file/uploadone.do",
+        viewAction:'',
         otherDate:
         {
           dirName:'content/enterprise/logo',
@@ -147,7 +146,7 @@
         addForm: {
           enterpriseId:'',
           enterpriseName:'',
-          enterpriseSummary:'dddd', 
+          enterpriseSummary:'', 
           business:'',
           addree:'',
           telphone:'',
@@ -176,10 +175,7 @@
     methods: {
 
       handleOtherSuccess(res, file) {
-          console.log(res.retData.filePath);
-         
-         this.viewAction=base+"/file/download.do?fileInfoId="+res.retData.fileInfoId;
-          console.log(this.viewAction);
+        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+res.retData.bussinessId+"&timestamp="+new Date().getTime();
         },
 
       beforeAvatarUpload(file) {
@@ -243,8 +239,7 @@
       getEnterprise(para).then((data) => {
         this.addForm=data.retData;
         this.$refs.ue.setUEContent(this.addForm.enterpriseSummary);
-        console.log(this.addForm);
-        this.viewAction=base+"/file/download.do?fileInfoId="+data.retData.enterprisePicId;
+        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+data.retData.enterprisePicId+"&timestamp="+new Date().getTime();
       })
     }
 

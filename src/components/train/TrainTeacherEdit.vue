@@ -67,9 +67,7 @@
             </el-row>
            
             <el-form-item label="照片"  prop="teacherPicPath">
-                <div v-if="addForm.teacherPicPath" style="width:178px;float:left"> 
-                    <img  :src="viewAction" class="avatar">
-               </div>
+                
                <el-upload
                 class="avatar-uploader"
                 :action="uploadAction" 
@@ -77,7 +75,8 @@
                 :show-file-list="false"
                 :on-success="handleOtherSuccess"
                 :before-upload="beforeAvatarUpload">
-                 <i  class="el-icon-plus avatar-uploader-icon"></i>
+                <img v-if="addForm.teacherPicPath" :src="viewAction" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-form-item>
 
@@ -119,7 +118,7 @@
     
     data() {
       return {
-        uploadAction:base+"/file/upload.do",
+        uploadAction:base+"/file/uploadone.do",
         viewAction:'',
          otherDate:
         {
@@ -162,11 +161,8 @@
     methods: {
 
       handleOtherSuccess(res, file) {
-          console.log(res.retData.filePath);
-          
-          this.viewAction=base+"/file/download.do?fileInfoId="+res.retData.fileInfoId;
-          console.log(this.viewAction);
-        },
+        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+res.retData.bussinessId+"&timestamp="+new Date().getTime();
+      },
 
       beforeAvatarUpload(file) {
             console.log(file.type);
@@ -228,7 +224,7 @@
       console.log(para);
       getTrainTeacher(para).then((data) => {
         this.addForm=data.retData;
-        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+data.retData.teacherPicPath;
+        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+data.retData.teacherPicPath+"&timestamp="+new Date().getTime();
       })
     }
 

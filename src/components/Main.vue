@@ -89,18 +89,7 @@
          <el-menu-item index="/main/system/enterprise">企业信息</el-menu-item>
       </el-submenu>
 
-      <el-submenu index="7">
-        <template slot="title">
-          <i class="fa fa-bullhorn fa-lg" style="padding-right:10px"></i>
-          <span>招聘管理</span>
-        </template>
-      </el-submenu>
-      <el-submenu index="8">
-        <template slot="title">
-          <i class="fa fa-cart-plus fa-lg" style="padding-right:10px"></i>
-          <span>商品管理</span>
-        </template>
-      </el-submenu>
+      
     </el-menu>
        
     </aside>
