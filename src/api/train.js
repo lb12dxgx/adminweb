@@ -34,3 +34,10 @@ export const updateTrainCert = params => { return mockAxios.post(`${base}/system
 export const getTrainCertList = params => { return mockAxios.post(`${base}/system/traincert/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteTrainCert = params => { return mockAxios.post(`${base}/system/traincert/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getTrainCert = params => { return mockAxios.post(`${base}/system/traincert/get.do`,qs.stringify(params)).then(res => res.data); }; 
+
+export const saveTrainSignUp = params => { return mockAxios.post(`${base}/system/trainsignup/save.do`,qs.stringify(params)).then(res => res.data); }; 
+export const updateTrainSignUp = params => { return mockAxios.post(`${base}/system/trainsignup/update.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getTrainSignUpList = params => { return mockAxios.post(`${base}/system/trainsignup/list.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteTrainSignUp = params => { return mockAxios.post(`${base}/system/trainsignup/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getTrainSignUp = params => { return mockAxios.post(`${base}/system/trainsignup/get.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getTrainSignUpExcel = params => { window.open(`${base}/system/trainsignup/excel.do?trainPlanId=`+params); }; 

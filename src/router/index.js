@@ -28,6 +28,11 @@ import TrainPlanEdit from '@/components/Train/TrainPlanEdit'
 import TrainClass from '@/components/Train/TrainClass'
 import TrainClassAdd from '@/components/Train/TrainClassAdd'
 import TrainClassEdit from '@/components/Train/TrainClassEdit'
+
+import TrainSignUp from '@/components/Train/TrainSignUp'
+import TrainSignUpAdd from '@/components/Train/TrainSignUpAdd'
+import TrainSignUpEdit from '@/components/Train/TrainSignUpEdit'
+
 import TrainTeacher from '@/components/Train/TrainTeacher'
 import TrainTeacherAdd from '@/components/Train/TrainTeacherAdd'
 import TrainTeacherEdit from '@/components/Train/TrainTeacherEdit'
@@ -47,6 +52,13 @@ import EnterpriseEdit from '@/components/service/EnterpriseEdit'
 import Product from '@/components/service/Product'
 import ProductAdd from '@/components/service/ProductAdd'
 import ProductEdit from '@/components/service/ProductEdit'
+import Meet from '@/components/service/Meet'
+import MeetAdd from '@/components/service/MeetAdd'
+import MeetEdit from '@/components/service/MeetEdit'
+import MeetSignUp from '@/components/service/MeetSignUp'
+import MeetSignUpAdd from '@/components/service/MeetSignUpAdd'
+import MeetSignUpEdit from '@/components/service/MeetSignUpEdit'
+
 
 Vue.use(Router)
 
@@ -140,6 +152,18 @@ export default new Router({
             component: TrainClassEdit,
             name:'trainClassEdit'
            },{
+            path: 'system/trainsignup',
+            component: TrainSignUp,
+            name:'trainSignUp'
+           },{
+            path: 'system/trainsignup/add',
+            component: TrainSignUpAdd,
+            name:'trainSignUpAdd'
+           },{
+            path: 'system/trainsignup/edit',
+            component: TrainSignUpEdit,
+            name:'trainSignUpEdit'
+           },{
             path: 'system/trainteacher',
             component: TrainTeacher,
             name:'trainTeacher'
@@ -203,11 +227,32 @@ export default new Router({
             path: 'system/product/edit',
             component: ProductEdit,
             name:'productedit'
+           },{
+            path: 'system/meet',
+            component: Meet,
+            name:'meet'
+           },{
+            path: 'system/meet/add',
+            component: MeetAdd,
+            name:'meetAdd'
+           },{
+            path: 'system/meet/edit',
+            component: MeetEdit,
+            name:'meetedit'
+           },{
+            path: 'system/meetsignup',
+            component: MeetSignUp,
+            name:'meetsignup'
+           },{
+            path: 'system/meetsignup/add',
+            component: MeetSignUpAdd,
+            name:'meetsignupAdd'
+           },{
+            path: 'system/meetsignup/edit',
+            component: MeetSignUpEdit,
+            name:'meetsignupEdit'
            }
-
-
-
-      ]
+        ]
     }
   ]
 })

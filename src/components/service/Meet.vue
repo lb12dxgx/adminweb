@@ -2,8 +2,8 @@
   <div class="content">
     <div class="seach">
       <el-form :inline="true" :model="filters" class="demo-form-inline">
-        <el-form-item label="培训名称">
-          <el-input v-model="filters.trainName" placeholder="培训名称"></el-input>
+        <el-form-item label="会议名称">
+          <el-input v-model="filters.meetName" placeholder="会议名称"></el-input>
         </el-form-item>
         
         <el-form-item>
@@ -12,26 +12,28 @@
         </el-form-item>
       </el-form>
     </div>
+    
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="trainName" label="培训名称" > </el-table-column>
-        <el-table-column prop="trainAddr" label="培训地点" width="200"  > </el-table-column>
-        <el-table-column prop="trainStartDate" label="开始时间" width="100" :formatter='formatTrainStartDate'> </el-table-column>
-        <el-table-column prop="trainEndDate" label="结束时间" width="100" :formatter='formatTrainEndDate'> </el-table-column>
-        <el-table-column prop="personNum" label="培训人数" width="80"> </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column prop="meetName" label="会议名称" > </el-table-column>
+        <el-table-column prop="meetPlace" label="会议地点" width="250"  > </el-table-column>
+        <el-table-column prop="num" label="总人数" width="250"  > </el-table-column>
+       
+        <el-table-column prop="startDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
+         <el-table-column prop="endDate" label="结束时间" width="100" :formatter='formatEndDate'> </el-table-column>
+       
+        <el-table-column label="操作" width="250">
           <template slot-scope="scope">
-            <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button size="small" type="primary"  @click="handleClass(scope.row)">课程信息</el-button>
-            <el-button size="small" type="primary"  @click="handleSignUp(scope.row)">报名信息</el-button>
+             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+             <el-button size="small" type="primary"  @click="handleSignUp(scope.row)">报名信息</el-button>
             <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
       </el-table-column>
       </el-table>
     </div>
 
-     <div class="page">
+    <div class="page">
       <el-pagination  @current-change="handleCurrentChange" :current-page="pageNum" :page-size="5" layout="total,  prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
@@ -40,13 +42,13 @@
 </template>
 
 <script>
-  import {getTrainPlanList,deleteTrainPlan} from '../../api/train';
+  import {getMeetList,deleteMeet} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
     data() {
       return {
         filters: {
-          trainName: ''
+          meetName: ''
         },
         listLoading:false,
         list: [],
@@ -58,44 +60,43 @@
 
     methods: {
 
-     formatTrainStartDate(row, column) {
-          var val=row.trainStartDate
+     formatStartDate(row, column) {
+          var val=row.startDate
          if (val != null) {
             var date = new Date(val);
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         }
       },
 
-       formatTrainEndDate(row, column) {
-          var val=row.trainStartDate
+       formatEndDate(row, column) {
+          var val=row.endDate
          if (val != null) {
             var date = new Date(val);
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         }
       },
 
-       handleSubmit(){
+      handleSubmit(){
            this.getList();
       },
 
-     handleAdd(){
-        this.$router.push({ path:'trainplan/add'});
+      handleAdd(){
+        this.$router.push({ path:'meet/add', });
       },
+
+      
+
       handleEdit(row){
-        this.$router.push({ path:'trainplan/edit', query:{trainPlanId:row.trainPlanId}});
-      },
-
-      handleClass(row){
-        this.$router.push({ path:'trainclass', query:{trainPlanId:row.trainPlanId}});
-      },
-
-      handleSignUp(row){
-        this.$router.push({ path:'trainsignup', query:{trainPlanId:row.trainPlanId}});
+        this.$router.push({ path:'meet/edit', query:{meetId:row.meetId}});
       },
 
       handleCurrentChange(val) {
         this.pageNum = val;
         this.getList();
+      },
+
+      handleSignUp(row){
+        this.$router.push({ path:'meetsignup', query:{meetId:row.meetId}});
       },
 
      //删除
@@ -105,8 +106,8 @@
         }).then(() => {
           this.listLoading = true;
           NProgress.start();
-          let para = {trainPlanId: row.trainPlanId };
-          deleteTrainPlan(para).then((res) => {
+          let para = {meetId: row.meetId };
+          deleteMeet(para).then((res) => {
             this.listLoading = false;
             NProgress.done();
             if(res.state==1){
@@ -127,16 +128,18 @@
           var params = Object.assign({pageNum:this.pageNum}, this.filters);
           this.listLoading = true;
           NProgress.start();
-          getTrainPlanList(params).then(data => {
+          getMeetList(params).then(data => {
             this.listLoading = false;
             NProgress.done();
             this.list =data.retData.content;
             this.total=data.retData.totalElements;
+            
           });
       }
     },
 
     mounted() {
+      
       this.getList();
     }
 

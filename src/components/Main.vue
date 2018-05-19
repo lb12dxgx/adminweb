@@ -87,6 +87,7 @@
         </template>
          <el-menu-item index="/main/system/zbinfo">招标信息</el-menu-item>
          <el-menu-item index="/main/system/enterprise">企业信息</el-menu-item>
+        <el-menu-item index="/main/system/meet">会议信息</el-menu-item>
       </el-submenu>
 
       

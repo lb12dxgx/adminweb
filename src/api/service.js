@@ -27,3 +27,16 @@ export const updateEnterprise = params => { return mockAxios.post(`${base}/syste
 export const getEnterpriseList = params => { return mockAxios.post(`${base}/system/enterprise/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteEnterprise = params => { return mockAxios.post(`${base}/system/enterprise/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getEnterprise = params => { return mockAxios.post(`${base}/system/enterprise/get.do`,qs.stringify(params)).then(res => res.data); }; 
+
+export const saveMeet = params => { return mockAxios.post(`${base}/system/meet/save.do`,qs.stringify(params)).then(res => res.data); }; 
+export const updateMeet = params => { return mockAxios.post(`${base}/system/meet/update.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getMeetList = params => { return mockAxios.post(`${base}/system/meet/list.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteMeet = params => { return mockAxios.post(`${base}/system/meet/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getMeet = params => { return mockAxios.post(`${base}/system/meet/get.do`,qs.stringify(params)).then(res => res.data); }; 
+
+export const saveMeetSignUp = params => { return mockAxios.post(`${base}/system/meetsignup/save.do`,qs.stringify(params)).then(res => res.data); }; 
+export const updateMeetSignUp = params => { return mockAxios.post(`${base}/system/meetsignup/update.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getMeetSignUpList = params => { return mockAxios.post(`${base}/system/meetsignup/list.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteMeetSignUp = params => { return mockAxios.post(`${base}/system/meetsignup/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getMeetSignUp = params => { return mockAxios.post(`${base}/system/meetsignup/get.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getMeetSignUpExcel = params => { window.open(`${base}/system/meetsignup/excel.do?meetId=`+params); }; 
