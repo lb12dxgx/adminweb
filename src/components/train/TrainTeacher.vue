@@ -19,6 +19,7 @@
         <el-table-column prop="teacherName" label="专家名称" > </el-table-column>
         <el-table-column prop="teacherCode" label="证书编码" width="250"  > </el-table-column>
         <el-table-column prop="teacherTitle" label="专家职称" width="100"  > </el-table-column>
+        <el-table-column prop="indexShow" label="显示首页" width="100" :formatter='formatShow' > </el-table-column>
         <el-table-column prop="startDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
         <el-table-column prop="endDate" label="结束时间" width="100"
         :formatter='formatEndDate' > </el-table-column>
@@ -50,6 +51,7 @@
         list: [],
         total: 0,
         pageNum: 1,
+        showMap:{1:'显示',0:'不显示'}
 
       }
     },
@@ -71,6 +73,12 @@
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         }
       },
+
+      formatShow(row, column) {
+          var val=row.indexShow
+          return this.showMap[val];
+      },
+
 
       handleSubmit(){
            this.getList();

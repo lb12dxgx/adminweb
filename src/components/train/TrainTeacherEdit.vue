@@ -65,6 +65,22 @@
                 
               </el-col>
             </el-row>
+
+             <el-row>
+              <el-col :span="12">
+                <el-form-item label="首页显示"  prop="indexShow">
+                   <el-select v-model="addForm.indexShow" placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                </el-form-item>
+              </el-col>
+            
+            </el-row>
            
             <el-form-item label="照片"  prop="teacherPicPath">
                 
@@ -124,7 +140,7 @@
         {
           dirName:'content/teacher',
           token:sessionStorage.getItem('accessToken'),
-          bussinessId:uuidv1()
+          bussinessId:''
         },
 
         editorOption: {
@@ -153,7 +169,17 @@
           teacherSumary:'',
           startDate:'',
           endDate:''
-        }
+        },
+        options: 
+        [
+          {
+            value: 1,
+            label: '显示'
+          },{
+            value: 0,
+            label: '不显示'
+          }
+        ],
       }
         
     },
@@ -224,6 +250,7 @@
       console.log(para);
       getTrainTeacher(para).then((data) => {
         this.addForm=data.retData;
+        this.otherDate.bussinessId=data.retData.teacherPicPath;
         this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+data.retData.teacherPicPath+"&timestamp="+new Date().getTime();
       })
     }

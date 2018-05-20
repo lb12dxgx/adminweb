@@ -20,6 +20,7 @@
         <el-table-column prop="trainStartDate" label="开始时间" width="100" :formatter='formatTrainStartDate'> </el-table-column>
         <el-table-column prop="trainEndDate" label="结束时间" width="100" :formatter='formatTrainEndDate'> </el-table-column>
         <el-table-column prop="personNum" label="培训人数" width="80"> </el-table-column>
+         <el-table-column prop="showMain" label="显示方式" width="80" :formatter='formatMain'> </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
@@ -52,7 +53,7 @@
         list: [],
         total: 0,
         pageNum: 1,
-
+        mainMap:{1:'单独显示',0:'列表显示'}
       }
     },
 
@@ -72,6 +73,11 @@
             var date = new Date(val);
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         }
+      },
+
+      formatMain(row, column) {
+          var val=row.showMain
+          return this.mainMap[val];
       },
 
        handleSubmit(){

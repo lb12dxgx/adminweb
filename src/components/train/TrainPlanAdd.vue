@@ -53,6 +53,23 @@
                 </el-col>
             </el-row>
 
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="显示方式"  prop="showMain">
+                   <el-select v-model="addForm.showMain" placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                </el-form-item>
+              </el-col>
+            
+            </el-row>
+
+
             <el-form-item label="培训说明"  prop="trainSumary">
                <quill-editor v-model="addForm.trainSumary"
                     ref="myQuillEditor"
@@ -113,7 +130,17 @@
           personNum:'',
           trainMoney:'',
           trainSumary:''
-        }
+        },
+        options: 
+        [
+          {
+            value: 1,
+            label: '单独显示'
+          },{
+            value: 0,
+            label: '列表显示'
+          }
+        ],
       }
         
     },

@@ -38,6 +38,11 @@
              
             </el-row>
 
+             <el-form-item label="课程介绍" required  prop="classDesc">
+               <el-input type="textarea" v-model="addForm.classDesc"></el-input>
+           
+            </el-form-item>
+
             <el-form-item label="课程说明"  prop="classSumary">
                <quill-editor v-model="addForm.classSumary"
                     ref="myQuillEditor"
