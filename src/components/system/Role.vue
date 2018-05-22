@@ -18,10 +18,11 @@
         <el-table-column prop="roleName" label="角色名称" width="180"> </el-table-column>
         <el-table-column prop="roleCode" label="角色编码" width="180"></el-table-column>
         <el-table-column prop="roleSummary" label="备注"> </el-table-column>
-        <el-table-column label="操作" width="380">
+        <el-table-column label="操作" width="440">
           <template slot-scope="scope">
             <el-button size="small" @click="handleUser(scope.$index, scope.row)">设置人员</el-button>
             <el-button size="small" @click="handleMenu(scope.$index, scope.row)">设置权限</el-button>
+            <el-button size="small" @click="handleColumn(scope.$index, scope.row)">设置栏目</el-button>
             <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
             <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
@@ -151,6 +152,10 @@
 
        handleMenu(index, row){
          this.$router.push({ path:'role/menu', query:{roleId:row.roleId}});
+      },
+
+      handleColumn(index, row){
+         this.$router.push({ path:'role/column', query:{roleId:row.roleId}});
       },
 
       handleSubmit(){

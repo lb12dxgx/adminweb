@@ -12,6 +12,7 @@ import SystemMenu from '@/components/system/Menu'
 import SystemRole from '@/components/system/Role'
 import SystemRoleUser from '@/components/system/RoleUser'
 import SystemRoleMenu from '@/components/system/RoleMenu'
+import SystemRoleColumn from '@/components/system/RoleColumn'
 
 import ContentColumnInfo from '@/components/content/ColumnInfo'
 import ContentInfo from '@/components/content/ContentInfo'
@@ -102,6 +103,10 @@ export default new Router({
             path: 'system/role/menu',
             component: SystemRoleMenu,
             name:'systemRoleMenu'
+          },{
+            path: 'system/role/column',
+            component: SystemRoleColumn,
+            name:'systemRoleColumn'
           },{
             path: 'system/column',
             component: ContentColumnInfo,

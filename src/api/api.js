@@ -36,6 +36,10 @@ export const saveRoleAccount = params => { return mockAxios.post(`${base}/system
 export const saveRoleMenu = params => { return mockAxios.post(`${base}/system/role/saveRoleMenu.do`,qs.stringify(params,{arrayFormat:'repeat'})).then(res => res.data); }; 
 export const getRoleMenu = params => { return mockAxios.post(`${base}/system/role/getRoleMenu.do`,qs.stringify(params)).then(res => res.data); };   
 
+export const saveRoleColumn = params => { return mockAxios.post(`${base}/system/role/saveRoleColumn.do`,qs.stringify(params,{arrayFormat:'repeat'})).then(res => res.data); }; 
+export const getRoleColumn = params => { return mockAxios.post(`${base}/system/role/getRoleColumn.do`,qs.stringify(params)).then(res => res.data); };   
+
+
 
 
 
