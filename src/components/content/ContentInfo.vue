@@ -63,7 +63,8 @@
 
 <script>
 import NProgress from 'nprogress';
-import {getColumnTree,getContentList,deleteContent} from '../../api/column';
+import {treeByPrivage,getContentList,deleteContent} from '../../api/column';
+import {getColumnByUserId} from '../../api/api';
 import ContentInfoAdd from './ContentInfoAdd.vue';
 import ContentInfoEdit from './ContentInfoEdit.vue';
 export default {
@@ -189,9 +190,21 @@ export default {
       },
       
       getTree(){
-         getColumnTree().then((res) => {
+        let userpara={'userId': sessionStorage.getItem('accessToken')};
+        getColumnByUserId(userpara).then((res) =>{
+          var columnIdList=new Array()
+          var i=0;
+         for(var content of res.retData){
+            columnIdList[i]=content.columnId;
+            i=i+1;
+          };
+          let para={'columnIdList':columnIdList} ;
+          treeByPrivage(para).then((res) => {
             this.columnJson =res.retData ;
           })
+
+        })
+         
       },
 
       getList(){

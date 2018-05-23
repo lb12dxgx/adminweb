@@ -13,6 +13,7 @@ let base = ip;
 export const saveColumn = params => { return mockAxios.post(`${base}/system/column/save.do`,qs.stringify(params)).then(res => res.data); }; 
 export const updateColumn = params => { return mockAxios.post(`${base}/system/column/update.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getColumnTree = params => { return mockAxios.post(`${base}/system/column/tree.do`,qs.stringify(params)).then(res => res.data); };
+export const treeByPrivage = params => { return mockAxios.post(`${base}/system/column/treeByPrivage.do`,qs.stringify(params,{arrayFormat:'repeat'})).then(res => res.data); };
 export const deleteColumn = params => { return mockAxios.post(`${base}/system/column/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 
 export const saveContent = params => { return mockAxios.post(`${base}/system/content/save.do`,qs.stringify(params)).then(res => res.data); }; 
