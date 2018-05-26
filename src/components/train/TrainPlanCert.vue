@@ -81,7 +81,9 @@
         this.getList();
       },
 
-     
+      handleSubmit(){
+           this.getList();
+      },
 
       getList() {
           var params = Object.assign({pageNum:this.pageNum}, this.filters);

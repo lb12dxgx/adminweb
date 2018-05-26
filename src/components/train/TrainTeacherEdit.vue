@@ -134,7 +134,7 @@
     
     data() {
       return {
-        uploadAction:base+"/file/uploadone.do",
+        uploadAction:base+"/file/uploadone.do", 
         viewAction:'',
          otherDate:
         {

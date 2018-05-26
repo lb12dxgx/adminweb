@@ -106,7 +106,7 @@
     
     data() {
       return {
-        uploadAction:base+"/file/upload.do",
+        uploadAction:base+"/file/uploadone.do",
         viewAction:"",
         otherDate:
         {
@@ -165,7 +165,7 @@
 
       handleOtherSuccess(res, file) {
            
-          this.viewAction=base+"/file/downloadByBusi.do?fileInfoId="+res.retData.fileInfoId;
+          this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+res.retData.bussinessId+"&timestamp="+new Date().getTime();
        },
 
       beforeAvatarUpload(file) {

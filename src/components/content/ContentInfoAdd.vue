@@ -23,6 +23,13 @@
                   </el-form-item>
                 </el-col> 
               </el-row>
+               <el-row>
+                <el-col :span="24" >
+                  <el-form-item label="链接">
+                    <el-input  v-model="form.contentJson.url" placeholder="页面链接"></el-input>
+                  </el-form-item>
+                </el-col> 
+              </el-row>
               <el-row>
                 <el-col :span="12" >
                   <el-form-item label="发布人">
@@ -97,41 +104,7 @@
               <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
             </el-upload>
           </el-tab-pane>
-          <el-tab-pane label="内容图" name="second">
-             <el-upload
-              class="upload-demo"
-              :action="uploadAction"
-              :data="contentDate"
-              :on-success="handleContentSuccess"
-              :before-upload="beforeAvatarUpload"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :before-remove="beforeRemove"
-              multiple
           
-              :file-list="contentfileList"
-              list-type="picture">
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
-          </el-tab-pane>
-          <el-tab-pane label="图片集" name="third">
-             <el-upload
-              class="upload-demo"
-              :action="uploadAction"
-              :on-success="handlePicSuccess"
-              :data="picDate"
-              :before-upload="beforeAvatarUpload"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :before-remove="beforeRemove"
-              multiple
-              :file-list="picfileList"
-              list-type="picture">
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
-          </el-tab-pane>
           <el-tab-pane label="附件" name="fourth">
              <el-upload
               class="upload-demo"
