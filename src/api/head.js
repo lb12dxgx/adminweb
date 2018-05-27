@@ -9,4 +9,3 @@ const ip="http://127.0.0.1:8080"
 mock.restore();//去掉模拟行为
  
 export  {mock,mockAxios,router,uuidv4,ip}
- 

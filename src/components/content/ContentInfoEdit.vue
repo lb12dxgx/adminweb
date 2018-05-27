@@ -297,27 +297,6 @@ export default {
           })
       });
 
-      fileinfos({"bussinessId":this.form.contentFileId}).then((data) => {
-          let list=data.retData;
-          list.forEach ((f,k) =>{
-            var file={};
-            file.id=f.fileInfoId
-            file.name=f.fileName
-             file.url=base+f.fileWebPath
-            this.contentfileList.push(file);
-          })
-      });
-
-      fileinfos({"bussinessId":this.form.picFileId}).then((data) => {
-          let list=data.retData;
-          list.forEach ((f,k) =>{
-            var file={};
-            file.id=f.fileInfoId
-            file.name=f.fileName
-             file.url=base+f.fileWebPath
-            this.picfileList.push(file);
-          })
-      });
 
        fileinfos({"bussinessId":this.form.otherFileId}).then((data) => {
           let list=data.retData;
