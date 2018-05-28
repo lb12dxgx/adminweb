@@ -20,12 +20,13 @@
         <el-table-column prop="addree" label="地址" width="250"  > </el-table-column>
         <el-table-column prop="telphone" label="电话" width="100"  > </el-table-column>
         <el-table-column prop="level" label="级别" width="100" :formatter='formatLevel' > </el-table-column>
-       <el-table-column prop="createDate" label="创建时间" width="100" :formatter='formatCreateDate'> </el-table-column>
+     
        
-        <el-table-column label="操作" width="250">
+        <el-table-column label="操作" width="300">
           <template slot-scope="scope">
              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-             <el-button size="small" type="primary"  @click="handleProduct(scope.row)">产品信息</el-button>
+             <el-button size="small" type="primary"  @click="handleProduct(scope.row)">产品</el-button>
+             <el-button size="small" type="primary"  @click="handleCert(scope.row)">证书</el-button>
             <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
       </el-table-column>
@@ -85,6 +86,11 @@
       handleProduct(row){
         this.$router.push({ path:'product', query:{enterpriseId:row.enterpriseId}});
       },
+
+       handleCert(row){
+        this.$router.push({ path:'enterprisecert', query:{enterpriseId:row.enterpriseId}});
+      },
+
 
       handleEdit(row){
         this.$router.push({ path:'enterprise/edit', query:{enterpriseId:row.enterpriseId}});

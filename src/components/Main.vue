@@ -34,61 +34,16 @@
       :unique-opened="true"
       active-text-color="#ffd04b"
       :router="true">
-      <el-submenu index="1">
+      <el-submenu   v-for="(submenu, index) in submenuList" :index="index">
         <template slot="title">
           <i class="fa fa-user fa-lg" style="padding-right:10px"></i>
-          <span>系统管理</span>
+          <span>{{submenu.menuName}}</span>
         </template>
-        <el-menu-item index="/main/system/account">用户管理</el-menu-item>
-        <el-menu-item index="/main/system/org">部门管理</el-menu-item>
-        <el-menu-item index="/main/system/role">角色管理</el-menu-item>
-        <el-menu-item index="/main/system/menu">菜单管理</el-menu-item>
+        <el-menu-item v-for="menu in submenu.children" :index="menu.menuUrl" >
+          {{menu.menuName}}
+        </el-menu-item>
       </el-submenu>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="fa fa-book fa-lg" style="padding-right:10px"></i>
-          <span>内容管理</span>
-        </template>
-        <el-menu-item index="/main/system/column">栏目管理</el-menu-item>
-        <el-menu-item index="/main/system/content">内容管理</el-menu-item>
-         <el-menu-item index="/main/system/outnews">信息采集</el-menu-item>
-         <el-menu-item index="/main/system/outkey">关键词管理</el-menu-item>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title">
-          <i class="fa fa-book fa-lg" style="padding-right:10px"></i>
-          <span>118管理</span>
-        </template>
-        <el-menu-item index="/main/system/applyorg">监管部门</el-menu-item>
-        <el-menu-item index="/main/system/beforeapply">申请管理</el-menu-item>
-         
-      </el-submenu>
-
-      <el-submenu index="4">
-        <template slot="title">
-          <i class="fa fa-users fa-lg" style="padding-right:10px"></i>
-          <span>会员管理</span>
-        </template>
-      </el-submenu>
-      <el-submenu index="5">
-        <template slot="title">
-          <i class="fa fa-id-card-o fa-lg" style="padding-right:10px"></i>
-          <span>培训管理</span>
-        </template>
-         <el-menu-item index="/main/system/trainplan">培训计划</el-menu-item>
-         <el-menu-item index="/main/system/trainteacher">专家信息</el-menu-item>
-         <el-menu-item index="/main/system/trainpalncert">培训证书</el-menu-item>
-      </el-submenu>
-
-      <el-submenu index="6">
-        <template slot="title">
-          <i class="fa fa-id-card-o fa-lg" style="padding-right:10px"></i>
-          <span>产业服务</span>
-        </template>
-         <el-menu-item index="/main/system/zbinfo">招标信息</el-menu-item>
-         <el-menu-item index="/main/system/enterprise">企业信息</el-menu-item>
-        <el-menu-item index="/main/system/meet">会议信息</el-menu-item>
-      </el-submenu>
+      
 
       
     </el-menu>
@@ -108,6 +63,7 @@
 </template>
 
 <script>
+  import {getMenu} from '../api/api';
   export default {
     data() {
       return {
@@ -115,6 +71,7 @@
         sysUserName: '',
         sysOrgName: '',
         sysUserAvatar: '',
+        submenuList:[],
         form: {
           name: '',
           region: '',
@@ -154,6 +111,10 @@
       }
     },
     mounted() {
+      let para = {accessToken: sessionStorage.getItem('accessToken')};
+      getMenu(para).then((data) => {
+        this.submenuList=data.retData;
+      })
       var orgName = sessionStorage.getItem('orgName');
       var userName = sessionStorage.getItem('userName');
       this.sysUserName = userName;

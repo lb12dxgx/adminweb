@@ -40,3 +40,10 @@ export const getMeetSignUpList = params => { return mockAxios.post(`${base}/syst
 export const deleteMeetSignUp = params => { return mockAxios.post(`${base}/system/meetsignup/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getMeetSignUp = params => { return mockAxios.post(`${base}/system/meetsignup/get.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getMeetSignUpExcel = params => { window.open(`${base}/system/meetsignup/excel.do?meetId=`+params); }; 
+
+
+export const saveEnterpriseCert = params => { return mockAxios.post(`${base}/system/enterprisecert/save.do`,qs.stringify(params)).then(res => res.data); }; 
+export const updateEnterpriseCert = params => { return mockAxios.post(`${base}/system/enterprisecert/update.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getEnterpriseCertList = params => { return mockAxios.post(`${base}/system/enterprisecert/list.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteEnterpriseCert = params => { return mockAxios.post(`${base}/system/enterprisecert/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getEnterpriseCert = params => { return mockAxios.post(`${base}/system/enterprisecert/get.do`,qs.stringify(params)).then(res => res.data); }; 

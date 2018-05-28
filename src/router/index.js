@@ -60,6 +60,10 @@ import MeetSignUp from '@/components/service/MeetSignUp'
 import MeetSignUpAdd from '@/components/service/MeetSignUpAdd'
 import MeetSignUpEdit from '@/components/service/MeetSignUpEdit'
 
+import EnterpriseCert from '@/components/service/EnterpriseCert'
+import EnterpriseCertAdd from '@/components/service/EnterpriseCertAdd'
+import EnterpriseCertEdit from '@/components/service/EnterpriseCertEdit'
+
 
 Vue.use(Router)
 
@@ -256,6 +260,18 @@ export default new Router({
             path: 'system/meetsignup/edit',
             component: MeetSignUpEdit,
             name:'meetsignupEdit'
+           },{
+            path: 'system/enterprisecert',
+            component: EnterpriseCert,
+            name:'enterprisecert'
+           },{
+            path: 'system/enterprisecert/add',
+            component: EnterpriseCertAdd,
+            name:'enterprisecertAdd'
+           },{
+            path: 'system/enterprisecert/edit',
+            component: EnterpriseCertEdit,
+            name:'enterprisecertEdit'
            }
         ]
     }

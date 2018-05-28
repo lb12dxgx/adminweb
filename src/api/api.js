@@ -15,6 +15,7 @@ export const saveAccount = params => { return mockAxios.post(`${base}/system/acc
 export const updateAccount = params => { return mockAxios.post(`${base}/system/account/update.do`,qs.stringify(params)).then(res => res.data); }; 
 export const accountAllList = params => { return mockAxios.post(`${base}/system/account/alllist.do`,qs.stringify(params)).then(res => res.data); }; 
 export const resetAccount = params => { return mockAxios.post(`${base}/system/account/reset.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getMenu = params => { return mockAxios.post(`${base}/system/account/getMenu.do`,qs.stringify(params)).then(res => res.data); }; 
 
 
 
