@@ -15,8 +15,8 @@
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="trainName" label="培训名称" > </el-table-column>
-        <el-table-column prop="trainAddr" label="培训地点" width="200"  > </el-table-column>
+        <el-table-column prop="trainName" label="培训名称" width="300"> </el-table-column>
+        <el-table-column prop="trainAddr" label="培训地点" width="100"  > </el-table-column>
         <el-table-column prop="trainStartDate" label="开始时间" width="100" :formatter='formatTrainStartDate'> </el-table-column>
         <el-table-column prop="trainEndDate" label="结束时间" width="100" :formatter='formatTrainEndDate'> </el-table-column>
         <el-table-column prop="personNum" label="培训人数" width="80"> </el-table-column>
@@ -26,6 +26,8 @@
             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
             <el-button size="small" type="primary"  @click="handleClass(scope.row)">课程信息</el-button>
             <el-button size="small" type="primary"  @click="handleSignUp(scope.row)">报名信息</el-button>
+            <el-button size="small" type="primary"  @click="changeSign(scope.row)" v-if="scope.row.isSign==0">开始签到</el-button>
+            <el-button size="small" type="primary"  @click="changeSign(scope.row)" v-if="scope.row.isSign==1">结束签到</el-button>
             <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
       </el-table-column>
@@ -41,7 +43,7 @@
 </template>
 
 <script>
-  import {getTrainPlanList,deleteTrainPlan} from '../../api/train';
+  import {getTrainPlanList,deleteTrainPlan,changeSign} from '../../api/train';
   import NProgress from 'nprogress';
   export default {
     data() {
@@ -97,6 +99,26 @@
 
       handleSignUp(row){
         this.$router.push({ path:'trainsignup', query:{trainPlanId:row.trainPlanId}});
+      },
+
+      changeSign(row){
+         let para = {trainPlanId: row.trainPlanId };
+          this.listLoading = true;
+          NProgress.start();
+          changeSign(para).then((res) => {
+            this.listLoading = false;
+            NProgress.done();
+            if(res.state==1){
+              this.$notify({
+                title: '成功',
+                message: '改变签到状态成功！',
+                duration:2500,
+                type: 'success'
+              });
+              this.getList();
+            }
+            
+          });
       },
 
       handleCurrentChange(val) {

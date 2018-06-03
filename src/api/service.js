@@ -33,6 +33,7 @@ export const updateMeet = params => { return mockAxios.post(`${base}/system/meet
 export const getMeetList = params => { return mockAxios.post(`${base}/system/meet/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteMeet = params => { return mockAxios.post(`${base}/system/meet/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getMeet = params => { return mockAxios.post(`${base}/system/meet/get.do`,qs.stringify(params)).then(res => res.data); }; 
+export const changeSign = params => { return mockAxios.post(`${base}/system/meet/changeSign.do`,qs.stringify(params)).then(res => res.data); }; 
 
 export const saveMeetSignUp = params => { return mockAxios.post(`${base}/system/meetsignup/save.do`,qs.stringify(params)).then(res => res.data); }; 
 export const updateMeetSignUp = params => { return mockAxios.post(`${base}/system/meetsignup/update.do`,qs.stringify(params)).then(res => res.data); }; 
