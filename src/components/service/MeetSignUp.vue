@@ -21,7 +21,7 @@
         <el-table-column prop="telphone" label="手机" width="150"  > </el-table-column>
         <el-table-column prop="empName" label="企业名称"  > </el-table-column>
         <el-table-column prop="post" label="职位" width="100"  > </el-table-column>
-        <el-table-column prop="singleRoom" label="住宿要求" width="100"  > </el-table-column>
+        <el-table-column prop="isSign" label="是否签到" width="100" :formatter='formatIsSign' > </el-table-column>
         <el-table-column prop="createDate" label="申请时间" width="100" :formatter='formatCreateDate'> </el-table-column>
         <el-table-column label="操作" width="150">
           <template slot-scope="scope">
@@ -70,9 +70,14 @@
         }
       },
 
-      formatLevel(row, column) {
-          var val=row.level
-          return this.levelMap[val];
+      formatIsSign(row, column) {
+          var val=row.isSign
+          if(val==0){
+            return "未签到";
+          }else{
+            return "已签到";
+          }
+          
       },
        
 

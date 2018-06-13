@@ -17,8 +17,8 @@
 
             <el-row>
               <el-col :span="12">
-                <el-form-item label="职位" required prop="teacherPosition">
-                 <el-input v-model="addForm.teacherPosition"  style="width:200px">
+                <el-form-item label="工作单位" required prop="companyName">
+                 <el-input v-model="addForm.companyName"  style="width:200px">
                   </el-input> 
                 </el-form-item>
               </el-col>
@@ -163,7 +163,7 @@
           teacherName:'', 
           teacherCode:'',
           teacherTitle:'',
-          teacherPosition:'',
+          companyName:'',
           teacherSumary:'',
           startDate:'',
           endDate:''

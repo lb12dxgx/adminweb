@@ -237,6 +237,9 @@
       let enterpriseId=this.$route.query.enterpriseId;
       let para = {enterpriseId: enterpriseId};
       getEnterprise(para).then((data) => {
+        if(data.retData.enterprisePicId==''||data.retData.enterprisePicId==null){
+          data.retData.teacherPicPath=uuidv1();
+        }
         this.addForm=data.retData;
         this.$refs.ue.setUEContent(this.addForm.enterpriseSummary);
         this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+data.retData.enterprisePicId+"&timestamp="+new Date().getTime();
