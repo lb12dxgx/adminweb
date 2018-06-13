@@ -23,10 +23,12 @@
         <el-table-column prop="startDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
          <el-table-column prop="endDate" label="结束时间" width="100" :formatter='formatEndDate'> </el-table-column>
        
-        <el-table-column label="操作" width="250">
+        <el-table-column label="操作" width="350">
           <template slot-scope="scope">
              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
              <el-button size="small" type="primary"  @click="handleSignUp(scope.row)">报名信息</el-button>
+             <el-button size="small" type="primary"  @click="changeSign(scope.row)" v-if="scope.row.isSign==0">开始签到</el-button>
+             <el-button size="small" type="primary"  @click="changeSign(scope.row)" v-if="scope.row.isSign==1">结束签到</el-button>
             <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
       </el-table-column>
@@ -42,7 +44,7 @@
 </template>
 
 <script>
-  import {getMeetList,deleteMeet} from '../../api/service';
+  import {getMeetList,deleteMeet,changeSign} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
     data() {
@@ -97,6 +99,26 @@
 
       handleSignUp(row){
         this.$router.push({ path:'meetsignup', query:{meetId:row.meetId}});
+      },
+
+      changeSign(row){
+         let para = {meetId: row.meetId };
+          this.listLoading = true;
+          NProgress.start();
+          changeSign(para).then((res) => {
+            this.listLoading = false;
+            NProgress.done();
+            if(res.state==1){
+              this.$notify({
+                title: '成功',
+                message: '改变签到状态成功！',
+                duration:2500,
+                type: 'success'
+              });
+              this.getList();
+            }
+            
+          });
       },
 
      //删除

@@ -34,7 +34,7 @@
       :unique-opened="true"
       active-text-color="#ffd04b"
       :router="true">
-      <el-submenu   v-for="(submenu, index) in submenuList" :index="index">
+      <el-submenu   v-for="(submenu, index) in submenuList" :index="index+''">
         <template slot="title">
           <i class="fa fa-user fa-lg" style="padding-right:10px"></i>
           <span>{{submenu.menuName}}</span>

@@ -23,6 +23,7 @@
         <el-table-column prop="post" label="职位" width="100"  > </el-table-column>
         <el-table-column prop="isSign" label="是否签到" width="100" :formatter='formatIsSign' > </el-table-column>
         <el-table-column prop="createDate" label="申请时间" width="100" :formatter='formatCreateDate'> </el-table-column>
+        <el-table-column prop="isSign" label="是否签到" width="100" :formatter='formatIsSign'> </el-table-column>
         <el-table-column label="操作" width="150">
           <template slot-scope="scope">
              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
@@ -73,12 +74,21 @@
       formatIsSign(row, column) {
           var val=row.isSign
           if(val==0){
+<<<<<<< HEAD
             return "未签到";
           }else{
             return "已签到";
           }
           
+=======
+            return "未签到" ;
+          }else{
+             return "已签到" ;
+          }
+>>>>>>> 54151706a05db643e7641becc35537e101419940
       },
+
+     
        
 
       handleSubmit(){

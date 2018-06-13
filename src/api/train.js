@@ -15,6 +15,7 @@ export const updateTrainPlan = params => { return mockAxios.post(`${base}/system
 export const getTrainPlanList = params => { return mockAxios.post(`${base}/system/trainplan/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteTrainPlan = params => { return mockAxios.post(`${base}/system/trainplan/delete.do`,qs.stringify(params)).then(res => res.data); };
 export const getTrainPlan = params => { return mockAxios.post(`${base}/system/trainplan/get.do`,qs.stringify(params)).then(res => res.data); }; 
+export const changeSign = params => { return mockAxios.post(`${base}/system/trainplan/changeSign.do`,qs.stringify(params)).then(res => res.data); }; 
 
 export const saveTrainClass = params => { return mockAxios.post(`${base}/system/trainclass/save.do`,qs.stringify(params)).then(res => res.data); }; 
 export const updateTrainClass = params => { return mockAxios.post(`${base}/system/trainclass/update.do`,qs.stringify(params)).then(res => res.data); }; 
