@@ -27,6 +27,11 @@ export const updateMenu = params => { return mockAxios.post(`${base}/system/menu
 export const getMenuTree = params => { return mockAxios.post(`${base}/system/menu/tree.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteMenu = params => { return mockAxios.post(`${base}/system/menu/delete.do`,qs.stringify(params)).then(res => res.data); }; 
  
+export const saveDict = params => { return mockAxios.post(`${base}/system/dict/save.do`,qs.stringify(params)).then(res => res.data); }; 
+export const updateDict = params => { return mockAxios.post(`${base}/system/dict/update.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getDictTree = params => { return mockAxios.post(`${base}/system/dict/tree.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteDict = params => { return mockAxios.post(`${base}/system/dict/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+ 
 export const roleList = params => { return mockAxios.post(`${base}/system/role/list.do`,qs.stringify(params)).then(res => res.data); }; 
 export const deleteRole = params => { return mockAxios.post(`${base}/system/role/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const saveRole = params => { return mockAxios.post(`${base}/system/role/save.do`,qs.stringify(params)).then(res => res.data); }; 

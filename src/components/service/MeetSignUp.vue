@@ -74,24 +74,12 @@
       formatIsSign(row, column) {
           var val=row.isSign
           if(val==0){
-<<<<<<< HEAD
             return "未签到";
           }else{
             return "已签到";
           }
-          
-=======
-            return "未签到" ;
-          }else{
-             return "已签到" ;
-          }
->>>>>>> 54151706a05db643e7641becc35537e101419940
       },
-
-     
-       
-
-      handleSubmit(){
+   handleSubmit(){
            this.getList();
       },
 

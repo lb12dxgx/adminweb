@@ -9,6 +9,7 @@ import SystemUser from '@/components/system/User'
 import SystemOrg from '@/components/system/Org'
 import SystemAccount from '@/components/system/Account'
 import SystemMenu from '@/components/system/Menu'
+import SystemDict from '@/components/system/Dict'
 import SystemRole from '@/components/system/Role'
 import SystemRoleUser from '@/components/system/RoleUser'
 import SystemRoleMenu from '@/components/system/RoleMenu'
@@ -95,6 +96,10 @@ export default new Router({
             path: 'system/menu',
             component: SystemMenu,
             name:'systemMenu'
+          },{
+            path: 'system/dict',
+            component: SystemDict,
+            name:'systemDict'
           },{
             path: 'system/role',
             component: SystemRole,
