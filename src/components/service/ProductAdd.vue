@@ -180,7 +180,7 @@
 
       handleOtherSuccess(res, file) {
           console.log(res.retData.filePath);
-          this.addForm.productPicId=res.retData.fileInfoId;
+          this.addForm.productPicId=res.retData.bussinessId;
           this.viewAction=this.viewAction+res.retData.fileInfoId;
           console.log(this.viewAction);
         },

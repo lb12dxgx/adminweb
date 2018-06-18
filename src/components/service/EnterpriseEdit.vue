@@ -118,7 +118,7 @@
         {
           dirName:'content/enterprise/logo',
           token:sessionStorage.getItem('accessToken'),
-          bussinessId:uuidv1()
+          bussinessId:''
         },
         editorOption: {
         
@@ -237,12 +237,15 @@
       let enterpriseId=this.$route.query.enterpriseId;
       let para = {enterpriseId: enterpriseId};
       getEnterprise(para).then((data) => {
+         console.log("============");
+         console.log(data.retData);
+         this.addForm=data.retData;
         if(data.retData.enterprisePicId==''||data.retData.enterprisePicId==null){
-          data.retData.teacherPicPath=uuidv1();
+           this.addForm.enterprisePicId=uuidv1();
         }
-        this.addForm=data.retData;
+         this.otherDate.bussinessId=this.addForm.enterprisePicId;
         this.$refs.ue.setUEContent(this.addForm.enterpriseSummary);
-        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+data.retData.enterprisePicId+"&timestamp="+new Date().getTime();
+        this.viewAction=base+"/file/downloadByBusi.do?bussinessId="+this.addForm.enterprisePicId+"&timestamp="+new Date().getTime();
       })
     }
 

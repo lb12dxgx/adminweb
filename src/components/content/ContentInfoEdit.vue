@@ -142,11 +142,6 @@ import NProgress from 'nprogress';
 import {updateContent} from '../../api/column';
 import {fileinfos,deleteFileinfo,base} from '../../api/fileinfo';
 
-var titleFileId="";
-var contentFileId="";
-var picFileId="";
-var otherFileId="";
-
 export default {
     components: {
       UE
@@ -161,27 +156,16 @@ export default {
         uploadAction:base+"/file/upload.do",
         titleDate:
         {
-          dirName:'content/title/'+titleFileId,
+          dirName:'content/title/',
           token:sessionStorage.getItem('accessToken'),
-          bussinessId:titleFileId
+          bussinessId:""
         },
-        contentDate:
-        {
-          dirName:'content/content'+contentFileId,
-          token:sessionStorage.getItem('accessToken'),
-          bussinessId:contentFileId
-        },
-        picDate:
-        {
-          dirName:'content/pic'+picFileId,
-          token:sessionStorage.getItem('accessToken'),
-          bussinessId:picFileId
-        },
+     
         otherDate:
         {
-          dirName:'content/other'+otherFileId,
+          dirName:'content/other',
           token:sessionStorage.getItem('accessToken'),
-          bussinessId:otherFileId
+          bussinessId:""
         },
         titlefileList: [], 
         picfileList:[],
@@ -225,16 +209,7 @@ export default {
           this.titleDate.bussinessId=res.retData.bussinessId;
           file.id=res.retData.fileInfoId;
         },
-        handleContentSuccess(res, file) {
-          this.form.contentFileId=res.retData.bussinessId;
-          this.contentDate.bussinessId=res.retData.bussinessId;
-          file.id=res.retData.fileInfoId;
-        },
-        handlePicSuccess(res, file) {
-          this.form.picFileId=res.retData.bussinessId;
-          this.picDate.bussinessId=res.retData.bussinessId;
-          file.id=res.retData.fileInfoId;
-        },
+        
         handleOtherSuccess(res, file) {
           this.form.otherFileId=res.retData.bussinessId;
           this.otherDate.bussinessId=res.retData.bussinessId;
@@ -277,12 +252,12 @@ export default {
     },
 
      mounted() {
-      console.log(this.form.titleFileId);
+      
       this.editorcontent=this.form.content;
-      titleFileId=this.form.titleFileId;
-      contentFileId=this.form.contentFileId;
-      picFileId=this.form.picFileId;
-      otherFileId=this.form.otherFileId;
+     
+     this.titleDate.bussinessId=this.form.titleFileId;
+     
+     this.otherDate.bussinessId=this.form.otherFileId;
 
       console.log(this.form);
       fileinfos({"bussinessId":this.form.titleFileId}).then((data) => {

@@ -55,7 +55,7 @@
         list: [],
         total: 0,
         pageNum: 1,
-        typeMap:{'xmjl':'项目经理','jl':'项目监理'}
+        typeMap:{'gxtc':'地下管线探测'}
 
       }
     },

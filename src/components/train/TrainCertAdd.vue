@@ -151,11 +151,8 @@
          options:
         [
           {
-            value: 'xmjl',
-            label: '项目经理'
-          },{
-            value: 'jl',
-            label: '项目监理'
+            value: 'gxtc',
+            label: '地下管线探测'
           }
         ]
       }

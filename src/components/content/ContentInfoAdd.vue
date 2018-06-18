@@ -148,10 +148,6 @@ import {saveContent} from '../../api/column';
 
 
 const uuidv1 = require('uuid/v1');
-var titleFileId="";
-var contentFileId="";
-var picFileId="";
-var otherFileId="";
 
 
 export default {
@@ -168,27 +164,15 @@ export default {
         uploadAction:base+"/file/upload.do",
         titleDate:
         {
-          dirName:'content/title/'+titleFileId,
+          dirName:'content/title/',
           token:sessionStorage.getItem('accessToken'),
-          bussinessId:titleFileId
-        },
-        contentDate:
-        {
-          dirName:'content/content'+contentFileId,
-          token:sessionStorage.getItem('accessToken'),
-          bussinessId:contentFileId
-        },
-        picDate:
-        {
-          dirName:'content/pic'+picFileId,
-          token:sessionStorage.getItem('accessToken'),
-          bussinessId:picFileId
+          bussinessId:""
         },
         otherDate:
         {
-          dirName:'content/other'+otherFileId,
+          dirName:'content/other',
           token:sessionStorage.getItem('accessToken'),
-          bussinessId:otherFileId
+          bussinessId:""
         },
         titlefileList:[], 
         picfileList:[],
@@ -200,10 +184,8 @@ export default {
           content: '',
           level:'',
           contentJson:{},
-          titleFileId:titleFileId,
-          contentFileId:contentFileId,
-          picFileId:picFileId,
-          otherFileId:otherFileId
+          titleFileId:'',
+          otherFileId:''
         },
 
          formRules: {
@@ -248,16 +230,7 @@ export default {
           this.titleDate.bussinessId=res.retData.bussinessId;
           file.id=res.retData.fileInfoId;
         },
-        handleContentSuccess(res, file) {
-          this.form.contentFileId=res.retData.bussinessId;
-          this.contentDate.bussinessId=res.retData.bussinessId;
-          file.id=res.retData.fileInfoId;
-        },
-        handlePicSuccess(res, file) {
-          this.form.picFileId=res.retData.bussinessId;
-          this.picDate.bussinessId=res.retData.bussinessId;
-          file.id=res.retData.fileInfoId;
-        },
+       
         handleOtherSuccess(res, file) {
           this.form.otherFileId=res.retData.bussinessId;
           this.otherDate.bussinessId=res.retData.bussinessId;
@@ -299,14 +272,10 @@ export default {
 
      mounted() {
       let r=uuidv1();
-      titleFileId=r+"titleFileId";
-      contentFileId=r+"contentFileId";
-      picFileId=r+"picFileId";
-      otherFileId=r+"otherFileId";
-      console.log(titleFileId);
-      console.log(contentFileId);
-      console.log(picFileId);
-      console.log(otherFileId);
+     this.form.titleFileId=r+"titleFileId";
+     this.titleDate.bussinessId=r+"titleFileId";
+     this.form.otherFileId=r+"otherFileId";
+     this.otherDate.bussinessId=r+"otherFileId";
     }
   }
    </script>
