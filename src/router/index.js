@@ -64,6 +64,10 @@ import MeetSignUpEdit from '@/components/service/MeetSignUpEdit'
 import EnterpriseCert from '@/components/service/EnterpriseCert'
 import EnterpriseCertAdd from '@/components/service/EnterpriseCertAdd'
 import EnterpriseCertEdit from '@/components/service/EnterpriseCertEdit'
+import JobInfo from '@/components/service/JobInfo'
+import Resume from '@/components/service/Resume'
+
+
 
 
 Vue.use(Router)
@@ -277,6 +281,14 @@ export default new Router({
             path: 'system/enterprisecert/edit',
             component: EnterpriseCertEdit,
             name:'enterprisecertEdit'
+           },{
+            path: 'system/jobinfo',
+            component: JobInfo,
+            name:'jobInfo'
+           },{
+            path: 'system/resume',
+            component: Resume,
+            name:'resume'
            }
         ]
     }

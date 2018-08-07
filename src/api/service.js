@@ -48,3 +48,9 @@ export const updateEnterpriseCert = params => { return mockAxios.post(`${base}/s
 export const getEnterpriseCertList = params => { return mockAxios.post(`${base}/system/enterprisecert/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteEnterpriseCert = params => { return mockAxios.post(`${base}/system/enterprisecert/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getEnterpriseCert = params => { return mockAxios.post(`${base}/system/enterprisecert/get.do`,qs.stringify(params)).then(res => res.data); }; 
+
+
+export const getJobInfoList = params => { return mockAxios.post(`${base}/system/job/list.do`,qs.stringify(params)).then(res => res.data); }
+export const changeJobLevel = params => { return mockAxios.post(`${base}/system/job/changeLevel.do`,qs.stringify(params)).then(res => res.data); }
+export const getPersonList = params => { return mockAxios.post(`${base}/system/resume/list.do`,qs.stringify(params)).then(res => res.data); }
+export const changePersonLevel = params => { return mockAxios.post(`${base}/system/resume/changeLevel.do`,qs.stringify(params)).then(res => res.data); }

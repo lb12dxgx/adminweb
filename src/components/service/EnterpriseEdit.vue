@@ -50,6 +50,22 @@
                 </el-form-item>
               </el-col>
             </el-row>
+
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="招聘级别" required prop="level">
+                 
+                   <el-select v-model="addForm.jobLevel" placeholder="请选择">
+                      <el-option
+                        v-for="item in joboptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                </el-form-item>
+              </el-col>
+            </el-row>
            
             <el-form-item label="主营业务"  prop="business">
                 <el-input
@@ -137,9 +153,7 @@
           level:[
             { required: true, message: '请输入等级', trigger: 'blur' }
           ],
-          orderNum:[
-            { required: true, message: '请输入顺序', trigger: 'blur' }
-          ],
+          
           
         },
 
@@ -152,7 +166,8 @@
           telphone:'',
           level:'',
           orderNum:'',
-          enterprisePicId:''
+          enterprisePicId:'',
+          jobLevel:''
         },
 
         options:
@@ -168,6 +183,17 @@
             label: '超级VIP'
           }
         ],
+
+        joboptions:
+        [
+          {
+            value: 10,
+            label: '普通招聘'
+          },{
+            value: 20,
+            label: '名企招聘'
+          }
+        ]
       }
         
     },
