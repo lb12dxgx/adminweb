@@ -21,12 +21,17 @@ export const updateProduct = params => { return mockAxios.post(`${base}/system/p
 export const getProductList = params => { return mockAxios.post(`${base}/system/product/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteProduct = params => { return mockAxios.post(`${base}/system/product/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getProduct = params => { return mockAxios.post(`${base}/system/product/get.do`,qs.stringify(params)).then(res => res.data); }; 
+export const changeProductLevel = params => { return mockAxios.post(`${base}/system/product/changeLevel.do`,qs.stringify(params)).then(res => res.data); }
+export const getAllProductList = params => { return mockAxios.post(`${base}/system/product/productlist.do`,qs.stringify(params)).then(res => res.data); };
+
+
 
 export const saveEnterprise = params => { return mockAxios.post(`${base}/system/enterprise/save.do`,qs.stringify(params)).then(res => res.data); }; 
 export const updateEnterprise = params => { return mockAxios.post(`${base}/system/enterprise/update.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getEnterpriseList = params => { return mockAxios.post(`${base}/system/enterprise/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteEnterprise = params => { return mockAxios.post(`${base}/system/enterprise/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getEnterprise = params => { return mockAxios.post(`${base}/system/enterprise/get.do`,qs.stringify(params)).then(res => res.data); }; 
+export const changeEnterpriseLevel = params => { return mockAxios.post(`${base}/system/enterprise/changeLevel.do`,qs.stringify(params)).then(res => res.data); }
 
 export const saveMeet = params => { return mockAxios.post(`${base}/system/meet/save.do`,qs.stringify(params)).then(res => res.data); }; 
 export const updateMeet = params => { return mockAxios.post(`${base}/system/meet/update.do`,qs.stringify(params)).then(res => res.data); }; 

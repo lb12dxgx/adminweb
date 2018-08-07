@@ -66,6 +66,8 @@ import EnterpriseCertAdd from '@/components/service/EnterpriseCertAdd'
 import EnterpriseCertEdit from '@/components/service/EnterpriseCertEdit'
 import JobInfo from '@/components/service/JobInfo'
 import Resume from '@/components/service/Resume'
+import HyEnterprise from '@/components/hyproduct/HyEnterprise'
+import HyProduct from '@/components/hyproduct/HyProduct'
 
 
 
@@ -289,6 +291,14 @@ export default new Router({
             path: 'system/resume',
             component: Resume,
             name:'resume'
+           },{
+            path: 'system/hyenterprise',
+            component: HyEnterprise,
+            name:'hyEnterprise'
+           },{
+            path: 'system/hyproduct',
+            component: HyProduct,
+            name:'hyProduct'
            }
         ]
     }
