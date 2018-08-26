@@ -23,7 +23,7 @@ export const deleteProduct = params => { return mockAxios.post(`${base}/system/p
 export const getProduct = params => { return mockAxios.post(`${base}/system/product/get.do`,qs.stringify(params)).then(res => res.data); }; 
 export const changeProductLevel = params => { return mockAxios.post(`${base}/system/product/changeLevel.do`,qs.stringify(params)).then(res => res.data); }
 export const getAllProductList = params => { return mockAxios.post(`${base}/system/product/productlist.do`,qs.stringify(params)).then(res => res.data); };
-
+export const viewProduct = params => { window.open(`${base}/hyproduct/productview.html?productId=`+params);}; 
 
 
 export const saveEnterprise = params => { return mockAxios.post(`${base}/system/enterprise/save.do`,qs.stringify(params)).then(res => res.data); }; 
@@ -32,6 +32,8 @@ export const getEnterpriseList = params => { return mockAxios.post(`${base}/syst
 export const deleteEnterprise = params => { return mockAxios.post(`${base}/system/enterprise/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getEnterprise = params => { return mockAxios.post(`${base}/system/enterprise/get.do`,qs.stringify(params)).then(res => res.data); }; 
 export const changeEnterpriseLevel = params => { return mockAxios.post(`${base}/system/enterprise/changeLevel.do`,qs.stringify(params)).then(res => res.data); }
+export const viewEnterprise = params => { window.open(`${base}/hyproduct/enterpriseview.html?enterpriseId=`+params);}; 
+
 
 export const saveMeet = params => { return mockAxios.post(`${base}/system/meet/save.do`,qs.stringify(params)).then(res => res.data); }; 
 export const updateMeet = params => { return mockAxios.post(`${base}/system/meet/update.do`,qs.stringify(params)).then(res => res.data); }; 
@@ -57,5 +59,33 @@ export const getEnterpriseCert = params => { return mockAxios.post(`${base}/syst
 
 export const getJobInfoList = params => { return mockAxios.post(`${base}/system/job/list.do`,qs.stringify(params)).then(res => res.data); }
 export const changeJobLevel = params => { return mockAxios.post(`${base}/system/job/changeLevel.do`,qs.stringify(params)).then(res => res.data); }
+export const deleteJobInfo = params => { return mockAxios.post(`${base}/system/job/delete.do`,qs.stringify(params)).then(res => res.data); };
+export const viewJobInfo = params => { window.open(`${base}/job/jobview.html?jobInfoId=`+params);}; 
+
+
+
 export const getPersonList = params => { return mockAxios.post(`${base}/system/resume/list.do`,qs.stringify(params)).then(res => res.data); }
 export const changePersonLevel = params => { return mockAxios.post(`${base}/system/resume/changeLevel.do`,qs.stringify(params)).then(res => res.data); }
+export const deletePerson = params => { return mockAxios.post(`${base}/system/resume/delete.do`,qs.stringify(params)).then(res => res.data); };
+export const viewPerson = params => { window.open(`${base}/emp/resume/view.html?personId=`+params);}; 
+
+export const getAccidentUnList = params => { return mockAxios.post(`${base}/system/accidentinfo/unlist.do`,qs.stringify(params)).then(res => res.data); }
+export const getAccidentPassList = params => { return mockAxios.post(`${base}/system/accidentinfo/passlist.do`,qs.stringify(params)).then(res => res.data); }
+export const getAccidentNoPassList = params => { return mockAxios.post(`${base}/system/accidentinfo/nopasslist.do`,qs.stringify(params)).then(res => res.data); }
+export const changePassAccident = params => { return mockAxios.post(`${base}/system/accidentinfo/changePass.do`,qs.stringify(params)).then(res => res.data); }
+export const changeNoPassAccident = params => { return mockAxios.post(`${base}/system/accidentinfo/changeNoPass.do`,qs.stringify(params)).then(res => res.data); }
+export const getAccident = params => { return mockAxios.post(`${base}/system/accidentinfo/get.do`,qs.stringify(params)).then(res => res.data); }
+
+
+export const getAbilityUnList = params => { return mockAxios.post(`${base}/system/abilityinfo/unlist.do`,qs.stringify(params)).then(res => res.data); }
+export const getAbilityPassList = params => { return mockAxios.post(`${base}/system/abilityinfo/passlist.do`,qs.stringify(params)).then(res => res.data); }
+export const getAbilityNoPassList = params => { return mockAxios.post(`${base}/system/abilityinfo/nopasslist.do`,qs.stringify(params)).then(res => res.data); }
+export const changePassAbility = params => { return mockAxios.post(`${base}/system/abilityinfo/changePass.do`,qs.stringify(params)).then(res => res.data); }
+export const changeNoPassAbility = params => { return mockAxios.post(`${base}/system/abilityinfo/changeNoPass.do`,qs.stringify(params)).then(res => res.data); }
+export const getAbility = params => { return mockAxios.post(`${base}/system/abilityinfo/get.do`,qs.stringify(params)).then(res => res.data); }
+
+
+
+export const getBuyinfoList = params => { return mockAxios.post(`${base}/system/buyinfo/list.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteBuyinfo = params => { return mockAxios.post(`${base}/system/buyinfo/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const viewBuyinfo = params => { window.open(`${base}/hyproduct/buyinfoview.html?buyInfoId=`+params);}; 

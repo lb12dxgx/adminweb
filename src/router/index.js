@@ -17,6 +17,8 @@ import SystemRoleColumn from '@/components/system/RoleColumn'
 
 import ContentColumnInfo from '@/components/content/ColumnInfo'
 import ContentInfo from '@/components/content/ContentInfo'
+import AccidentInfo from '@/components/content/AccidentInfo'
+import AccidentInfoView from '@/components/content/AccidentInfoView'
 import OutNews from '@/components/content/OutNews'
 import OutKey from '@/components/content/OutKey'
 
@@ -30,44 +32,62 @@ import TrainPlanEdit from '@/components/Train/TrainPlanEdit'
 import TrainClass from '@/components/Train/TrainClass'
 import TrainClassAdd from '@/components/Train/TrainClassAdd'
 import TrainClassEdit from '@/components/Train/TrainClassEdit'
-
 import TrainSignUp from '@/components/Train/TrainSignUp'
 import TrainSignUpAdd from '@/components/Train/TrainSignUpAdd'
 import TrainSignUpEdit from '@/components/Train/TrainSignUpEdit'
 
-import TrainTeacher from '@/components/Train/TrainTeacher'
-import TrainTeacherAdd from '@/components/Train/TrainTeacherAdd'
-import TrainTeacherEdit from '@/components/Train/TrainTeacherEdit'
-
-import TrainPlanCert from '@/components/Train/TrainPlanCert'
-import TrainCert from '@/components/Train/TrainCert'
-import TrainCertAdd from '@/components/Train/TrainCertAdd'
-import TrainCertEdit from '@/components/Train/TrainCertEdit'
+import Meet from '@/components/Train/Meet'
+import MeetAdd from '@/components/Train/MeetAdd'
+import MeetEdit from '@/components/Train/MeetEdit'
+import MeetSignUp from '@/components/Train/MeetSignUp'
+import MeetSignUpAdd from '@/components/Train/MeetSignUpAdd'
+import MeetSignUpEdit from '@/components/Train/MeetSignUpEdit'
 
 
-import ZbInfo from '@/components/service/ZbInfo'
-import ZbInfoAdd from '@/components/service/ZbInfoAdd'
-import ZbInfoEdit from '@/components/service/ZbInfoEdit'
+
+
+
+
 import Enterprise from '@/components/service/Enterprise'
 import EnterpriseAdd from '@/components/service/EnterpriseAdd'
 import EnterpriseEdit from '@/components/service/EnterpriseEdit'
 import Product from '@/components/service/Product'
 import ProductAdd from '@/components/service/ProductAdd'
 import ProductEdit from '@/components/service/ProductEdit'
-import Meet from '@/components/service/Meet'
-import MeetAdd from '@/components/service/MeetAdd'
-import MeetEdit from '@/components/service/MeetEdit'
-import MeetSignUp from '@/components/service/MeetSignUp'
-import MeetSignUpAdd from '@/components/service/MeetSignUpAdd'
-import MeetSignUpEdit from '@/components/service/MeetSignUpEdit'
 
-import EnterpriseCert from '@/components/service/EnterpriseCert'
-import EnterpriseCertAdd from '@/components/service/EnterpriseCertAdd'
-import EnterpriseCertEdit from '@/components/service/EnterpriseCertEdit'
-import JobInfo from '@/components/service/JobInfo'
-import Resume from '@/components/service/Resume'
+
+
+
+
+import JobInfo from '@/components/hyJob/JobInfo'
+import Resume from '@/components/hyJob/Resume'
+
+
 import HyEnterprise from '@/components/hyproduct/HyEnterprise'
 import HyProduct from '@/components/hyproduct/HyProduct'
+import HyBuyInfo from '@/components/hyproduct/HyBuyInfo'
+import ZbInfo from '@/components/hyproduct/ZbInfo'
+import ZbInfoAdd from '@/components/hyproduct/ZbInfoAdd'
+import ZbInfoEdit from '@/components/hyproduct/ZbInfoEdit'
+
+
+
+
+import TrainTeacher from '@/components/hyManage/TrainTeacher'
+import TrainTeacherAdd from '@/components/hyManage/TrainTeacherAdd'
+import TrainTeacherEdit from '@/components/hyManage/TrainTeacherEdit'
+
+import TrainPlanCert from '@/components/hyManage/TrainPlanCert'
+import TrainCert from '@/components/hyManage/TrainCert'
+import TrainCertAdd from '@/components/hyManage/TrainCertAdd'
+import TrainCertEdit from '@/components/hyManage/TrainCertEdit'
+
+import HyAbility from '@/components/hyManage/HyAbility'
+import HyAbilityView from '@/components/hyManage/HyAbilityView'
+
+import EnterpriseCert from '@/components/hyManage/EnterpriseCert'
+import EnterpriseCertAdd from '@/components/hyManage/EnterpriseCertAdd'
+import EnterpriseCertEdit from '@/components/hyManage/EnterpriseCertEdit'
 
 
 
@@ -130,6 +150,16 @@ export default new Router({
             path: 'system/content',
             component: ContentInfo,
             name:'contentInfo'
+            
+          },{
+            path: 'system/accidentInfo',
+            component: AccidentInfo,
+            name:'accidentInfo'
+            
+          },{
+            path: 'system/accidentInfo/view',
+            component: AccidentInfoView,
+            name:'accidentInfoView'
             
           },{
             path: 'system/outnews',
@@ -299,6 +329,18 @@ export default new Router({
             path: 'system/hyproduct',
             component: HyProduct,
             name:'hyProduct'
+           },{
+            path: 'system/hybuyinfo',
+            component: HyBuyInfo,
+            name:'hyBuyInfo'
+           },{
+            path: 'system/hyability',
+            component: HyAbility,
+            name:'hyAbility'
+           },{
+            path: 'system/hyability/view',
+            component: HyAbilityView,
+            name:'hyAbilityView'
            }
         ]
     }

@@ -19,6 +19,12 @@
                  
                 </el-form-item>
               </el-col>
+
+              <el-col :span="12">
+                <el-form-item label="企业名称" required prop="enterpriseName">
+                 <el-input v-model="addForm.enterpriseName" auto-complete="off"></el-input>
+                </el-form-item>
+              </el-col>
               
             </el-row>
             
@@ -85,10 +91,13 @@
         
       
         addFormRules: {
+          
           certTypeName: [
             { required: true, message: '请输入证书类型', trigger: 'blur' }
           ],
-         
+          enterpriseName: [
+            { required: true, message: '请输入企业名称', trigger: 'blur' }
+          ],
           certCode: [
             { required: true, message: '请输入证书编号', trigger: 'blur' }
           ],

@@ -23,10 +23,12 @@
         <el-table-column prop="level" label="级别" width="100" :formatter='formatLevel' > </el-table-column>
        <el-table-column prop="createDate" label="创建时间" width="100" :formatter='formatCreateDate'> </el-table-column>
        
-        <el-table-column label="操作" width="150">
+        <el-table-column label="操作" width="250">
           <template slot-scope="scope">
              <el-button size="small" type="primary"  @click="changeLevel(scope.row)" v-if="scope.row.level==10">提升VIP</el-button>
              <el-button size="small" type="primary"  @click="changeLevel(scope.row)" v-else>降低级别</el-button>
+             <el-button size="small" type="primary"  @click="del(scope.row)" >删除</el-button>
+             <el-button size="small" type="primary"  @click="view(scope.row)" >查看</el-button>
           </template>
       </el-table-column>
       </el-table>
@@ -41,7 +43,7 @@
 </template>
 
 <script>
-  import {getAllProductList,changeProductLevel} from '../../api/service';
+  import {getAllProductList,changeProductLevel,deleteProduct,viewProduct} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
     data() {
@@ -74,6 +76,35 @@
 
       handleSubmit(){
            this.getList();
+      },
+
+      view(row){
+        viewProduct(row.productId);
+      },
+       
+     //删除
+      del(row) {
+        this.$confirm('确认删除该记录吗?', '提示', {
+          type: 'warning'
+        }).then(() => {
+          this.listLoading = true;
+          NProgress.start();
+          let para = {productId: row.productId };
+          deleteProduct(para).then((res) => {
+            this.listLoading = false;
+            NProgress.done();
+            if(res.state==1){
+              this.$notify({
+                title: '成功',
+                message: '修改成功',
+                duration:2500,
+                type: 'success'
+              });
+              this.getList();
+            }
+            
+          });
+        });
       },
        
      //删除

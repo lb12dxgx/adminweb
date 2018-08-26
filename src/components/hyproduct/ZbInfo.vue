@@ -1,70 +1,71 @@
 <template>
   <div class="content">
     <div class="seach">
-        <el-form :inline="true" :model="filters" class="demo-form-inline">
-         <el-form-item>
-            
-            <el-button type="primary" @click="handleAdd">新增</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
+      <el-form :inline="true" :model="filters" class="demo-form-inline">
+        <el-form-item label="招标项目">
+          <el-input v-model="filters.zbXmName" placeholder="招标项目"></el-input>
+        </el-form-item>
+        
+        <el-form-item>
+          <el-button  @click="handleSubmit">查询</el-button>
+          <el-button type="primary" @click="handleAdd">新增</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
     
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="enterpriseName" label="企业名称" > </el-table-column>
-        <el-table-column prop="certCode" label="证书编码" width="100"  > </el-table-column>
-        <el-table-column prop="certTypeName" label="证书类型" width="100" :formatter='formatCertType'  > </el-table-column>
-        
-        <el-table-column prop="startDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
-        <el-table-column prop="endDate" label="结束时间" width="100" :formatter='formatEndDate'> </el-table-column>
-        
+        <el-table-column prop="zbXmName" label="招标项目" > </el-table-column>
+        <el-table-column prop="area" label="项目地址" width="250"  > </el-table-column>
+       
+        <el-table-column prop="publishDate" label="发布时间" width="100" :formatter='formatStartDate'> </el-table-column>
        
         <el-table-column label="操作" width="250">
           <template slot-scope="scope">
-             <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+             <el-button size="small" type="primary" @click="handleEdit(scope.row)">编辑</el-button>
+            <el-button  size="small" type="primary" @click="handleDel(scope.$index, scope.row)">删除</el-button>
           </template>
       </el-table-column>
       </el-table>
     </div>
 
+    <div class="page">
+      <el-pagination  @current-change="handleCurrentChange" :current-page="pageNum" :page-size="5" layout="total,  prev, pager, next, jumper" :total="total">
+      </el-pagination>
+    </div>
     
-
   </div>
 </template>
 
 <script>
-  import {getEnterpriseCertList,deleteEnterpriseCert} from '../../api/service';
+  import {getZbInfoList,deleteZbInfo} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
     data() {
       return {
-       
-        enterpriseId:'', 
+        filters: {
+          zbXmName: ''
+        },
         listLoading:false,
         list: [],
-        typeMap:{'zynlpj':'作业能力评价','jlqyzs':'监理企业证书'}
+        total: 0,
+        pageNum: 1,
 
       }
     },
 
     methods: {
-      
-      formatCertType(row, column) {
-          var val=row.certTypeName
-          return this.typeMap[val];
-      },
 
      formatStartDate(row, column) {
-          var val=row.startDate
+          var val=row.publishDate
          if (val != null) {
             var date = new Date(val);
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         }
       },
 
-      formatEndDate(row, column) {
+       formatEndDate(row, column) {
           var val=row.endDate
          if (val != null) {
             var date = new Date(val);
@@ -77,18 +78,20 @@
       },
 
       handleAdd(){
-        this.$router.push({ path:'enterprisecert/add', query:{enterpriseId:this.enterpriseId}});
+        this.$router.push({ path:'zbinfo/add', });
       },
 
-      retBack() {
-        this.$router.push({ path:'/main/system/enterprise'});
-      },
+      
 
       handleEdit(row){
-        this.$router.push({ path:'enterprisecert/edit', query:{enterpriseCertId:row.enterpriseCertId}});
+        this.$router.push({ path:'zbinfo/edit', query:{zbInfoId:row.zbInfoId}});
       },
 
-     
+      handleCurrentChange(val) {
+        this.pageNum = val;
+        this.getList();
+      },
+
      //删除
       handleDel: function (index, row) {
         this.$confirm('确认删除该记录吗?', '提示', {
@@ -96,8 +99,8 @@
         }).then(() => {
           this.listLoading = true;
           NProgress.start();
-          let para = {enterpriseCertId: row.enterpriseCertId };
-          deleteEnterpriseCert(para).then((res) => {
+          let para = {zbInfoId: row.zbInfoId };
+          deleteZbInfo(para).then((res) => {
             this.listLoading = false;
             NProgress.done();
             if(res.state==1){
@@ -115,20 +118,21 @@
       },
 
       getList() {
-          var params = Object.assign( {enterpriseId:this.enterpriseId});
+          var params = Object.assign({pageNum:this.pageNum}, this.filters);
           this.listLoading = true;
           NProgress.start();
-          getEnterpriseCertList(params).then(data => {
+          getZbInfoList(params).then(data => {
             this.listLoading = false;
             NProgress.done();
-            this.list =data.retData;
-           
+            this.list =data.retData.content;
+            this.total=data.retData.totalElements;
+            
           });
       }
     },
 
     mounted() {
-      this.enterpriseId=this.$route.query.enterpriseId;
+      
       this.getList();
     }
 

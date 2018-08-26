@@ -11,11 +11,8 @@
 
     <div class="seach">
       <el-form :inline="true" :model="filters" class="demo-form-inline">
-        <el-form-item label="企业名称">
-          <el-input v-model="filters.enterpriseName" placeholder="企业名称"></el-input>
-        </el-form-item>
-         <el-form-item label="能力类型">
-          <el-input v-model="filters.abilityInfoType" placeholder="能力类型"></el-input>
+        <el-form-item label="事故名称">
+          <el-input v-model="filters.accidentName" placeholder="事故名称"></el-input>
         </el-form-item>
         
         <el-form-item>
@@ -28,13 +25,11 @@
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="enterpriseName" label="企业名称" > </el-table-column>
-        <el-table-column prop="abilityInfoType" label="能力类型" width="200"  > </el-table-column>
-        <el-table-column prop="abilityInfoLevel" label="能力级别" width="200"  > </el-table-column>
-        
-        <el-table-column prop="telphone" label="电话" width="150"  > </el-table-column>
-        <el-table-column prop="person" label="申请人" width="100"  > </el-table-column>
-        <el-table-column prop="createDate" label="时间" width="100" :formatter='formatCreateDate' > </el-table-column>  
+        <el-table-column prop="accidentName" label="事故名称" > </el-table-column>
+        <el-table-column prop="accidentPlace" label="地址" width="200"  > </el-table-column>
+        <el-table-column prop="telePhone" label="电话" width="150"  > </el-table-column>
+        <el-table-column prop="personName" label="姓名" width="100"  > </el-table-column>
+        <el-table-column prop="creatDate" label="时间" width="100" :formatter='formatCreateDate' > </el-table-column>  
        
         <el-table-column label="操作" width="300">
           <template slot-scope="scope">
@@ -52,37 +47,18 @@
     </div>
      
     
-<el-dialog
-  title="审批意见"
-  :visible.sync="dialogVisible"
-  width="30%"
-  :before-close="handleClose">
-  <span>
-     <el-input v-model="suggestions" type="textarea"  :rows="8" >
-      </el-input> 
-  </span>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="saveNoPass">确 定</el-button>
-  </span>
-</el-dialog>
-
   </div>
 </template>
 
 <script>
-  import {getAbilityUnList,getAbilityPassList,getAbilityNoPassList,changePassAbility,changeNoPassAbility,getAbility} from '../../api/service';
+  import {getAccidentUnList,getAccidentPassList,getAccidentNoPassList,changePassAccident,changeNoPassAccident,getAccident} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
     data() {
       return {
         filters: {
-          enterpriseName: '',
-          abilityInfoType:'',
+          accidentName: ''
         },
-        suggestions:'',
-        abilityInfoId:'',
-        dialogVisible: false,
         activeName:'first',
         listLoading:false,
         list: [],
@@ -95,7 +71,7 @@
     methods: {
 
      formatCreateDate(row, column) {
-          var val=row.createDate
+          var val=row.creatDate
          if (val != null) {
             var date = new Date(val);
             return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -107,16 +83,14 @@
       },
 
       handleClick(tab){
-        this.filters.enterpriseName='';
-        this.filters.abilityInfoType='';
-        
+        this.filters.accidentName='';
         this.getList();
       },
        
 
 
       handleView(row){
-        this.$router.push({ path:'hyability/view', query:{abilityInfoId:row.abilityInfoId,activeName:this.activeName}});
+        this.$router.push({ path:'accidentInfo/view', query:{accidentInfoId:row.accidentInfoId,activeName:this.activeName}});
       },
 
        handlePass(row){
@@ -125,10 +99,9 @@
         }).then(() => {
           this.listLoading = true;
           NProgress.start();
-          let para = {abilityInfoId: row.abilityInfoId };
-          changePassAbility(para).then((res) => {
+          let para = {accidentInfoId: row.accidentInfoId };
+          changePassAccident(para).then((res) => {
             this.listLoading = false;
-
             NProgress.done();
             if(res.state==1){
               this.$notify({
@@ -145,32 +118,28 @@
       },
 
 
-      saveNoPass(){
+      handleNoPass(row){
+       this.$confirm('确认不通过该记录吗?', '提示', {
+          type: 'warning'
+        }).then(() => {
           this.listLoading = true;
           NProgress.start();
-         let para = {abilityInfoId: this.abilityInfoId,suggestions:this.suggestions};
-        changeNoPassAbility(para).then((res) => {
+          let para = {accidentInfoId: row.accidentInfoId };
+          changeNoPassAccident(para).then((res) => {
             this.listLoading = false;
             NProgress.done();
-             if(res.state==1){
+            if(res.state==1){
               this.$notify({
                 title: '成功',
                 message: '修改成功',
                 duration:2500,
                 type: 'success'
               });
-              this.dialogVisible=false;
               this.getList();
             }
             
           });
-      },
-
-      handleNoPass(row){
-        this.suggestions='';
-        this.abilityInfoId=row.abilityInfoId;
-        this.dialogVisible=true;
-      
+        });
       },
 
       handleCurrentChange(val) {
@@ -184,7 +153,7 @@
           this.listLoading = true;
           NProgress.start();
           if(this.activeName=='first'){
-            getAbilityUnList(params).then(data => {
+            getAccidentUnList(params).then(data => {
               this.listLoading = false;
               NProgress.done();
               this.list =data.retData.content;
@@ -192,7 +161,7 @@
               
             });
           }else if(this.activeName=='second'){
-            getAbilityPassList(params).then(data => {
+            getAccidentPassList(params).then(data => {
               this.listLoading = false;
               NProgress.done();
               this.list =data.retData.content;
@@ -200,7 +169,7 @@
               
             });
           }else{
-            getAbilityNoPassList(params).then(data => {
+            getAccidentNoPassList(params).then(data => {
               this.listLoading = false;
               NProgress.done();
               this.list =data.retData.content;
