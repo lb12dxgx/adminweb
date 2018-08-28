@@ -37,6 +37,13 @@
                 </el-form-item>
               </el-col>
               <el-col :span="12">
+                <el-form-item label="证书级别" required prop="level">
+                 <el-input v-model="addForm.level" auto-complete="off"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="12">
                 <el-form-item label="有效期" required prop="startDate">
                     <el-col :span="11">
                        <el-date-picker
@@ -98,6 +105,9 @@
           enterpriseName: [
             { required: true, message: '请输入企业名称', trigger: 'blur' }
           ],
+          level:[
+            { required: true, message: '请输入证书级别', trigger: 'blur' }
+          ],
           certCode: [
             { required: true, message: '请输入证书编号', trigger: 'blur' }
           ],
@@ -115,17 +125,18 @@
           enterpriseName:'',
           certCode:'',
           startDate:'',
-          endDate:''
+          endDate:'',
+          level:''
         
         },
          options:
         [
           {
-            value: 'zynlpj',
-            label: '作业能力评价'
+            value: 'kwxf',
+            label: '非开挖修复作业'
           },{
-            value: 'jlqyzs',
-            label: '监理企业证书'
+            value: 'jcpg',
+            label: '检测评估作业'
           }
         ]
       }

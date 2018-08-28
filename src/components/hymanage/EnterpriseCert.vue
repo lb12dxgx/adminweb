@@ -6,7 +6,7 @@
           <el-form-item label="企业名称">
             <el-input v-model="filters.enterpriseName" placeholder="企业名称"></el-input>
           </el-form-item>
-
+            <el-button type="primary" @click="handleSubmit">查询</el-button>
             <el-button type="primary" @click="handleAdd">新增</el-button>
           </el-form-item>
         </el-form>
@@ -16,8 +16,10 @@
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column prop="enterpriseName" label="企业名称" > </el-table-column>
+        <el-table-column prop="certTypeName" label="证书类型" width="160" :formatter='formatCertType'  > </el-table-column>
         <el-table-column prop="certCode" label="证书编码" width="100"  > </el-table-column>
-        <el-table-column prop="certTypeName" label="证书类型" width="100" :formatter='formatCertType'  > </el-table-column>
+        <el-table-column prop="level" label="证书级别" width="80"  > </el-table-column>
+        
         <el-table-column prop="startDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
         <el-table-column prop="endDate" label="结束时间" width="100" :formatter='formatEndDate'> </el-table-column>
         <el-table-column label="操作" width="250">
@@ -50,7 +52,7 @@
         list:  [],
         total: 0,
         pageNum: 1,
-        typeMap:{'zynlpj':'作业能力评价','jlqyzs':'监理企业证书'}
+        typeMap:{'kwxf':'非开挖修复作业','jcpg':'检测评估作业'}
 
       }
     },
