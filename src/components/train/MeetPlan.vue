@@ -63,7 +63,7 @@
       },
 
       retBack() {
-        this.$router.push({ path:'/main/system/meetplan'});
+        this.$router.push({ path:'/main/system/meet'});
       },
 
       handleEdit(row){
