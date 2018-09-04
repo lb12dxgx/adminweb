@@ -14,7 +14,7 @@
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="教师职称" required prop="startDate">
+                <el-form-item label="教师职称" required prop="teacherPost">
                   <el-input v-model="addForm.teacherPost" auto-complete="off"></el-input>
                 </el-form-item>
               </el-col>
@@ -35,7 +35,7 @@
                     placeholder="选择日期"
                     format="yyyy-MM-dd"
                     value-format="yyyy-MM-dd"
-                    @change="getStartDate">
+                    >
                   </el-date-picker>
                 </el-form-item>
               </el-col>

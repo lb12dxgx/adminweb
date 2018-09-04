@@ -35,7 +35,7 @@
                     placeholder="选择日期"
                     format="yyyy-MM-dd"
                     value-format="yyyy-MM-dd"
-                    @change="getStartDate">
+                   >
                   </el-date-picker>
                 </el-form-item>
               </el-col>
@@ -88,10 +88,7 @@
 
     methods: {
 
-      getStartDate(date){
-          this.startDate = date;
-          console.log(this.trainStartDate);
-      },
+      
 
      
        //新增

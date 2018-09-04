@@ -16,14 +16,14 @@
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="meetName" label="会议名称" > </el-table-column>
-        <el-table-column prop="meetPlace" label="会议地点" width="100"  > </el-table-column>
+        <el-table-column prop="meetName" label="会议名称" width="200"> </el-table-column>
+        <el-table-column prop="meetPlace" label="会议地点" width="150"  > </el-table-column>
         <el-table-column prop="num" label="总人数" width="100"  > </el-table-column>
        
         <el-table-column prop="startDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
          <el-table-column prop="endDate" label="结束时间" width="100" :formatter='formatEndDate'> </el-table-column>
        
-        <el-table-column label="操作" width="350">
+        <el-table-column label="操作" >
           <template slot-scope="scope">
              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
              <el-button size="small" @click="handlePlan(scope.row)">日程</el-button>
@@ -88,7 +88,7 @@
       },
 
       handlePlan(row){
-        this.$router.push({ path:'system/meetplan', query:{meetId:row.meetId}});
+        this.$router.push({ path:'meetplan', query:{meetId:row.meetId}});
       },
 
       handleEdit(row){
