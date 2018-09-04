@@ -66,6 +66,46 @@
               </el-col>
             </el-row>
 
+
+
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="直播地址"  prop="zburl">
+                    <el-input v-model="addForm.zburl"  >
+                  </el-input> 
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="直播状态"  prop="zbState">
+                   <el-select v-model="addForm.zbState" placeholder="请选择">
+                      <el-option
+                        v-for="item in optionStates"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                </el-form-item>
+              </el-col>
+            
+            </el-row>
+
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="显示方式"  prop="showMain">
+                   <el-select v-model="addForm.showMain" placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                </el-form-item>
+              </el-col>
+            
+            </el-row>
+
             <el-form-item label="会议摘要"  prop="meetSummary">
                  <el-input v-model="addForm.meetSummary" type="textarea"  :rows="4">
                   </el-input> 
@@ -165,8 +205,31 @@
           endDate:'',
           meetSummary:'',
           meetContent:'',
-          meetPicId:''
-        }
+          meetPicId:'',
+          showMain:'',
+          zburl:'',
+          zbState:'',
+        },
+         options: 
+        [
+          {
+            value: 1,
+            label: '单独显示'
+          },{
+            value: 0,
+            label: '列表显示'
+          }
+        ],
+        optionStates: 
+        [
+          {
+            value: 1,
+            label: '启用'
+          },{
+            value: 0,
+            label: '停用'
+          }
+        ],
       }
         
     },

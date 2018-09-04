@@ -50,6 +50,13 @@ export const getMeetSignUp = params => { return mockAxios.post(`${base}/system/m
 export const getMeetSignUpExcel = params => { window.open(`${base}/system/meetsignup/excel.do?meetId=`+params); }; 
 
 
+export const saveMeetPlan = params => { return mockAxios.post(`${base}/system/meetplan/save.do`,qs.stringify(params)).then(res => res.data); }; 
+export const updateMeetPlan = params => { return mockAxios.post(`${base}/system/meetplan/update.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getMeetPlanList = params => { return mockAxios.post(`${base}/system/meetplan/list.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteMeetPlan = params => { return mockAxios.post(`${base}/system/meetplan/delete.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getMeetPlan = params => { return mockAxios.post(`${base}/system/meetplan/get.do`,qs.stringify(params)).then(res => res.data); }; 
+
+
 export const saveEnterpriseCert = params => { return mockAxios.post(`${base}/system/enterprisecert/save.do`,qs.stringify(params)).then(res => res.data); }; 
 export const updateEnterpriseCert = params => { return mockAxios.post(`${base}/system/enterprisecert/update.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getEnterpriseCertList = params => { return mockAxios.post(`${base}/system/enterprisecert/list.do`,qs.stringify(params)).then(res => res.data); };

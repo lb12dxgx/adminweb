@@ -42,6 +42,9 @@ import MeetEdit from '@/components/Train/MeetEdit'
 import MeetSignUp from '@/components/Train/MeetSignUp'
 import MeetSignUpAdd from '@/components/Train/MeetSignUpAdd'
 import MeetSignUpEdit from '@/components/Train/MeetSignUpEdit'
+import MeetPlan from '@/components/Train/MeetPlan'
+import MeetPlanAdd from '@/components/Train/MeetPlanAdd'
+import MeetPlanEdit from '@/components/Train/MeetPlanEdit'
 
 
 
@@ -289,6 +292,18 @@ export default new Router({
             path: 'system/meet/edit',
             component: MeetEdit,
             name:'meetedit'
+           },{
+            path: 'system/meetplan',
+            component: MeetPlan,
+            name:'meetplan'
+           },{
+            path: 'system/meetplan/add',
+            component: MeetPlanAdd,
+            name:'meetplanAdd'
+           },{
+            path: 'system/meetplan/edit',
+            component: MeetPlanEdit,
+            name:'meetplanedit'
            },{
             path: 'system/meetsignup',
             component: MeetSignUp,

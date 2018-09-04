@@ -17,8 +17,8 @@
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column prop="meetName" label="会议名称" > </el-table-column>
-        <el-table-column prop="meetPlace" label="会议地点" width="250"  > </el-table-column>
-        <el-table-column prop="num" label="总人数" width="250"  > </el-table-column>
+        <el-table-column prop="meetPlace" label="会议地点" width="100"  > </el-table-column>
+        <el-table-column prop="num" label="总人数" width="100"  > </el-table-column>
        
         <el-table-column prop="startDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
          <el-table-column prop="endDate" label="结束时间" width="100" :formatter='formatEndDate'> </el-table-column>
@@ -26,6 +26,7 @@
         <el-table-column label="操作" width="350">
           <template slot-scope="scope">
              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+             <el-button size="small" @click="handlePlan(scope.row)">日程</el-button>
              <el-button size="small" type="primary"  @click="handleSignUp(scope.row)">报名信息</el-button>
              <el-button size="small" type="primary"  @click="changeSign(scope.row)" v-if="scope.row.isSign==0">开始签到</el-button>
              <el-button size="small" type="primary"  @click="changeSign(scope.row)" v-if="scope.row.isSign==1">结束签到</el-button>
@@ -86,7 +87,9 @@
         this.$router.push({ path:'meet/add', });
       },
 
-      
+      handlePlan(row){
+        this.$router.push({ path:'system/meetplan', query:{meetId:row.meetId}});
+      },
 
       handleEdit(row){
         this.$router.push({ path:'meet/edit', query:{meetId:row.meetId}});
