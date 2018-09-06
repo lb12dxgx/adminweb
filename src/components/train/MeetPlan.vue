@@ -13,7 +13,7 @@
         <el-table-column prop="teacherName" label="教师名称" width="100"  > </el-table-column>
         <el-table-column prop="teacherCompany" label="单位" width="200" > </el-table-column>
          <el-table-column prop="teacherPost" label="职称" width="200" > </el-table-column>
-         <el-table-column prop="startDates" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
+         <el-table-column prop="startDate" label="开始时间" width="100" > </el-table-column>
        
         <el-table-column label="操作" width="250">
           <template slot-scope="scope">
@@ -30,6 +30,26 @@
 </template>
 
 <script>
+  
+  function dateFtt(fmt,date)   
+  { //author: meizz   
+    var o = {   
+      "M+" : date.getMonth()+1,                 //月份   
+      "d+" : date.getDate(),                    //日   
+      "h+" : date.getHours(),                   //小时   
+      "m+" : date.getMinutes(),                 //分   
+      "s+" : date.getSeconds(),                 //秒   
+      "q+" : Math.floor((date.getMonth()+3)/3), //季度   
+      "S"  : date.getMilliseconds()             //毫秒   
+    };   
+    if(/(y+)/.test(fmt))   
+      fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
+    for(var k in o)   
+      if(new RegExp("("+ k +")").test(fmt))   
+    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+    return fmt;   
+  } 
+
   import {getMeetPlanList,deleteMeetPlan} from '../../api/service';
   import NProgress from 'nprogress';
   export default {
@@ -50,7 +70,7 @@
           var val=row.startDate
          if (val != null) {
             var date = new Date(val);
-            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate());
+            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate())+'  '+date.getHours()+':'+date.getMinutes();
         }
       },
 

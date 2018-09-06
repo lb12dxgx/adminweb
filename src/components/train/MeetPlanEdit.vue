@@ -9,12 +9,12 @@
 
              <el-row>
               <el-col :span="12">
-                <el-form-item label="教师名称" required prop="teacherName">
+                <el-form-item label="教师名称"  prop="teacherName">
                   <el-input v-model="addForm.teacherName" auto-complete="off"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="教师职称" required prop="startDate">
+                <el-form-item label="教师职称"  prop="startDate">
                   <el-input v-model="addForm.teacherPost" auto-complete="off"></el-input>
                 </el-form-item>
               </el-col>
@@ -22,21 +22,14 @@
 
             <el-row>
               <el-col :span="12">
-                <el-form-item label="单位" required prop="teacherCompany">
+                <el-form-item label="单位"  prop="teacherCompany">
                   <el-input v-model="addForm.teacherCompany" auto-complete="off"></el-input>
                 </el-form-item>
               </el-col>
 
               <el-col :span="12">
-                <el-form-item label="开始时间" required prop="startDate">
-                   <el-date-picker
-                    v-model="addForm.startDate"
-                    type="date"
-                    placeholder="选择日期"
-                    format="yyyy-MM-dd"
-                    value-format="yyyy-MM-dd"
-                   >
-                  </el-date-picker>
+                <el-form-item label="开始时间"  prop="startDate">
+                  <el-input v-model="addForm.startDate" auto-complete="off"></el-input>
                 </el-form-item>
               </el-col>
               
@@ -68,9 +61,6 @@
         addFormRules: {
           meetPlanName: [
             { required: true, message: '请输入日程名称', trigger: 'blur' }
-          ],
-          teacherName: [
-            { required: true, message: '请输入教师名称', trigger: 'blur' }
           ]
         },
          addForm: {
