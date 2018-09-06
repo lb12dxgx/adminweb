@@ -13,7 +13,7 @@
         <el-table-column prop="teacherName" label="教师名称" width="100"  > </el-table-column>
         <el-table-column prop="teacherCompany" label="单位" width="200" > </el-table-column>
          <el-table-column prop="teacherPost" label="职称" width="200" > </el-table-column>
-         <el-table-column prop="startDate" label="开始时间" width="100" > </el-table-column>
+         <el-table-column prop="startDate" label="开始时间" width="100" > </el-table-column>  
        
         <el-table-column label="操作" width="250">
           <template slot-scope="scope">
