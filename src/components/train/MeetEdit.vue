@@ -68,8 +68,8 @@
 
             <el-row>
               <el-col :span="12">
-                <el-form-item label="直播地址"  prop="zburl">
-                    <el-input v-model="addForm.zburl"  >
+                <el-form-item label="直播地址"  prop="zbUrl">
+                    <el-input v-model="addForm.zbUrl"  >
                   </el-input> 
                 </el-form-item>
               </el-col>
@@ -206,7 +206,7 @@
           meetContent:'',
           meetPicId:'',
           showMain:'',
-          zburl:'',
+          zbUrl:'',
           zbState:'',
         },
         options: 
