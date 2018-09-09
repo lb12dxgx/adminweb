@@ -14,3 +14,4 @@ export const applyorgList = params => { return mockAxios.post(`${base}/system/ap
 export const deleteApplyorg = params => { return mockAxios.post(`${base}/system/applyorg/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const saveApplyorg = params => { return mockAxios.post(`${base}/system/applyorg/save.do`,qs.stringify(params)).then(res => res.data); }; 
 export const updateApplyorg = params => { return mockAxios.post(`${base}/system/applyorg/update.do`,qs.stringify(params)).then(res => res.data); }; 
+export const applycityList = params => { return mockAxios.post(`${base}/system/applycity/list.do`,qs.stringify(params)).then(res => res.data); };

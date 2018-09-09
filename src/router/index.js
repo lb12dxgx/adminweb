@@ -22,7 +22,7 @@ import AccidentInfoView from '@/components/content/AccidentInfoView'
 import OutNews from '@/components/content/OutNews'
 import OutKey from '@/components/content/OutKey'
 
-
+import ApplyCity from '@/components/before/ApplyCity'
 import ApplyOrg from '@/components/before/ApplyOrg'
 import BeforeApply from '@/components/before/BeforeApply'
 
@@ -177,6 +177,10 @@ export default new Router({
             path: 'system/applyorg',
             component: ApplyOrg,
             name:'applyOrg'
+           },{
+            path: 'system/applycity',
+            component: ApplyCity,
+            name:'applyCity'
            },{
             path: 'system/beforeapply',
             component: BeforeApply,
