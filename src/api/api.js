@@ -50,7 +50,6 @@ export const getColumnByUserId = params => { return mockAxios.post(`${base}/syst
 
 
 
-
 mockAxios.interceptors.request.use(
     config => {
         if (sessionStorage.getItem('accessToken')) {  // 判断是否存在token，如果存在的话，则每个http header都加上token

@@ -94,12 +94,20 @@ import EnterpriseCertAdd from '@/components/hyManage/EnterpriseCertAdd'
 import EnterpriseCertEdit from '@/components/hyManage/EnterpriseCertEdit'
 
 
+import Study from '@/components/content/Study'
+
+
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+   {
+      path: '/study',
+      name: 'Study',
+      component: Study
+    },
     {
     	path: '/',
       name: 'Login',

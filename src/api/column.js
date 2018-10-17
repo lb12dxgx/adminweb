@@ -30,3 +30,10 @@ export const deleteAllOutNew = params => { return mockAxios.post(`${base}/system
 export const outKeyList = params => { return mockAxios.post(`${base}/system/outkey/list.do`,qs.stringify(params)).then(res => res.data); };
 export const deleteOutKey = params => { return mockAxios.post(`${base}/system/outkey/delete.do`,qs.stringify(params)).then(res => res.data); }; 
 export const saveOutKey = params => { return mockAxios.post(`${base}/system/outkey/save.do`,qs.stringify(params)).then(res => res.data); }; 
+
+
+export const oneStep = params => { return mockAxios.post(`${base}/system/study/oneStep.do`,qs.stringify(params)).then(res => res.data); };   
+export const twoStep = params => { return mockAxios.post(`${base}/system/study/twoStep.do`,qs.stringify(params)).then(res => res.data); };   
+export const threeStep = params => { return mockAxios.post(`${base}/system/study/threeStep.do`,qs.stringify(params)).then(res => res.data); };   
+export const foreStep = params => { return mockAxios.post(`${base}/system/study/foreStep.do`,qs.stringify(params)).then(res => res.data); };   
+
