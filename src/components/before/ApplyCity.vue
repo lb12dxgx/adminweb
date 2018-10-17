@@ -16,11 +16,22 @@
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column prop="cityName" label="城市名称" width="180"> </el-table-column>
-        <el-table-column prop="applyCompany" label="机构名称" width="180"></el-table-column>
-        <el-table-column prop="person" label="管理城市"> </el-table-column>
+        <el-table-column prop="applyCompany" label="单位名称" width="180"></el-table-column>
+        <el-table-column prop="enttelphone" label="单位电话" width="180"></el-table-column>
+        <el-table-column prop="person" label="联系人"> </el-table-column>
         <el-table-column prop="telphone" label="机构电话" width="180"></el-table-column>
         <el-table-column prop="createDate" label="申请时间" :formatter='formatCreateDate'></el-table-column>
-        
+        <el-table-column prop="state" label="状态" :formatter='formatState'></el-table-column>
+        <el-table-column label="操作" width="200">
+          <template slot-scope="scope">
+            <el-button size="small" @click="handlePass(scope.row)" v-if="scope.row.state==0">通过</el-button>
+            <el-button size="small" @click="handleSet(scope.row)" v-if="scope.row.state==1">
+            设置区域
+            </el-button>
+          
+            <el-button  size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+          </template>
+      </el-table-column>
       </el-table>
     </div>
     <div class="page">
@@ -47,12 +58,25 @@
         list: [],
         total: 0,
         pageNum: 1,
+
         
         
       }
     },
 
     methods: {
+
+
+      formatState(row, column) {
+          var val=row.state;
+          if(val==0){
+            return "待审批";  
+          }else if (val==1){
+              return "审批通过";  
+          }else{
+            return "审批未通过";  
+          }
+      },
 
        formatCreateDate(row, column) {
           var val=row.createDate
