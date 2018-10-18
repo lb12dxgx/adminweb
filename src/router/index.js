@@ -23,6 +23,14 @@ import OutNews from '@/components/content/OutNews'
 import OutKey from '@/components/content/OutKey'
 
 import ApplyCity from '@/components/before/ApplyCity'
+import ApplyCityAdd from '@/components/before/ApplyCityAdd'
+
+import CityDistrict from '@/components/before/CityDistrict'
+import CityDistrictAdd from '@/components/before/CityDistrictAdd'
+
+import CityArea from '@/components/before/CityArea'
+import CityAreaAdd from '@/components/before/CityAreaAdd'
+
 import ApplyOrg from '@/components/before/ApplyOrg'
 import BeforeApply from '@/components/before/BeforeApply'
 
@@ -189,6 +197,26 @@ export default new Router({
             path: 'system/applycity',
             component: ApplyCity,
             name:'applyCity'
+           },{
+            path: 'system/applycity/add',
+            component: ApplyCityAdd,
+            name:'applyCityAdd'
+           },{
+            path: 'system/citydistrict',
+            component: CityDistrict,
+            name:'cityDistrict'
+           },{
+            path: 'system/citydistrict/add',
+            component: CityDistrictAdd,
+            name:'citydistrictAdd'
+           },{
+            path: 'system/cityarea',
+            component: CityArea,
+            name:'cityDistrict'
+           },{
+            path: 'system/cityarea/add',
+            component: CityAreaAdd,
+            name:'cityAreaAdd'
            },{
             path: 'system/beforeapply',
             component: BeforeApply,
