@@ -131,9 +131,6 @@
           ],
           endDate:[
             { required: true, message: '请输入结束时间', trigger: 'blur' }
-          ],
-          certPicPath:[
-            { required: true, message: '请输入照片', trigger: 'blur' }
           ]
           
         },
@@ -153,7 +150,24 @@
           {
             value: 'gxtc',
             label: '地下管线探测'
+          },
+          {
+            value: 'YQGW',
+            label: '地下油气检测与评估'
+          },
+          {
+            value: 'TCXM',
+            label: '地下管线探测工程项目经理'
+          },
+          {
+            value: 'TCJL',
+            label: '地下管线探测工程监理'
+          },
+          {
+            value: 'PSFKW',
+            label: '排水管道检测与评估'
           }
+
         ]
       }
         

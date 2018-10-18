@@ -18,7 +18,7 @@
         <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column prop="userName" label="姓名" > </el-table-column>
         <el-table-column prop="certCode" label="证书编码" width="100"  > </el-table-column>
-        <el-table-column prop="certTypeName" label="证书编码" width="100" :formatter='formatCertType'  > </el-table-column>
+        <el-table-column prop="certTypeName" label="证书名称" width="100" :formatter='formatCertType'  > </el-table-column>
         
         <el-table-column prop="startDate" label="开始时间" width="100" :formatter='formatStartDate'> </el-table-column>
         <el-table-column prop="endDate" label="结束时间" width="100" :formatter='formatEndDate'> </el-table-column>
@@ -55,7 +55,12 @@
         list:  [],
         total: 0,
         pageNum: 1,
-        typeMap:{'gxtc':'地下管线探测'}
+        typeMap:{'gxtc':'地下管线探测',
+                  'YQGW':'地下油气检测与评估',
+                  'TCXM':'地下管线探测工程项目经理',
+                  'TCJL':'地下管线探测工程监理',
+                  'PSFKW':'排水管道检测与评估'
+                }
 
       }
     },
