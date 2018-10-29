@@ -111,7 +111,7 @@
                 });
                this.$router.push({
                 path:'/main/system/citydistrict', 
-                query:{applyCityId:row.applyCityId}
+                query:{applyCityId:this.addForm.applyCityId}
                });
               
               });
