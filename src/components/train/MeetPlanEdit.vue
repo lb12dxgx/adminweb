@@ -34,6 +34,24 @@
               </el-col>
               
             </el-row>
+
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label="视频地址"  prop="videoUrl">
+                  <el-input v-model="addForm.videoUrl" auto-complete="off"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label="视频图片"  prop="picUrl">
+                 <el-input v-model="addForm.picUrl" auto-complete="off"></el-input>
+
+
+                </el-form-item>
+              </el-col>
+              
+            </el-row>
             
          </el-form>
         </el-col>
@@ -70,7 +88,9 @@
           teacherName:'',
           startDate:'',
           teacherCompany:'',
-          teacherPost:''
+          teacherPost:'',
+          videoUrl:'',
+          picUrl:''
         }
       }
         
