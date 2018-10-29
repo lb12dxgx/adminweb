@@ -102,7 +102,9 @@ import EnterpriseCertAdd from '@/components/hyManage/EnterpriseCertAdd'
 import EnterpriseCertEdit from '@/components/hyManage/EnterpriseCertEdit'
 
 
-import Study from '@/components/content/Study'
+import Gift from '@/components/mail/Gift'
+import GiftAdd from '@/components/mail/GiftAdd'
+import GiftEdit from '@/components/mail/GiftEdit'
 
 
 
@@ -397,6 +399,18 @@ export default new Router({
             path: 'system/hyability/view',
             component: HyAbilityView,
             name:'hyAbilityView'
+           },{
+            path: 'system/gift',
+            component: Gift,
+            name:'gift'
+           },{
+            path: 'system/gift/add',
+            component: GiftAdd,
+            name:'giftAdd'
+           },{
+            path: 'system/gift/edit',
+            component: GiftEdit,
+            name:'giftEdit'
            }
         ]
     }
