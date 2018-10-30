@@ -87,7 +87,7 @@
            this.getList();
       },
 
-      handleEdit(){
+      handleEdit(row){
         this.$router.push({ path:'gift/edit', query:{giftId:row.giftId}});
       },
        

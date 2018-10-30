@@ -2,7 +2,7 @@
   <div class="content">
     <el-row>
       <el-col :span="20" :offset="2">
-       <el-form :model="addForm" label-width="120px"  :rules="addFormRules" ref="addForm" size="small">
+      <el-form :model="addForm" label-width="120px"  :rules="addFormRules" ref="addForm" size="small">
             <el-row>
               <el-col :span="12">
                 <el-form-item label="礼物名称" required prop="name">
@@ -30,6 +30,32 @@
               <el-col :span="12">
                 <el-form-item label="库存数量"  prop="num">
                   <el-input v-model.number="addForm.num" type="number">
+                  </el-input> 
+                </el-form-item>
+              </el-col>
+            </el-row>
+
+            <el-row>
+              <el-col :span="20">
+                <el-form-item label="大图地址"  prop="picUrl">
+                 <el-input v-model="addForm.picUrl">
+                 </el-input> 
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="20">
+                <el-form-item label="小图地址"  prop="smailPicUrl">
+                  <el-input v-model="addForm.smailPicUrl">
+                  </el-input> 
+                </el-form-item>
+              </el-col>
+            </el-row>
+
+            <el-row>
+              <el-col :span="20">
+                <el-form-item label="礼物介绍地址"  prop="descUrl">
+                  <el-input v-model="addForm.descUrl">
                   </el-input> 
                 </el-form-item>
               </el-col>
@@ -131,9 +157,9 @@
         [
           {
             value: 0,
-            label: '启用'
+            label: '上架'
           },{
-            value: 0,
+            value: 1,
             label: '下架'
           }
         ],
