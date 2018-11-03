@@ -15,6 +15,9 @@ export const getGift = params => { return mockAxios.post(`${base}/system/mail/gi
 export const getExchangeList = params => { return mockAxios.post(`${base}/system/mail/exchange/list.do`,qs.stringify(params)).then(res => res.data); };
 export const getExchangeFinshList = params => { return mockAxios.post(`${base}/system/mail/exchange/finshlist.do`,qs.stringify(params)).then(res => res.data); };
 export const addExchangePost = params => { return mockAxios.post(`${base}/system/mail/exchange/addPost.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getExchange = params => { return mockAxios.post(`${base}/system/mail/exchange/get.do`,qs.stringify(params)).then(res => res.data); }; 
+
+
 
 export const getScoreList = params => { return mockAxios.post(`${base}/system/mail/score/list.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getRechargerecordList = params => { return mockAxios.post(`${base}/system/mail/rechargerecord/list.do`,qs.stringify(params)).then(res => res.data); }; 

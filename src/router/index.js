@@ -106,7 +106,9 @@ import Gift from '@/components/mail/Gift'
 import GiftAdd from '@/components/mail/GiftAdd'
 import GiftEdit from '@/components/mail/GiftEdit'
 
-
+import Exchange from '@/components/mail/Exchange'
+import ExchangeFinsh from '@/components/mail/ExchangeFinsh'
+import ExchangeEdit from '@/components/mail/ExchangeEdit'
 
 
 Vue.use(Router)
@@ -406,6 +408,18 @@ export default new Router({
             path: 'system/gift/edit',
             component: GiftEdit,
             name:'giftEdit'
+           },{
+            path: 'system/exchange',
+            component: Exchange,
+            name:'exchange'
+           },{
+            path: 'system/exchange/finsh',
+            component: ExchangeFinsh,
+            name:'exchangeFinsh'
+           },{
+            path: 'system/exchange/edit',
+            component: ExchangeEdit,
+            name:'exchangeEdit'
            }
         ]
     }
