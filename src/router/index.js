@@ -113,11 +113,6 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-   {
-      path: '/study',
-      name: 'Study',
-      component: Study
-    },
     {
     	path: '/',
       name: 'Login',
