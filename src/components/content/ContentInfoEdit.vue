@@ -42,7 +42,8 @@
                     <el-date-picker
                       v-model="form.contentJson.pdate"
                       type="date"
-                      placeholder="选择日期">
+                      placeholder="选择日期"
+                      value-format="yyyy-MM-dd">
                     </el-date-picker>
                   </el-form-item>
                 </el-col> 
@@ -66,7 +67,8 @@
                     <el-date-picker
                       v-model="form.contentJson.gddate"
                       type="date"
-                      placeholder="选择日期">
+                      placeholder="选择日期"
+                      value-format="yyyy-MM-dd">
                     </el-date-picker>
                   </el-form-item>
                 </el-col> 

@@ -139,7 +139,8 @@ export default {
 
       handleEdit(index, row){
         this.editContent=row;
-      
+        this.editContent.contentJson=row.contentJson;
+        console.log(this.editContent);
         this.editflag = true;
         this.listflag=false;
       },

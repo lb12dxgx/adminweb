@@ -29,12 +29,11 @@
     window.UEDITOR_CONFIG = {
 
         //为编辑器实例添加一个路径，这个不能被注释
-        //UEDITOR_HOME_URL: "/static/UE/" 
-        UEDITOR_HOME_URL: "/admin/static/UE/" 
+        UEDITOR_HOME_URL: "/static/UE/" 
 
         // 服务器统一请求接口路径
-          //, serverUrl: "http://127.0.0.1/" +  "exec"
-         , serverUrl: "http://120.79.20.2/" +  "exec"
+        , serverUrl: "http://127.0.0.1/" +  "exec"
+        // , serverUrl: "http://120.79.20.2/" +  "exec"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         , toolbars: [[
