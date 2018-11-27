@@ -22,3 +22,10 @@ export const getExchange = params => { return mockAxios.post(`${base}/system/mai
 export const getScoreList = params => { return mockAxios.post(`${base}/system/mail/score/list.do`,qs.stringify(params)).then(res => res.data); }; 
 export const getRechargerecordList = params => { return mockAxios.post(`${base}/system/mail/rechargerecord/list.do`,qs.stringify(params)).then(res => res.data); }; 
 
+
+export const getProblemList = params => { return mockAxios.post(`${base}/system/sns/problem/list.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getProblemOverList = params => { return mockAxios.post(`${base}/system/sns/problem/overlist.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getProblemEndList = params => { return mockAxios.post(`${base}/system/sns/problem/endlist.do`,qs.stringify(params)).then(res => res.data); }; 
+export const refundProblem = params => { return mockAxios.post(`${base}/system/sns/problem/refund.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getAnswerList = params => { return mockAxios.post(`${base}/system/sns/answer/list.do`,qs.stringify(params)).then(res => res.data); }; 
+export const getResultList = params => { return mockAxios.post(`${base}/system/sns/result/list.do`,qs.stringify(params)).then(res => res.data); }; 

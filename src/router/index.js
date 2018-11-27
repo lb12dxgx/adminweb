@@ -110,6 +110,9 @@ import Exchange from '@/components/mail/Exchange'
 import ExchangeFinsh from '@/components/mail/ExchangeFinsh'
 import ExchangeEdit from '@/components/mail/ExchangeEdit'
 
+import Problem from '@/components/sns/Problem'
+import ProblemView from '@/components/sns/ProblemView'
+
 
 Vue.use(Router)
 
@@ -420,6 +423,14 @@ export default new Router({
             path: 'system/exchange/edit',
             component: ExchangeEdit,
             name:'exchangeEdit'
+           },{
+            path: 'system/sns/problem',
+            component: Problem,
+            name:'problem'
+           },{
+            path: 'system/sns/problemview',
+            component: ProblemView,
+            name:'problemView'
            }
         ]
     }
