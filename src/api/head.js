@@ -8,4 +8,3 @@ const uuidv4 = require('uuid/v4');
 const ip="http://120.79.20.2"
 mock.restore();//去掉模拟行为
 export  {mock,mockAxios,router,uuidv4,ip}
- 
