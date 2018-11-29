@@ -22,7 +22,7 @@
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="title" label="标题" width="300"  > </el-table-column>
+        <el-table-column prop="title" label="标题"  > </el-table-column>
         <el-table-column prop="personName" label="姓名" width="70"  > </el-table-column>
         <el-table-column prop="enterpriseName" label="企业名称" width="180"  > </el-table-column>
         <el-table-column prop="giftName" label="礼物名称"  width="130" > </el-table-column>

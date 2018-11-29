@@ -27,7 +27,7 @@
         <el-table-column prop="enterpriseName" label="企业名称" width="180"  > </el-table-column>
         <el-table-column prop="giftName" label="礼物名称"  width="130" > </el-table-column>
         <el-table-column prop="refundState" label="退款状态" 
-        width="80" :formatter='formatState' >
+        width="150" :formatter='formatState' >
          </el-table-column>
         <el-table-column prop="dayNum" label="问题天数"  width="80" > </el-table-column>
        <el-table-column prop="createDate" label="时间" width="100"> </el-table-column>
@@ -77,6 +77,9 @@
     methods: {
       formatState(row, column) {
           var val=row.refundState
+          if(val==3){
+            return this.refundStateMap[val]+"("+row.refundDesc+")";
+          }
           return this.refundStateMap[val];
       },
 
