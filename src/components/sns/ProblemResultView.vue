@@ -99,21 +99,35 @@
 
           </el-form>
 
-          <el-card style="margin-left:40px" v-for="(item,index) in list" :key="index">
-            <div slot="header" class="clearfix" style="font-size:14px">
-              <span>{{item.enterpriseName}}:</span>
-              <span>
-                {{item.personName}}({{item.personPosition}})
-              </span>
-              <span style="float:right;margin-right:20px">
-                {{item.createDate}}
-              </span>
-            </div>
-            <div>
-              {{item.content}}
-            </div>
-          </el-card>
-
+           <el-tabs value="first"  @tab-click="handleClick">
+            <el-tab-pane label="奖励列表" name="first"></el-tab-pane>
+            <el-tab-pane label="回答列表" name="second"></el-tab-pane>
+         </el-tabs>
+          <div v-if="tabName=='second'">
+            <el-card  v-for="(item,index) in list" :key="index">
+              <div slot="header" class="clearfix" style="font-size:14px">
+                <span>{{item.enterpriseName}}:</span>
+                <span>
+                  {{item.personName}}({{item.personPosition}})
+                </span>
+                <span style="float:right;margin-right:20px">
+                  {{item.createDate}}
+                </span>
+              </div>
+              <div>
+                {{item.content}}
+              </div>
+            </el-card>
+          </div>
+          <div v-if="tabName=='first'">
+            <el-table :data="resultlist" highlight-current-row  border style="width: 100%">
+              <el-table-column type="index" label="序号" width="50"></el-table-column>
+              <el-table-column prop="personName" label="用户名" > </el-table-column>
+              <el-table-column prop="personPosition" label="职位"></el-table-column>
+              <el-table-column prop="enterpriseName" label="企业名称"></el-table-column>
+              <el-table-column prop="scoreNum" label="积分"></el-table-column>
+            </el-table>
+          </div>
         </el-col>
       </el-row>
       <div style="text-align:center;margin-top:20px">
@@ -125,16 +139,19 @@
 </template>
 
 <script>
-  import {getProblem,getAnswerList} from '../../api/sns';
+  import {getProblem,getAnswerList,getResultList} from '../../api/sns';
   
 
   export default {
     data() {
       return {
         addForm: {
+         
         },
-        type:1,
-        list:[]
+        tabName:'first',
+        list:[],
+        resultlist:[],
+        type:''
       }
     },
 
@@ -142,14 +159,12 @@
       
       //新增
       retBack() {
-        if(this.type==1){
-         this.$router.push({ path:'/main/system/sns/problem'});
-        }else{
-          this.$router.push({ path:'/main/system/sns/problem/over'});
-        }
+         this.$router.push({ path:'/main/system/sns/problem/finsh'});
       },
 
-     
+      handleClick(tab){
+        this.tabName=tab.name;
+      },
 
       
     },
@@ -158,13 +173,16 @@
 
     mounted() {
       let problemId=this.$route.query.problemId;
-      this.type=this.$route.query.type;
       let para = {problemId: problemId};
       getProblem(para).then((data) => {
         this.addForm=data.retData;
         getAnswerList(para).then((data) => {
           this.list=data.retData;
         });
+         getResultList(para).then((data) => {
+          this.resultlist=data.retData;
+        });
+
       })
     }
 

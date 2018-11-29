@@ -2,7 +2,7 @@
   <el-row class="container">
     <el-col :span="24" class="header">
       <el-col :span="10" class="logo logo-width">
-         811管理平台
+         118管理平台
       </el-col>
       <el-col :span="10">
         <div class="tools" @click.prevent="collapse">

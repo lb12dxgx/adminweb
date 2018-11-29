@@ -1,13 +1,15 @@
 <template>
   <div class="content">
    <el-tabs value="second"  @tab-click="handleClick">
-    <el-tab-pane label="待发送" name="first"></el-tab-pane>
-    <el-tab-pane label="已发送" name="second"></el-tab-pane>
+    <el-tab-pane label="进行中" name="first"></el-tab-pane>
+    <el-tab-pane label="已解决" name="second"></el-tab-pane>
+    <el-tab-pane label="待退款" name="three"></el-tab-pane>
+    <el-tab-pane label="已退款" name="four"></el-tab-pane>
    </el-tabs>
    <div class="seach">
       <el-form :inline="true" :model="filters" class="demo-form-inline">
-        <el-form-item label="姓名">
-          <el-input v-model="filters.personName" placeholder="姓名"></el-input>
+        <el-form-item label="标题">
+          <el-input v-model="filters.标题" placeholder="标题"></el-input>
         </el-form-item>
         
         <el-form-item>
@@ -20,17 +22,23 @@
     <div class="list">
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
-        <el-table-column prop="exchangeCode" label="兑换编码" width="150"  > </el-table-column>
-        <el-table-column prop="personName" label="姓名" width="100"  > </el-table-column>
-        <el-table-column prop="giftName" label="礼物名称"  width="200" > </el-table-column>
-        <el-table-column prop="num" label="兑换数量" width="100"  > </el-table-column>
-        <el-table-column prop="telphone" label="用户电话" width="120" > </el-table-column>
-        <el-table-column prop="postAddren" label="用户地址"  > </el-table-column>
-        <el-table-column prop="createDate" label="创建时间" width="100"> </el-table-column>
-        <el-table-column prop="postDate" label="快递时间" width="100"> </el-table-column>
-        <el-table-column prop="postCode" label="快递单号" width="100"> </el-table-column>
-       </el-table>
-    </div>
+        <el-table-column prop="title" label="标题" width="300"  > </el-table-column>
+        <el-table-column prop="personName" label="姓名" width="70"  > </el-table-column>
+        <el-table-column prop="enterpriseName" label="企业名称" width="180"  > </el-table-column>
+        <el-table-column prop="giftName" label="礼物名称"  width="130" > </el-table-column>
+        <el-table-column prop="viewNum" label="查看量" width="70"  > </el-table-column>
+        <el-table-column prop="answerNum" label="回答量" width="70" > </el-table-column>
+        <el-table-column prop="dayNum" label="问题天数"  width="80" > </el-table-column>
+       <el-table-column prop="createDate" label="时间" width="100"> </el-table-column>
+       
+        <el-table-column label="操作" width="70">
+          <template slot-scope="scope">
+             <el-button size="small" type="primary"  @click="handleView(scope.row)" >查看</el-button>
+             
+          </template>
+      </el-table-column>
+      </el-table>
+    </div> 
 
       <div class="page">
       <el-pagination  @current-change="handleCurrentChange" :current-page="pageNum" :page-size="10" layout="total,  prev, pager, next, jumper" :total="total">
@@ -41,7 +49,7 @@
 </template>
 
 <script>
-  import {getExchangeFinshList} from '../../api/sns';
+  import {getProblemEndList} from '../../api/sns';
   import NProgress from 'nprogress';
   export default {
     data() {
@@ -57,32 +65,36 @@
     },
 
     methods: {
-
       handleCurrentChange(val) {
         this.pageNum = val;
         this.getList();
       },
-      
+
       handleSubmit(){
            this.getList();
       },
 
-     
+      handleView(row){
+        this.$router.push({ path:'/main/system/sns/problemresultview', query:{problemId:row.problemId}});
+      },
 
       handleClick(tab){
         if(tab.name=='first'){
-         this.$router.push({ path:'/main/system/exchange'});
+         this.$router.push({ path:'/main/system/sns/problem'});
+        }else if(tab.name=='three'){
+         this.$router.push({ path:'/main/system/sns/problem/over'});
+        }else if(tab.name=='four'){
+         this.$router.push({ path:'/main/system/sns/problem/overrefund'});
         }else{
           this.getList();
         }
-         
       },
        
       getList() {
            var params = Object.assign({pageNum:this.pageNum}, this.filters);
           this.listLoading = true;
           NProgress.start();
-          getExchangeFinshList(params).then(data => {
+          getProblemEndList(params).then(data => {
             this.listLoading = false;
             NProgress.done();
             this.list =data.retData.content;

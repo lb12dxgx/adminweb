@@ -111,8 +111,11 @@ import ExchangeFinsh from '@/components/mail/ExchangeFinsh'
 import ExchangeEdit from '@/components/mail/ExchangeEdit'
 
 import Problem from '@/components/sns/Problem'
+import ProblemFinsh from '@/components/sns/ProblemFinsh'
 import ProblemView from '@/components/sns/ProblemView'
-
+import ProblemResultView from '@/components/sns/ProblemResultView'
+import ProblemOver from '@/components/sns/ProblemOver'
+import ProblemOverRefund from '@/components/sns/ProblemOverRefund'
 
 Vue.use(Router)
 
@@ -428,9 +431,25 @@ export default new Router({
             component: Problem,
             name:'problem'
            },{
+            path: 'system/sns/problem/over',
+            component: ProblemOver,
+            name:'problemOver'
+           },{
+            path: 'system/sns/problem/overrefund',
+            component: ProblemOverRefund,
+            name:'problemOverRefund'
+           },{
+            path: 'system/sns/problem/finsh',
+            component: ProblemFinsh,
+            name:'problemFinsh'
+           },{
             path: 'system/sns/problemview',
             component: ProblemView,
             name:'problemView'
+           },{
+            path: 'system/sns/problemresultview',
+            component: ProblemResultView,
+            name:'problemResultView'
            }
         ]
     }
