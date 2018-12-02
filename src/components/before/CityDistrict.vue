@@ -4,7 +4,8 @@
       <el-form :inline="true" :model="filters" class="demo-form-inline">
        <el-form-item>
          
-          <el-button  @click="handleAdd">新增</el-button>
+          <el-button type="primary" @click="handleAdd">新增</el-button>
+           <el-button   @click="handleBack">返回</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -68,7 +69,11 @@
           }
       },
 
-      
+      handleBack(){
+      this.$router.push({
+          path:'/main/system/applycity'
+        });
+     },
       
      handleAdd(){
       this.$router.push({
@@ -104,7 +109,7 @@
 
      handleSet(row){
       this.$router.push({ path:'/main/system/cityarea', 
-          query:{cityDistrictId:row.cityDistrictId}});
+          query:{cityDistrictId:row.cityDistrictId,applyCityId:this.applyCityId}});
       },
 
       //删除

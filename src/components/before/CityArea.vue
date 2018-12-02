@@ -3,8 +3,8 @@
     <div class="seach">
       <el-form :inline="true" :model="filters" class="demo-form-inline">
        <el-form-item>
-         
-          <el-button  @click="handleAdd">新增</el-button>
+         <el-button  type="primary" @click="handleAdd">新增</el-button>
+          <el-button   @click="handleBack">返回</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -66,6 +66,13 @@
       this.$router.push({
           path:'/main/system/cityarea/add', 
           query:{cityDistrictId:this.cityDistrictId}
+        });
+     },
+
+     handleBack(){
+      this.$router.push({
+          path:'/main/system/citydistrict', 
+          query:{applyCityId:this.applyCityId}
         });
      },
 
@@ -136,6 +143,7 @@
 
     mounted() {
       this.cityDistrictId=this.$route.query.cityDistrictId;
+      this.applyCityId=this.$route.query.applyCityId;
       this.getList();
      
     }

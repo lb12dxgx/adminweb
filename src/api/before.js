@@ -19,6 +19,8 @@ export const applycityList = params => { return mockAxios.post(`${base}/system/a
 export const enabledApplycity = params => { return mockAxios.post(`${base}/system/applycity/enabled.do`,qs.stringify(params)).then(res => res.data); };
 export const disabledApplycity = params => { return mockAxios.post(`${base}/system/applycity/disabled.do`,qs.stringify(params)).then(res => res.data); };
 export const saveApplycity = params => { return mockAxios.post(`${base}/system/applycity/save.do`,qs.stringify(params)).then(res => res.data); };
+export const deleteApplycity = params => { return mockAxios.post(`${base}/system/applycity/delete.do`,qs.stringify(params)).then(res => res.data); };
+
 
 export const citydistrictList = params => { return mockAxios.post(`${base}/system/citydistrict/list.do`,qs.stringify(params)).then(res => res.data); };
 export const enabledCitydistrict = params => { return mockAxios.post(`${base}/system/citydistrict/enabled.do`,qs.stringify(params)).then(res => res.data); };

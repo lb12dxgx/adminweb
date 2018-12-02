@@ -25,11 +25,12 @@
         <el-table-column label="操作" width="200">
           <template slot-scope="scope">
             <el-button size="small" @click="handlePass(scope.row)" v-if="scope.row.state==0||scope.row.state==2">启用</el-button>
+             <el-button size="small" @click="handleDel(scope.row)" v-if="scope.row.state==0">删除</el-button>
             <el-button size="small" @click="handleSet(scope.row)" v-if="scope.row.state==1">
             设置区县
             </el-button>
           
-            <el-button  size="small" v-if="scope.row.state==1" @click="handleDel(scope.$index, scope.row)">禁用</el-button>
+            <el-button  size="small" v-if="scope.row.state==1" @click="handleDisable(scope.$index, scope.row)">禁用</el-button>
           </template>
       </el-table-column>
       </el-table>
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-  import {applycityList,enabledApplycity,disabledApplycity,saveApplycity} from '../../api/before';
+  import {applycityList,enabledApplycity,disabledApplycity,saveApplycity,deleteApplycity} from '../../api/before';
   
   import NProgress from 'nprogress';
   export default {
@@ -117,8 +118,34 @@
           query:{applyCityId:row.applyCityId}});
       },
 
+
       //删除
-      handleDel: function (index, row) {
+      handleDel: function (row) {
+        this.$confirm('确认删除该城市吗?', '提示', {
+          type: 'warning'
+        }).then(() => {
+          this.listLoading = true;
+          NProgress.start();
+          let para = {applyCityId: row.applyCityId };
+          deleteApplycity(para).then((res) => {
+            this.listLoading = false;
+            NProgress.done();
+            if(res.state==1){
+              this.$notify({
+                title: '成功',
+                message: '删除成功',
+                duration:2500,
+                type: 'success'
+              });
+              this.getList();
+            }
+            
+          });
+        });
+      },
+
+      //删除
+      handleDisable: function (index, row) {
         this.$confirm('确认禁用该城市吗?', '提示', {
           type: 'warning'
         }).then(() => {
