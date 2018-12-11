@@ -11,7 +11,7 @@
           <el-button type="primary" @click="handleAdd">新增</el-button>
         </el-form-item>
       </el-form>
-    </div>
+    </div> 
     <div class="list"> 
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
