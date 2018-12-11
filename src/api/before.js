@@ -31,3 +31,11 @@ export const cityareaList = params => { return mockAxios.post(`${base}/system/ci
 export const enabledCityarea = params => { return mockAxios.post(`${base}/system/cityarea/enabled.do`,qs.stringify(params)).then(res => res.data); };
 export const disabledCityarea = params => { return mockAxios.post(`${base}/system/cityarea/disabled.do`,qs.stringify(params)).then(res => res.data); };
 export const saveCityarea = params => { return mockAxios.post(`${base}/system/cityarea/save.do`,qs.stringify(params)).then(res => res.data); };
+
+export const applyorgList = params => { return mockAxios.post(`${base}/system/applyorg/list.do`,qs.stringify(params)).then(res => res.data); };
+
+
+export const beforepersonListByCompanyId = params => { return mockAxios.post(`${base}/system/beforeperson/listByCompanyId.do`,qs.stringify(params)).then(res => res.data); };
+export const changeStateBeforeperson = params => { return mockAxios.post(`${base}/system/beforeperson/changeState.do`,qs.stringify(params)).then(res => res.data); };
+export const changeCompanyBeforeperson = params => { return mockAxios.post(`${base}/system/beforeperson/changeCompany.do`,qs.stringify(params)).then(res => res.data); };
+

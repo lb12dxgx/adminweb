@@ -34,6 +34,10 @@ import CityAreaAdd from '@/components/before/CityAreaAdd'
 import ApplyOrg from '@/components/before/ApplyOrg'
 import BeforeApply from '@/components/before/BeforeApply'
 
+import BeforePerson from '@/components/before/BeforePerson'
+import BeforeEnterprise from '@/components/before/BeforeEnterprise'
+import BeforeEnterpriseView from '@/components/before/BeforeEnterpriseView'
+
 import TrainPlan from '@/components/Train/TrainPlan'
 import TrainPlanAdd from '@/components/Train/TrainPlanAdd'
 import TrainPlanEdit from '@/components/Train/TrainPlanEdit'
