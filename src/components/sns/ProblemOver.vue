@@ -36,7 +36,7 @@
             <el-button size="small" type="primary" @click="handleView(scope.row)" >
               查看
             </el-button>
-            <el-button size="small" type="primary"  @click="refund(scope.row)" v-if="scope.row.refundState==0">
+            <el-button size="small" type="primary"  @click="refund(scope.row)">
             退款
             </el-button>
           </template>
