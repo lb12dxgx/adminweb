@@ -12,7 +12,7 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="list">
+    <div class="list"> 
       <el-table :data="list" highlight-current-row v-loading="listLoading" border style="width: 100%">
         <el-table-column type="index" label="序号" width="50"></el-table-column>
         <el-table-column prop="orgCode" label="机构编码" width="180"> </el-table-column>
