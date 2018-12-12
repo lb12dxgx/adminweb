@@ -231,6 +231,18 @@ export default new Router({
             component: BeforeApply,
             name:'beforeApply'
            },{
+            path: 'system/beforeperson',
+            component: BeforePerson,
+            name:'beforePerson'
+           },{
+            path: 'system/beforeenterprise',
+            component: BeforeEnterprise,
+            name:'beforeEnterprise'
+           },{
+            path: 'system/beforeenterprise/view',
+            component: BeforeEnterpriseView,
+            name:'beforeEnterpriseView'
+           },{
             path: 'system/trainplan',
             component: TrainPlan,
             name:'trainPlan'

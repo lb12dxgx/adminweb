@@ -2,13 +2,11 @@
   <div class="content">
     <div class="seach">
       <el-form :inline="true" :model="filters" class="demo-form-inline">
-        <el-form-item label="机构名称">
-          <el-input v-model="filters.orgName" placeholder="机构名称"></el-input>
+        <el-form-item label="企业名称">
+          <el-input v-model="filters.enterpriseName" placeholder="企业名称"></el-input>
         </el-form-item>
-        
         <el-form-item>
           <el-button  @click="handleSubmit">查询</el-button>
-          <el-button type="primary" @click="handleAdd">新增</el-button>
         </el-form-item>
       </el-form>
     </div> 
@@ -118,54 +116,13 @@
     data() {
       return {
         filters: {
-          orgName: ''
+          enterpriseName: ''
         },
         listLoading:false,
         list: [],
         total: 0,
         pageNum: 1,
-        
-        addFormVisible: false,//新增界面是否显示
-        addLoading: false,
-        addFormRules: {
-          orgName: [
-            { required: true, message: '请输入单位名称', trigger: 'blur' }
-          ]
-        },
-        addForm: {
-          formCode: '',
-          orgCode: '',
-          orgName: '',
-          city:'',
-          telphone:'',
-          address:'',
-          contacts:'',
-          contactsTel:'',
-          workDate:'',
-          feedback:'',
-          orderNum:'',
-        },
-
-        editFormVisible: false,//界面是否显示
-        editLoading: false,
-        editFormRules: {
-          orgName: [
-            { required: true, message: '请输入单位名称', trigger: 'blur' }
-          ]
-        },
-        editForm: {
-          formCode: '',
-          orgCode: '',
-          orgName: '',
-          city:'',
-          telphone:'',
-          address:'',
-          contacts:'',
-          contactsTel:'',
-          workDate:'',
-          feedback:'',
-          orderNum:'',
-        }
+        applyCityId:''
 
       }
     },
@@ -285,37 +242,14 @@
         });
       },
 
-      //密码重置
-      handleRest: function (index, row) {
-        this.$confirm('确认重置密码吗?', '提示', {
-          type: 'warning'
-        }).then(() => {
-          this.listLoading = true;
-          NProgress.start();
-          let para = {accountId: row.accountId };
-          resetAccount(para).then((res) => {
-            this.listLoading = false;
-            NProgress.done();
-            if(res.state==1){
-              this.$notify({
-                title: '成功',
-                message: '重置成功',
-                duration:2500,
-                type: 'success'
-              });
-             this.getList();
-            }
-            
-          });
-        });
-      },
+      
 
 
       getList() {
-          var params = Object.assign({pageNum:this.pageNum}, this.filters);
+          var params = Object.assign({pageNum:this.pageNum,applyCityId:this.applyCityId}, this.filters);
           this.listLoading = true;
           NProgress.start();
-          applyorgList(params).then(data => {
+          beforeenterpriserestListByApplyCityId(params).then(data => {
             this.listLoading = false;
             NProgress.done();
     
@@ -326,6 +260,7 @@
     },
 
     mounted() {
+      this.applyCityId=this.$route.query.applyCityId;
       this.getList();
      
     }

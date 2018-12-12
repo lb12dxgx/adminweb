@@ -39,3 +39,6 @@ export const beforepersonListByCompanyId = params => { return mockAxios.post(`${
 export const changeStateBeforeperson = params => { return mockAxios.post(`${base}/system/beforeperson/changeState.do`,qs.stringify(params)).then(res => res.data); };
 export const changeCompanyBeforeperson = params => { return mockAxios.post(`${base}/system/beforeperson/changeCompany.do`,qs.stringify(params)).then(res => res.data); };
 
+export const beforeenterpriserestListByApplyCityId = params => { return mockAxios.post(`${base}/system/beforeenterprise/listByApplyCityId.do`,qs.stringify(params)).then(res => res.data); };
+export const changeStateBeforeEnterprise = params => { return mockAxios.post(`${base}/system/beforeenterprise/changeState.do`,qs.stringify(params)).then(res => res.data); };
+

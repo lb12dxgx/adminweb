@@ -29,6 +29,10 @@
             <el-button size="small" @click="handleSet(scope.row)" v-if="scope.row.state==1">
             设置区县
             </el-button>
+
+            <el-button size="small" @click="handleEmp(scope.row)" v-if="scope.row.state==1">
+              企业列表
+            </el-button>
           
             <el-button  size="small" v-if="scope.row.state==1" @click="handleDisable(scope.$index, scope.row)">禁用</el-button>
           </template>
@@ -117,6 +121,12 @@
       this.$router.push({ path:'/main/system/citydistrict', 
           query:{applyCityId:row.applyCityId}});
       },
+
+      //查看企业列表
+      handleEmp(row){
+        this.$router.push({ path:'/main/system/beforeenterprise', 
+          query:{applyCityId:row.applyCityId}});
+      }
 
 
       //删除
